@@ -24,3 +24,7 @@ Use the authorized connection to run the read-only catalog checks in [verify-hos
 6. Sign A in again and confirm that A can read both saved artifacts and their version provenance. Verify B remains denied through the application and direct Data API calls. Record statuses, counts and redacted evidence. Document whether the agent execution was live or stubbed.
 
 Q/CUE and account-synced onboarding follow hosted acceptance. Keep PR #1 in draft through the acceptance run.
+
+## Portal implementation
+
+The [portal README](../apps/staging-portal/README.md) documents the private Preview build, secrets, worker role, and retry behavior. Confirm deployed Preview protection before testing real Auth. The local regression runs workflow writes using the proposed worker role. Hosted grants, credential configuration, real Pickaxe dispatch and the complete two-customer flow still require a live run.

@@ -7,3 +7,7 @@ The staged service verifies Supabase Auth server-side, authorizes project member
 Q/CUE should read project goals, versions and progress from the same authorized service. Track provenance and disclose blocked or unavailable actions. Do not accept a browser or model-provided actor ID.
 
 Pickaxe CLI worked in earlier workspace exports and synthetic runs. Supabase is connected but denies this project. Hermes, OpenClaw, Twin.so, Dialora, Noem.ai, Zernio, n8n, custom MCP, HeyROI AI and OUTCAAS are proposed adapters with no verified credentials or launch authorization in this repo. Future adapters must isolate credentials per customer, meter usage, record approvals, and support retries without duplicate external effects.
+
+## Staging portal runtime
+
+`apps/staging-portal` is a separate Next.js app. Supabase Auth supplies the browser identity, and PostgREST evaluates project and assessment access under RLS. The API verifies the token with the staging Auth endpoint before enqueueing a Vercel Workflow. The restricted PostgreSQL worker performs authorized agent runs and persists results. The existing Pickaxe portal remains separate.

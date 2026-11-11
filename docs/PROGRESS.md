@@ -23,3 +23,9 @@ Reviewed the migration sequence: the first creates the RLS-protected schema with
 The project owner reported eight tables with RLS and foreign keys, and three recorded migrations on `exghrllltefuhsgnagym`. The hosted version mapping and read-only catalog queries are in `staging/HOSTED_ACCEPTANCE.md` and `staging/verify-hosted.sql`. Codex's catalog probe still returned permission denied. No migrations were replayed, repaired, or rolled back. Local regression verifies that viewer and unrelated-user approval attempts fail and leave the assessment pending. Hosted runtime, authentication, agent execution and tenant acceptance are pending.
 
 Next three actions are listed in ROADMAP.md.
+
+## Authenticated staging portal implementation
+
+- Added the Next.js staging portal, Supabase password sign-in and sign-out, customer-scoped business and project forms, saved assessments, approval, and project activity. A verified server endpoint queues the two existing Pickaxe agents with Vercel Workflow.
+- Added a dedicated PostgreSQL worker provisioning script and ran the local workflow suite under that role. The suite passed with stubbed Auth and agent calls. The portal build and dependency audit passed.
+- A private preview, real Supabase users, hosted worker provisioning, real Pickaxe dispatch, Supabase advisors and the live two-customer acceptance are pending. The connected Codex database route previously denied staging access, and the required staging credentials were unavailable to this workspace. No production, hosted schema, or Pickaxe changes were made. Q/CUE and onboarding sync follow acceptance.

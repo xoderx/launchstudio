@@ -51,6 +51,10 @@ export function createWorkflow({ database, verifySession, runAgent }) {
       if (typeof output !== 'string' || output.trim().length === 0 || Buffer.byteLength(output) > 60000) throw Error('Invalid agent response');
       return await database.transaction(async tx => {
         await authorize(tx);
+        const { rowCount } = await tx.query(
+          "update public.agent_runs set status='succeeded' where id=$1 and status='running'", [runId]
+        );
+        if (!rowCount) throw Error('Agent run is no longer active');
         const { rows: [assessment] } = await tx.query(`
           insert into public.assessments(project_id,agent) values($1,$2)
           on conflict(project_id,agent) do update set agent=excluded.agent returning id
@@ -60,7 +64,6 @@ export function createWorkflow({ database, verifySession, runAgent }) {
           select $1,$2,$3,coalesce(max(version),0)+1,$4,$5 from public.assessment_versions
           where assessment_id=$1 returning version
         `, [assessment.id,projectId,agent,runId,{ markdown: output.trim() }]);
-        await tx.query("update public.agent_runs set status='succeeded' where id=$1 and status='running'",[runId]);
         await tx.query(`
           insert into public.workflow_progress(project_id,stage,next_agent,outstanding_tasks)
           values($1,$2,null,$3) on conflict(project_id) do update

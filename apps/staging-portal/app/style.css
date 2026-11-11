@@ -1,0 +1,12 @@
+:root{color-scheme:dark;background:#101827;color:#f5f8fc;font:100% system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0}main{width:min(100% - 2rem,54rem);margin:2rem auto 5rem}
+.brand{color:#c6f477;font-weight:750}h1{font-size:clamp(2rem,7vw,3rem);margin:.4em 0}
+section,article{border:1px solid #627188;border-radius:.7rem;padding:1rem;margin:1rem 0;background:#192637}
+form,label{display:grid;gap:.5rem}form{gap:1rem;margin:1rem 0}
+input,textarea,select,button{font:inherit;border-radius:.35rem;padding:.65rem;border:1px solid #8494ab}
+input,textarea,select{width:100%;background:#101827;color:#f5f8fc}
+textarea{min-height:5rem}button{justify-self:start;cursor:pointer;background:#c6f477;color:#172410;font-weight:700}
+button.secondary{background:#243448;color:#fff}button:disabled{opacity:.65;cursor:default}
+:focus-visible{outline:3px solid #c6f477;outline-offset:3px}
+.actions{display:flex;gap:.75rem;flex-wrap:wrap}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}

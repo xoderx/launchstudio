@@ -15,6 +15,7 @@ try {
     $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
     grant usage on schema auth to authenticated; grant execute on function auth.uid() to authenticated;`);
   for (const file of readdirSync('supabase/migrations').sort()) await db.exec(readFileSync('supabase/migrations/'+file,'utf8'));
+  await db.exec(readFileSync('worker-access.sql','utf8'));
   await db.query('insert into auth.users values ($1),($2)',[a,b]);
   const as = (actor, fn) => db.transaction(async tx=>{
     await tx.exec('set local role authenticated');
@@ -35,7 +36,14 @@ try {
   await assert.rejects(as(b,tx=>tx.query("insert into public.businesses(owner_id,name) values($1,'Forged')",[a])),{code:'42501'});
   for(const actor of [a,b]) await assert.rejects(as(actor,tx=>tx.query('delete from public.businesses where id=$1',[business.id])),{code:'42501'});
   const invoke=[];
-  const workflow=createWorkflow({database:db,verifySession:async t=>t==='A'?{id:a}:t==='B'?{id:b}:null,
+  const asWorker = fn => db.transaction(async tx => {
+    await tx.exec('set local role launchstudio_worker');
+    return fn(tx);
+  });
+  const worker = { transaction: asWorker, query: (...args) => asWorker(tx => tx.query(...args)) };
+  await assert.rejects(worker.query("update public.businesses set updated_at=now() where id=$1",[business.id]),{code:'42501'});
+  await assert.rejects(worker.query("delete from public.businesses where id=$1",[business.id]),{code:'42501'});
+  const workflow=createWorkflow({database:worker,verifySession:async t=>t==='A'?{id:a}:t==='B'?{id:b}:null,
     runAgent:async(id,input)=>{invoke.push({id,input});return id==='YL7LGN8AV2'?'Validated outcome with next steps.':'Market intelligence built from approved idea.';}});
   const run=(token,agent,requestId=crypto.randomUUID())=>workflow({token,projectId:project.id,agent,requestId});
   await assert.rejects(run(null,'idea-validator'),{status:401});
