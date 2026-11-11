@@ -12,4 +12,10 @@
 - Re-ran the disposable PostgreSQL test with all three packaged migrations and rollback. Two-customer isolation, owner and viewer grants, approval, assessment provenance, versioning, retry behavior, and restart recovery passed. Auth and agent responses were stubbed. The site build also passed its internal anchor checks.
 - No hosted migration was applied. Keep the authenticated workflow, Q/CUE, and onboarding sync gated on verified staging access and the live two-customer test. The rollback SQL drops staging data and is for a disposable reset only.
 
+## Connection routing follow-up
+
+The project owner reported a successful read-only SQL probe through the named ChatGPT connection `launchstuido supa` and an empty staging schema. In this Codex session, the Supabase connector's organization list omitted the expected LaunchStudio organization and a read-only SQL probe against `exghrllltefuhsgnagym` again returned permission denied. The project-scoped CLI entry still showed auth status Unknown. Hosted work requires a Codex session bound to the named LaunchStudio connection.
+
+Reviewed the migration sequence: the first creates the RLS-protected schema with membership checks and column-level write grants. The second adds the authenticated approval RPC with an editor or owner check. The third uses a composite foreign key to bind Market Intelligence provenance to an Idea Validator version in the same project. The destructive rollback removes the full schema and is reserved for a disposable reset. Local migration, rollback, two-customer isolation and restart tests passed with stubbed Auth and agent responses. Hosted compatibility, deployment and acceptance remain pending.
+
 Next three actions are listed in ROADMAP.md.
