@@ -29,3 +29,8 @@ Next three actions are listed in ROADMAP.md.
 - Added the Next.js staging portal, Supabase password sign-in and sign-out, customer-scoped business and project forms, saved assessments, approval, and project activity. A verified server endpoint queues the two existing Pickaxe agents with Vercel Workflow.
 - Added a dedicated PostgreSQL worker provisioning script and ran the local workflow suite under that role. The suite passed with stubbed Auth and agent calls. The portal build and dependency audit passed.
 - A private preview, real Supabase users, hosted worker provisioning, real Pickaxe dispatch, Supabase advisors and the live two-customer acceptance are pending. The connected Codex database route previously denied staging access, and the required staging credentials were unavailable to this workspace. No production, hosted schema, or Pickaxe changes were made. Q/CUE and onboarding sync follow acceptance.
+
+## Restricted staging worker and preview configuration
+
+- GitHub commit `23b12d0` adds `20261111223000_launchstudio_staging_worker_access.sql`, which matches the reviewed worker provisioning script. The project owner reported deployment as hosted version `20261111214206` and verified the restricted role and policies. The Codex role-catalog query was denied. Do not replay the worker migration or provisioning script.
+- Verified Standard Vercel Authentication on the dedicated staging project. Set `SUPABASE_URL` for Preview only. The publishable key, restricted worker connection and staging Pickaxe key still need secure provisioning. Leave the worker as NOLOGIN until its credential can be set securely. No deployment or live acceptance ran.
