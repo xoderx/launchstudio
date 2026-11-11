@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+*.local
+.DS_Store
+!.env.example
+*.pem
+*.key
+*.log
+.supabase/
+supabase/.temp/
+coverage/
+
+/site/public-build.html

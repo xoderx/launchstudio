@@ -1,0 +1,1252 @@
+{
+  "mapped": [
+    {
+      "position": 1,
+      "id": "YL7LGN8AV2",
+      "name": "Idea Validator",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 2,
+      "id": "RYAET6419X",
+      "name": "Market Intelligence Agent",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 3,
+      "id": "CV6MHOX4Q2",
+      "name": "Business model architect",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 4,
+      "id": "85WAJFOG5Z",
+      "name": "Brand launcher",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 5,
+      "id": "R825L3PAVU",
+      "name": "Brand checker",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 6,
+      "id": "SCV7PECQF3",
+      "name": "Audience DNA Builder",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 7,
+      "id": "3A3G7DKUD5",
+      "name": "Offer Architect",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 8,
+      "id": "JN1YG14GMN",
+      "name": "Product/Service Builder",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 9,
+      "id": "E6TA10VUZO",
+      "name": "Pricing & Packaging Designer",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 10,
+      "id": "P4A84P45UW",
+      "name": "Website & Funnel Generator",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 11,
+      "id": "NHC0XJ87PP",
+      "name": "Launch Campaign Creator",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 12,
+      "id": "ED80B6KXDV",
+      "name": "Launch Playbook",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 13,
+      "id": "HWHLHRA1PG",
+      "name": "Launch Command",
+      "category": "Launch",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Listed",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 14,
+      "id": "02X8FKDJRN",
+      "name": "Growth Diagnostic",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 15,
+      "id": "QSSPRRGYGI",
+      "name": "Lead Intelligence Finder",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 16,
+      "id": "TR2PO9P3DO",
+      "name": "AI Outreach Campaign Builder",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 17,
+      "id": "BNGHE43HYY",
+      "name": "Social Media Growth Engine",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 18,
+      "id": "13G2UCZ59M",
+      "name": "Content Swarm Generator",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 19,
+      "id": "3KISRP7LJ8",
+      "name": "Advertising Campaign Architect",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 20,
+      "id": "VD8V5WYO0A",
+      "name": "SEO & AI Discovery Optimizer",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 21,
+      "id": "1PMHMEHW1G",
+      "name": "Partnership Growth Finder",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 22,
+      "id": "U1NMXZS67P",
+      "name": "Referral & Ambassador Builder",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 23,
+      "id": "U11Y0BE6OG",
+      "name": "Viral Growth Challenge Builder",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 24,
+      "id": "MIJ377CWP7",
+      "name": "Conversion Optimization Agent",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 25,
+      "id": "6JH1TVL0MX",
+      "name": "AI Sales & Follow-Up Agent",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 26,
+      "id": "TLTYNJ6REX",
+      "name": "AI Growth Commander",
+      "category": "Grow",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "What would you like to talk about?",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 27,
+      "id": "launchstudio-tool-27",
+      "name": "Revenue Opportunity Scanner",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 28,
+      "id": "launchstudio-tool-28",
+      "name": "Profit & Pricing Optimizer",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 29,
+      "id": "launchstudio-tool-29",
+      "name": "Upsell & Cross-Sell Architect",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 30,
+      "id": "launchstudio-tool-30",
+      "name": "Subscription & Membership Builder",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 31,
+      "id": "launchstudio-tool-31",
+      "name": "Digital Product Monetizer",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 32,
+      "id": "launchstudio-tool-32",
+      "name": "MerchDone Revenue Builder",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 33,
+      "id": "launchstudio-tool-33",
+      "name": "Sponsorship & Brand Deal Builder",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 34,
+      "id": "launchstudio-tool-34",
+      "name": "Affiliate & Licensing Engine",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 35,
+      "id": "launchstudio-tool-35",
+      "name": "Proposal & Deal Closer",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 36,
+      "id": "launchstudio-tool-36",
+      "name": "Revenue Recovery Agent",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 37,
+      "id": "launchstudio-tool-37",
+      "name": "Customer Lifetime Value Optimizer",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 38,
+      "id": "launchstudio-tool-38",
+      "name": "Revenue Forecast & Profit Dashboard",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 39,
+      "id": "launchstudio-tool-39",
+      "name": "AI Revenue Commander",
+      "category": "Monetize",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 40,
+      "id": "launchstudio-tool-40",
+      "name": "Customer Success & Retention Agent",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 41,
+      "id": "launchstudio-tool-41",
+      "name": "SOP & Playbook Generator",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 42,
+      "id": "launchstudio-tool-42",
+      "name": "AI Workforce Architect",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 43,
+      "id": "launchstudio-tool-43",
+      "name": "Automation & Integration Builder",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 44,
+      "id": "launchstudio-tool-44",
+      "name": "Team & Delegation Architect",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 45,
+      "id": "launchstudio-tool-45",
+      "name": "Executive KPI & Performance Dashboard",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 46,
+      "id": "launchstudio-tool-46",
+      "name": "Market Expansion Planner",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 47,
+      "id": "launchstudio-tool-47",
+      "name": "Partnership & Channel Scale Builder",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 48,
+      "id": "launchstudio-tool-48",
+      "name": "Operations Efficiency Auditor",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 49,
+      "id": "launchstudio-tool-49",
+      "name": "Capital & Investment Readiness Agent",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 50,
+      "id": "launchstudio-tool-50",
+      "name": "IP & Business Asset Builder",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 51,
+      "id": "launchstudio-tool-51",
+      "name": "Exit Readiness & Valuation Planner",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    },
+    {
+      "position": 52,
+      "id": "launchstudio-tool-52",
+      "name": "AI Scale Commander",
+      "category": "Scale",
+      "model": "gpt-5.2",
+      "promptStatus": "Present",
+      "knowledgeCount": 0,
+      "actionsStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "mcpStatus": {
+        "status": "verified",
+        "connected": []
+      },
+      "configuredStarters": [],
+      "configuredPlaceholder": "",
+      "inputInterface": "chat",
+      "outputCapabilities": "Chat response; artifact generation unverified",
+      "portalVisibility": "Upgrade lock configured",
+      "testStatus": "See separate QA evidence",
+      "blocker": null
+    }
+  ]
+}
