@@ -6,4 +6,10 @@
 - Tested the new assessment provenance migration and actual local PostgreSQL close/reopen. The correct saved approved version survived restart, and tenant isolation continued after membership revocation. Identity and agent responses in this run were stubbed. Earlier live Pickaxe CLI responses exist in the original workspace outputs.
 - Hosted acceptance is blocked by the Supabase connector permission denial for exghrllltefuhsgnagym. No hosted migrations, signed-in handoff, security advisors, or Q/CUE deployment were verified.
 
+## November 11 staging verification
+
+- After reported OAuth authorization, the connected Supabase tool denied the read-only SQL probe, public schema inspection, and migration history for `exghrllltefuhsgnagym`. The project-scoped Codex CLI server was listed with auth status `Unknown`; its verification process could not start inside the desktop sandbox. Staging permissions and schema compatibility remain unverified.
+- Re-ran the disposable PostgreSQL test with all three packaged migrations and rollback. Two-customer isolation, owner and viewer grants, approval, assessment provenance, versioning, retry behavior, and restart recovery passed. Auth and agent responses were stubbed. The site build also passed its internal anchor checks.
+- No hosted migration was applied. Keep the authenticated workflow, Q/CUE, and onboarding sync gated on verified staging access and the live two-customer test. The rollback SQL drops staging data and is for a disposable reset only.
+
 Next three actions are listed in ROADMAP.md.
