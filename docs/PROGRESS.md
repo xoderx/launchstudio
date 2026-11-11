@@ -34,3 +34,7 @@ Next three actions are listed in ROADMAP.md.
 
 - GitHub commit `23b12d0` adds `20261111223000_launchstudio_staging_worker_access.sql`, which matches the reviewed worker provisioning script. The project owner reported deployment as hosted version `20261111214206` and verified the restricted role and policies. The Codex role-catalog query was denied. Do not replay the worker migration or provisioning script.
 - Verified Standard Vercel Authentication on the dedicated staging project. Set `SUPABASE_URL` for Preview only. The publishable key, restricted worker connection and staging Pickaxe key still need secure provisioning. Leave the worker as NOLOGIN until its credential can be set securely. No deployment or live acceptance ran.
+
+## Staging assessment TLS repair
+
+The protected Preview reproduced the generic assessment 500. A read-only Vercel probe using the Preview worker URL failed certificate verification before the project authorization query could execute. The worker now uses the Supabase PostgreSQL CA with strict TLS verification. The workflow request logs only the failing stage and a fixed error category. No staging migrations were reapplied.

@@ -1,20 +1,13 @@
 import { Pool } from 'pg';
 import { createPickaxeRunner } from '../../../staging/pickaxe-adapter.mjs';
 import { publicConfig } from './config.mjs';
+import { stagingPoolOptions } from './postgres-options.mjs';
 
 let pool;
 export function database() {
   if (!pool) {
     publicConfig();
-    const url = new URL(process.env.LAUNCHSTUDIO_STAGING_DATABASE_URL);
-    const user = decodeURIComponent(url.username);
-    const project = 'exghrllltefuhsgnagym';
-    const direct = url.hostname === `db.${project}.supabase.co` && user === 'launchstudio_worker';
-    const pooled = url.hostname.endsWith('.pooler.supabase.com') && user === `launchstudio_worker.${project}`;
-    if (!direct && !pooled) throw new Error('Dedicated staging database role required');
-    for (const key of [...url.searchParams.keys()]) url.searchParams.delete(key);
-    pool = new Pool({ connectionString: url.href, ssl: { rejectUnauthorized: true },
-      max: 3, connectionTimeoutMillis: 5000, statement_timeout: 10000 });
+    pool = new Pool(stagingPoolOptions(process.env.LAUNCHSTUDIO_STAGING_DATABASE_URL));
   }
   return {
     query: (sql, args) => pool.query(sql, args),

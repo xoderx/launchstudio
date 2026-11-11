@@ -13,3 +13,7 @@
 Earlier public and premium plan suggestions were not approval to change billing. See PRICING.md.
 
 The full November 11 conversation clarifies that a future independent portal, ChatGPT Project organization, and GitHub synchronization are options. The existing Pickaxe portal and local repository remain the current implementation. Product or pricing proposals become approved changes only when confirmed and recorded here.
+
+## Staging PostgreSQL TLS
+
+Use Supabase’s published PostgreSQL CA for the dedicated staging worker connection and require certificate and hostname verification. Keep the restricted-role endpoint allowlist and discard URI SSL options.
