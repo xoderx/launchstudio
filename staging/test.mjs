@@ -15,7 +15,6 @@ try {
     $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
     grant usage on schema auth to authenticated; grant execute on function auth.uid() to authenticated;`);
   for (const file of readdirSync('supabase/migrations').sort()) await db.exec(readFileSync('supabase/migrations/'+file,'utf8'));
-  await db.exec(readFileSync('worker-access.sql','utf8'));
   await db.query('insert into auth.users values ($1),($2)',[a,b]);
   const as = (actor, fn) => db.transaction(async tx=>{
     await tx.exec('set local role authenticated');
