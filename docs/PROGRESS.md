@@ -18,4 +18,8 @@ The project owner reported a successful read-only SQL probe through the named Ch
 
 Reviewed the migration sequence: the first creates the RLS-protected schema with membership checks and column-level write grants. The second adds the authenticated approval RPC with an editor or owner check. The third uses a composite foreign key to bind Market Intelligence provenance to an Idea Validator version in the same project. The destructive rollback removes the full schema and is reserved for a disposable reset. Local migration, rollback, two-customer isolation and restart tests passed with stubbed Auth and agent responses. Hosted compatibility, deployment and acceptance remain pending.
 
+## Hosted migration deployment reported
+
+The project owner reported eight tables with RLS and foreign keys, and three recorded migrations on `exghrllltefuhsgnagym`. The hosted version mapping and read-only catalog queries are in `staging/HOSTED_ACCEPTANCE.md` and `staging/verify-hosted.sql`. Codex's catalog probe still returned permission denied. No migrations were replayed, repaired, or rolled back. Local regression verifies that viewer and unrelated-user approval attempts fail and leave the assessment pending. Hosted runtime, authentication, agent execution and tenant acceptance are pending.
+
 Next three actions are listed in ROADMAP.md.

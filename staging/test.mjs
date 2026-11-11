@@ -56,6 +56,13 @@ try {
   assert.equal(invoke.length,1);
   assert.equal(invoke[0].input.profile.privateNotes,undefined);
   await assert.rejects(as(b,tx=>tx.query('select public.approve_idea_assessment($1,1)',[idea.assessmentId])),{code:'42501'});
+  await db.query("insert into public.business_memberships(business_id,user_id,role) values($1,$2,'viewer')",[business.id,b]);
+  await assert.rejects(as(b,tx=>tx.query('select public.approve_idea_assessment($1,1)',[idea.assessmentId])),{code:'42501'});
+  const { rows: [pending] } = await as(a,tx=>tx.query(
+    'select approval_status, approved_by from public.assessment_versions where assessment_id=$1 and version=1',[idea.assessmentId]
+  ));
+  assert.deepEqual(pending,{approval_status:'pending',approved_by:null});
+  await db.query('delete from public.business_memberships where business_id=$1 and user_id=$2',[business.id,b]);
   await as(a,tx=>tx.query('select public.approve_idea_assessment($1,1)',[idea.assessmentId]));
   assert.equal((await as(a,tx=>tx.query('select next_agent from public.workflow_progress where project_id=$1',[project.id]))).rows[0].next_agent,'market-intelligence');
   const newer=await run('A','idea-validator');
