@@ -21,3 +21,7 @@ Use Supabase’s published PostgreSQL CA for the dedicated staging worker connec
 ## Staging Pickaxe workspace scope
 
 Select the configured Pickaxe workspace on both background submission and polling when using a personal API key. Keep the workspace setting in Vercel Preview, and use the application request ID for correlation. Do not automatically submit again after a provider or persistence failure.
+
+Market Intelligence sends a bounded excerpt when the full context exceeds its Pickaxe message budget. Keep the complete assessment and its exact approved-version reference in Supabase.
+
+Project names and goals use the existing project editor policy. Older projects keep their IDs and goals and display a default name until an editor names them.

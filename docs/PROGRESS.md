@@ -42,3 +42,5 @@ The protected Preview reproduced the generic assessment 500. A read-only Vercel 
 ## Staging Pickaxe acceptance
 
 The restricted hosted worker saved a stubbed assessment inside a rolled-back transaction. Pickaxe history contained no matching synthetic prompt. The configured personal key received HTTP 400 on a read-only completion lookup without workspace scope and reached HTTP 404 for the same nonexistent submission with the verified workspace. Preview supplies that scope to both provider calls. Worker logs distinguish submission, acknowledgment, polling, output validation, and the failing persistence operation.
+
+The live Idea Validator run saved a version that the owner approved. Market Intelligence linked the approved version but Pickaxe rejected its 3,961-token message against a 3,000-token limit. Bound the Market Intelligence request without changing the approved source. The additive project-name migration preserves existing project and assessment relationships.

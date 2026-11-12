@@ -36,6 +36,38 @@ test('missing personal workspace fails before a request can reach Pickaxe', asyn
   await assert.rejects(run('fixture', {}), { stage: 'pickaxe_submission', category: 'missing_workspace' });
 });
 
+test('Market Intelligence bounds the serialized message without altering the approved result', async () => {
+  let message;
+  const run = createPickaxeRunner({
+    async submitPickaxe(payload) {
+      message = payload.message;
+      return { submissionId: 'synthetic', status: 'completed', result: 'Research result' };
+    },
+  });
+  const markdown = 'Approved recommendation: test demand.\n' + '🪁 quote " and newline\n'.repeat(2000);
+  const context = {
+    name: 'Synthetic pilot',
+    goal: 'Validate library demand',
+    profile: { audience: 'Library groups', offering: '🪁'.repeat(2000) },
+    approvedIdea: { markdown },
+  };
+  assert.equal(await run('fixture', context, { agent: 'market-intelligence' }), 'Research result');
+  assert.ok(Buffer.byteLength(message) <= 2800);
+  const sent = JSON.parse(message.slice(message.indexOf('\n\n') + 2));
+  assert.equal(sent.goal, context.goal);
+  assert.equal(sent.profile.audience, 'Library groups');
+  assert.equal(sent.contextMayBeExcerpted, true);
+  assert.ok(sent.approvedIdea.markdown.startsWith('Approved recommendation:'));
+  assert.ok(markdown.startsWith(sent.approvedIdea.markdown));
+  assert.ok(sent.approvedIdea.markdown.length < markdown.length);
+  assert.equal(context.approvedIdea.markdown, markdown);
+
+  await run('fixture', { ...context, approvedIdea: { markdown: 'Short approved text' }, profile: {} },
+    { agent: 'market-intelligence' });
+  assert.match(message, /Short approved text/);
+  assert.doesNotMatch(message, /contextMayBeExcerpted/);
+});
+
 test('submission, acknowledgment, polling and invalid output have distinct failures', async () => {
   const queued = { submissionId: 'opaque', status: 'queued' };
   const scenarios = [

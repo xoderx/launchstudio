@@ -54,6 +54,7 @@ export function createWorkflow({ database, verifySession, runAgent }) {
     }
     try {
       const output = await runAgent(agents[agent], claimed.input, {
+        agent,
         requestId,
         onAcknowledged(id) {
           // Only known opaque identifier formats are safe to include.

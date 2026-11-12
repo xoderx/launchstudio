@@ -25,13 +25,24 @@ try {
   const {rows:[business]}=await as(a,tx=>tx.query("insert into public.businesses(owner_id,name,profile) values($1,'Bike repair',$2) returning id",[a,{offering:'mobile repairs', audience:'commuters', privateNotes:'do not send'}]));
   const {rows:[businessB]}=await as(b,tx=>tx.query("insert into public.businesses(owner_id,name) values($1,'Separate business') returning id",[b]));
   const {rows:[projectB]}=await as(b,tx=>tx.query("insert into public.business_projects(business_id,goal) values($1,'Independent goal') returning id",[businessB.id]));
+  assert.equal((await as(b,tx=>tx.query('select name from public.business_projects where id=$1',[projectB.id]))).rows[0].name,'Untitled project');
   assert.equal((await as(b,tx=>tx.query('select id from public.business_projects where id=$1',[projectB.id]))).rows.length,1);
   assert.equal((await as(a,tx=>tx.query('select id from public.business_projects where id=$1',[projectB.id]))).rows.length,0);
-  const {rows:[project]}=await as(a,tx=>tx.query("insert into public.business_projects(business_id,goal) values($1,'Validate demand') returning id",[business.id]));
+  const {rows:[project]}=await as(a,tx=>tx.query("insert into public.business_projects(business_id,name,goal) values($1,'Bike repair pilot','Validate demand') returning id,name,goal",[business.id]));
+  assert.deepEqual([project.name,project.goal],['Bike repair pilot','Validate demand']);
+  const {rows:[editedProject]} = await as(a,tx=>tx.query(
+    "update public.business_projects set name='Renamed pilot',goal='Validate pricing' where id=$1 returning id,business_id,name,goal",
+    [project.id],
+  ));
+  assert.deepEqual(editedProject,{id:project.id,business_id:business.id,name:'Renamed pilot',goal:'Validate pricing'});
+  assert.equal((await as(b,tx=>tx.query(
+    "update public.business_projects set name='Unauthorized edit' where id=$1 returning id",[project.id],
+  ))).rowCount,0);
+  await assert.rejects(as(a,tx=>tx.query("insert into public.business_projects(business_id,name,goal) values($1,'   ','Validate demand')",[business.id])),{code:'23514'});
   assert.equal((await as(a,tx=>tx.query("update public.businesses set name='Mobile bike repair' where id=$1 returning id",[business.id]))).rows.length,1);
   assert.equal((await as(b,tx=>tx.query('select id from public.businesses where id=$1',[business.id]))).rows.length,0);
   assert.equal((await as(b,tx=>tx.query("update public.businesses set name='Changed' where id=$1 returning id",[business.id]))).rows.length,0);
-  await assert.rejects(as(b,tx=>tx.query("insert into public.business_projects(business_id,goal) values($1,'Forged')",[business.id])),{code:'42501'});
+  await assert.rejects(as(b,tx=>tx.query("insert into public.business_projects(business_id,name,goal) values($1,'Forged','Forged')",[business.id])),{code:'42501'});
   await assert.rejects(as(b,tx=>tx.query("insert into public.businesses(owner_id,name) values($1,'Forged')",[a])),{code:'42501'});
   for(const actor of [a,b]) await assert.rejects(as(actor,tx=>tx.query('delete from public.businesses where id=$1',[business.id])),{code:'42501'});
   const invoke=[];

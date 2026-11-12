@@ -54,6 +54,7 @@ export default function Portal() {
 function Workspace({ db, session }) {
   const [businesses, setBusinesses] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [editorBusinessIds, setEditorBusinessIds] = useState([]);
   const [businessId, selectBusiness] = useState('');
   const [projectId, selectProject] = useState('');
   const [snapshot, setSnapshot] = useState(null);
@@ -63,14 +64,17 @@ function Workspace({ db, session }) {
   const actor = session.user.id;
   const business = businesses.find(item => item.id === businessId);
   const project = projects.find(item => item.id === projectId);
+  const canEditProjects = business?.owner_id === actor || editorBusinessIds.includes(businessId);
 
   async function refresh() {
-    const [owned, available] = await Promise.all([
+    const [owned, available, memberships] = await Promise.all([
       db.from('businesses').select('id, owner_id, name, profile').order('created_at'),
-      db.from('business_projects').select('id, business_id, goal, status').order('created_at'),
+      db.from('business_projects').select('id, business_id, name, goal, status').order('created_at'),
+      db.from('business_memberships').select('business_id').eq('user_id', actor).eq('role', 'editor'),
     ]);
     setBusinesses(unwrap(owned));
     setProjects(unwrap(available));
+    setEditorBusinessIds(unwrap(memberships).map(item => item.business_id));
   }
   useEffect(() => { refresh().catch(() => setMessage('Could not load your workspace.')); }, [db]);
   useEffect(() => {
@@ -129,15 +133,26 @@ function Workspace({ db, session }) {
       setMessage('Business profile saved.');
     });
   }
-  function createProject(event) {
+  function saveProject(event, target) {
     event.preventDefault();
     const form = event.currentTarget;
-    const goal = new FormData(form).get('goal');
+    const fields = new FormData(form);
+    const name = fields.get('name').trim();
+    const goal = fields.get('goal').trim();
+    if (!name || !goal) {
+      setMessage('Enter a project name and goal.');
+      return;
+    }
     action(async () => {
-      const created = unwrap(await db.from('business_projects').insert({ business_id: businessId, goal }).select('id').single());
+      const table = db.from('business_projects');
+      const query = target
+        ? table.update({ name, goal }).eq('id', target.id).eq('business_id', businessId)
+        : table.insert({ business_id: businessId, name, goal });
+      const saved = unwrap(await query.select('id').single());
       await refresh();
-      selectProject(created.id);
-      form.reset();
+      selectProject(saved.id);
+      if (!target) form.reset();
+      setMessage(target ? 'Project updated.' : 'Project created.');
     });
   }
   function runAgent(agent, retry = null) {
@@ -176,14 +191,23 @@ function Workspace({ db, session }) {
     {business && <section><h2>Projects</h2>
       <label>Project<select value={projectId} onChange={event => selectProject(event.target.value)}>
         <option value="">Choose a project</option>
-        {projects.filter(item => item.business_id === businessId).map(item => <option value={item.id} key={item.id}>{item.goal}</option>)}
+        {projects.filter(item => item.business_id === businessId).map(item => <option value={item.id} key={item.id}>
+          {item.name === 'Untitled project' ? `${item.name} — ${item.goal}` : item.name}
+        </option>)}
       </select></label>
-      <form onSubmit={createProject}>
-        <label>New project goal<textarea name="goal" required maxLength={2000} /></label>
+      {canEditProjects && <form onSubmit={event => saveProject(event)}>
+        <label>Project Name<input name="name" required maxLength={160} /></label>
+        <label>Project Goal<textarea name="goal" required maxLength={2000} /></label>
         <button disabled={busy}>Create project</button>
-      </form>
+      </form>}
+      {project && canEditProjects && <form key={project.id} onSubmit={event => saveProject(event, project)}>
+        <h3>Edit project</h3>
+        <label>Project Name<input name="name" required maxLength={160} defaultValue={project.name} /></label>
+        <label>Project Goal<textarea name="goal" required maxLength={2000} defaultValue={project.goal} /></label>
+        <button disabled={busy}>Save project changes</button>
+      </form>}
     </section>}
-    {project && <section><h2>Project activity</h2><p>{project.goal}</p>
+    {project && <section><h2>Project activity</h2><h3>{project.name}</h3><p>{project.goal}</p>
       <p>Status: {project.status}{current?.progress && ` · Stage: ${current.progress.stage}`}</p>
       {current?.progress?.outstanding_tasks.map(task => <p key={task}>{task}</p>)}
       <div className="actions">
