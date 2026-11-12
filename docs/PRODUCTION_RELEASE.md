@@ -58,3 +58,5 @@ The original hosted migration version mapping is documented in `staging/HOSTED_A
 - CoVibeCoder browser fixture passes all 13 workspaces and verifies that both an interrupted response and a failed confirmation read cannot create duplicate draft versions. Dark/light axe checks report no violations for the tested WCAG rules.
 
 These browser fixtures use synthetic sessions. Actual deployed authentication-boundary smoke is documented separately; full current customer A/B acceptance is still not claimed. PR #1 stays draft while those release conditions remain open.
+
+Protected Preview for the application update: https://launchstudio-staging-8yrhg4l9t-xoderxs-projects.vercel.app (`811fd7e`, deployment `dpl_CqNFCqVsTTZnnmWCb31obsPvUxxm`, READY). Real Chromium smoke reached sign-in, loaded public configuration and verified invalid-login recovery and the unauthenticated workflow 401. No customer sign-in was fabricated. Temporary deployment-scoped access was revoked after testing. See [hosted smoke evidence](release-review/hosted-smoke.json). The following documentation-only commit records this result; it changes no tested application behavior.
