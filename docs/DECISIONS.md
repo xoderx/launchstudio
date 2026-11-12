@@ -31,3 +31,5 @@ Q/CUE Phase 1 reads project and business context through the signed-in Supabase 
 Q/CUE Phase 2 reserves one unresolved workflow request per project in Supabase before Vercel dispatch. A worker can submit only after claiming its dispatch ID. It records the provider ID before polling. Recovery uses that ID for GET only and preserves the original assessment provenance. Unknown outcomes without an ID and unreconciled legacy failures require operator review.
 
 Project histories use descending creation time plus the immutable row ID as a keyset. The signed-in Supabase client performs the database queries under RLS. Older pages stay anchored until the customer chooses to show the newest records.
+
+Audience DNA uses the approved Market Intelligence version and the approved Idea Validator version linked from that market run. Both references are stored on the run and constrained to the same project. The structured result separates source-backed evidence from assumptions. Growth Diagnostic is recommended only after the audience profile is saved and approved. The provider dispatch gate remains closed until the staging pilot prerequisites are verified.

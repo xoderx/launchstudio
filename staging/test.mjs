@@ -3,6 +3,7 @@ import { readFileSync, readdirSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
+import { audienceSections } from './audience-dna.mjs';
 import { createWorkflow, createSessionVerifier } from './workflow.mjs';
 import { createRequestHandler } from './request-handler.mjs';
 import { reserveDispatch, claimDispatch, updateDispatch } from '../apps/staging-portal/lib/workflow-requests.mjs';
@@ -155,6 +156,40 @@ try {
   assert.deepEqual((await reads(a)).rows, [{ status: 'completed', can_reconcile: true }]);
   assert.deepEqual(await reserveDispatch(worker, retry, false), { status: 'completed' });
 
+  const audienceOutput = Object.fromEntries(Object.keys(audienceSections).map(key => [key, ['Synthetic '+key]]));
+  let audienceCalls = 0;
+  const audience = createWorkflow({ database: worker, verifySession: async token => ({ id: token === 'A' ? a : b }),
+    async runAgent(id, input) {
+      audienceCalls++;
+      assert.equal(id, 'SCV7PECQF3');
+      assert.equal(input.approvedIdea.markdown, 'Validated outcome with next steps.');
+      assert.equal(input.approvedMarket.markdown, 'Market intelligence built from approved idea.');
+      return JSON.stringify(audienceOutput);
+    },
+  });
+  const audienceRequest = { projectId: project.id, agent: 'audience-dna', requestId: crypto.randomUUID() };
+  await assert.rejects(audience({ ...audienceRequest, token: 'A' }), { status: 409 });
+  assert.equal(audienceCalls, 0);
+  await assert.rejects(as(b, tx => tx.query('select public.approve_targeting_assessment($1,1)', [market.assessmentId])), { code: '42501' });
+  await as(a, tx => tx.query('select public.approve_targeting_assessment($1,1)', [market.assessmentId]));
+  await assert.rejects(audience({ ...audienceRequest, token: 'B' }), { status: 404 });
+  const targeted = await audience({ ...audienceRequest, token: 'A' });
+  assert.equal(targeted.version, 1);
+  assert.equal((await audience({ ...audienceRequest, token: 'A' })).runId, targeted.runId);
+  assert.equal(audienceCalls, 1);
+  const { rows: [targetVersion] } = await as(a, tx => tx.query(`
+    select r.source_assessment_id, r.source_assessment_version, r.market_assessment_id,
+      r.market_assessment_version,v.result,v.approval_status
+    from public.agent_runs r join public.assessment_versions v on v.run_id=r.id where r.id=$1
+  `, [targeted.runId]));
+  assert.deepEqual(targetVersion, {
+    source_assessment_id: idea.assessmentId, source_assessment_version: 1,
+    market_assessment_id: market.assessmentId, market_assessment_version: 1,
+    result: { sections: audienceOutput }, approval_status: 'pending',
+  });
+  assert.equal((await as(b,tx=>tx.query('select result from public.assessment_versions where run_id=$1',[targeted.runId]))).rows.length,0);
+  await assert.rejects(as(b, tx => tx.query('select public.approve_targeting_assessment($1,1)', [targeted.assessmentId])), { code: '42501' });
+  await as(a, tx => tx.query('select public.approve_targeting_assessment($1,1)', [targeted.assessmentId]));
   const unacknowledged = { ...recoverable, requestId: crypto.randomUUID() };
   const unknownJob = { ...unacknowledged, ...await reserveDispatch(worker, unacknowledged, false) };
   await claimDispatch(worker, unknownJob);

@@ -56,3 +56,7 @@ Added a staging workflow request ledger, server-side provider acknowledgment, GE
 Recommend Audience DNA Builder as the next pilot. It can turn the approved idea and its linked market evidence into a target audience profile. Before connecting it, verify the agent's credential scope, required inputs, dependencies and provider usage limits, and decide how a customer approves the Market Intelligence version for use as a source.
 
 Staging verification: a signed-in synthetic Idea Validator request was interrupted immediately after Pickaxe acknowledged it. After reload, the unknown request offered recovery and prevented a new submission. GET-only reconciliation completed the same request and saved one assessment. The temporary acceptance deployment was separate from the release Preview.
+
+## Q/CUE Phase 3
+
+Connected Audience DNA approval, source selection, versioned result persistence, and recovery to the existing staging pipeline. Local restricted-worker tests use a stubbed structured response, verify both pinned source versions and the explicit approval gate, and check denial of cross-customer read, approval and execution. Read-only Pickaxe metadata confirms the agent is a GPT-5.2 chat agent with no form fields or attached actions. Live execution remains gated on verified entitlement, limits, and workspace cost controls.

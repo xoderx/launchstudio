@@ -1,4 +1,5 @@
 import { createWorkflow } from '../../../staging/workflow.mjs';
+import { audienceEnabled } from './config.mjs';
 import { agentRunner, database } from './runtime.mjs';
 import { claimDispatch, updateDispatch } from './workflow-requests.mjs';
 
@@ -9,6 +10,8 @@ export async function runAssessment(job) {
 
 async function executeAssessment(job) {
   'use step';
+  if (job.agent === 'audience-dna' &&
+      (!audienceEnabled() || job.projectId !== process.env.AUDIENCE_DNA_PILOT_PROJECT_ID)) return;
   const db = database();
   const workflow = createWorkflow({
     database: db,

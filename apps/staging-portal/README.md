@@ -30,3 +30,9 @@ Run the dashboard tests with `node --test lib/command-center.test.mjs` from this
 Apply the workflow recovery migration to the staging Supabase project before deploying this version. A queued or running request becomes visibly unknown after five minutes without a recorded update. When Pickaxe acknowledged the request, the initiating customer can select **Check existing submission**. Recovery only polls the saved provider ID and never issues a replacement provider submission. If there is no acknowledgment, contact support to verify the outcome. Historical failures from before the ledger have no provider ID to recover in Q/CUE.
 
 The project histories use the signed-in customer's Supabase session and RLS. **Load older** continues from the last displayed creation timestamp and unique row ID. **Show newest** refreshes the list from the top. Run `node --test lib/*.test.mjs` for history and dashboard regressions, and `node test.mjs` from `staging/` for database and recovery coverage.
+
+### Audience DNA staging pilot
+
+The Audience DNA Builder agent is `SCV7PECQF3`. The protected Preview supports reviewing and approving Market Intelligence before it can be used as a source. Audience DNA pins that exact market version and the approved Idea Validator version referenced by its run, sends bounded excerpts, and validates all structured output sections before saving.
+
+Apply the additive Audience DNA migration to staging before deploying. The Preview feature is disabled by default. Enable `AUDIENCE_DNA_ENABLED` and set `AUDIENCE_DNA_PILOT_PROJECT_ID` only for the authorized synthetic project after confirming execution entitlement, the actual provider message limits, and a workspace spend boundary. Metadata reads with the Preview credential do not establish permission to run the agent or a per-run cost. Run one synthetic request once those checks pass. Recover an acknowledged request through the existing workflow history instead of repeating it.

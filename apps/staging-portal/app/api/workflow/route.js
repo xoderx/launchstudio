@@ -1,14 +1,15 @@
 import { start } from 'workflow/api';
 import { createRequestHandler } from '../../../../../staging/request-handler.mjs';
 import { createSessionVerifier } from '../../../../../staging/workflow.mjs';
-import { publicConfig } from '../../../lib/config.mjs';
+import { approvedAudienceSources } from '../../../../../staging/audience-dna.mjs';
+import { audienceEnabled, publicConfig } from '../../../lib/config.mjs';
 import { database } from '../../../lib/runtime.mjs';
 import { runAssessment } from '../../../lib/jobs.mjs';
 import { reserveDispatch } from '../../../lib/workflow-requests.mjs';
 import { workflowStage } from '../../../lib/workflow-diagnostics.mjs';
 
 const uuid = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
-const agents = new Set(['idea-validator', 'market-intelligence']);
+const agents = new Set(['idea-validator', 'market-intelligence', 'audience-dna']);
 
 export const POST = createRequestHandler(async ({ token, projectId, requestId, agent, operation }) => {
   const config = await workflowStage('public_config', publicConfig);
@@ -42,6 +43,14 @@ export const POST = createRequestHandler(async ({ token, projectId, requestId, a
       where project_id = $1 and agent = 'idea-validator' and approval_status = 'approved'
       limit 1`, [projectId]));
     if (!rowCount) throw Object.assign(new Error(), { status: 409 });
+  }
+  if (agent === 'audience-dna') {
+    if (!audienceEnabled() || projectId !== process.env.AUDIENCE_DNA_PILOT_PROJECT_ID) {
+      throw Object.assign(Error('Audience DNA pilot is unavailable'), { status: 409 });
+    }
+    if (!operation && !await approvedAudienceSources(db, projectId)) {
+      throw Object.assign(Error('Approved source assessments are required'), { status: 409 });
+    }
   }
   const job = { actorId: actor.id, projectId, requestId, agent };
   const reservation = await workflowStage('workflow_reservation', () => reserveDispatch(db, job, operation === 'reconcile'));

@@ -13,6 +13,7 @@ function unwrap({ data, error }) {
 
 export default function Portal() {
   const [client, setClient] = useState(null);
+  const [audienceDNA, setAudienceDNA] = useState(false);
   const [session, setSession] = useState(null);
   const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false);
@@ -21,10 +22,11 @@ export default function Portal() {
     let active = true;
     fetch('/api/config').then(async response => {
       if (!response.ok) throw Error('Staging configuration is unavailable.');
-      const { url, publishableKey } = await response.json();
+      const { url, publishableKey, audienceDNA } = await response.json();
       if (!active) return;
       const db = createClient(url, publishableKey, { auth: { detectSessionInUrl: false } });
       subscription = db.auth.onAuthStateChange((_event, current) => setSession(current)).data.subscription;
+      setAudienceDNA(audienceDNA === true);
       setClient(db);
     }).catch(error => { if (active) setMessage(error.message); });
     return () => { active = false; subscription?.unsubscribe(); };
@@ -50,11 +52,11 @@ export default function Portal() {
       <button disabled={busy}>{busy ? 'Signing in…' : 'Sign in'}</button>
       <p role="status">{message}</p>
     </form>}
-    {session && <Workspace key={session.user.id} db={client} session={session} />}
+    {session && <Workspace key={session.user.id} db={client} session={session} audienceDNA={audienceDNA} />}
   </>;
 }
 
-function Workspace({ db, session }) {
+function Workspace({ db, session, audienceDNA }) {
   const [businesses, setBusinesses] = useState([]);
   const [projects, setProjects] = useState([]);
   const [editorBusinessIds, setEditorBusinessIds] = useState([]);
@@ -159,7 +161,7 @@ function Workspace({ db, session }) {
   const scoped = snapshot?.projectId === project?.id ? snapshot : null;
   const pages = scoped && { ...scoped.pages, ...history[projectId] };
   const current = scoped && projectView({
-    ...scoped, pages, versions: pages.versions.items, runs: pages.runs.items,
+    ...scoped, audienceDNA, pages, versions: pages.versions.items, runs: pages.runs.items,
   }, project?.id);
   const pending = pendingByProject[projectId];
   const activeRequest = current?.activeRequest;
@@ -279,7 +281,8 @@ function Workspace({ db, session }) {
 
   function approve(version) {
     action(async () => {
-      unwrap(await db.rpc('approve_idea_assessment', { target: version.assessment_id, target_version: version.version }));
+      const rpc = version.agent === 'idea-validator' ? 'approve_idea_assessment' : 'approve_targeting_assessment';
+      unwrap(await db.rpc(rpc, { target: version.assessment_id, target_version: version.version }));
       setMessage('Assessment approved.');
     });
   }
@@ -353,8 +356,13 @@ function Workspace({ db, session }) {
         <div className="actions">
           <button disabled={!canRun || busy || waiting} onClick={() => runAgent('idea-validator')}>Run Idea Validator</button>
           <button disabled={!canRun || busy || waiting || !current?.approvedIdea} onClick={() => runAgent('market-intelligence')}>Run Market Intelligence</button>
+          <button disabled={!audienceDNA || !canRun || busy || waiting || !current?.approvedMarket}
+            onClick={() => runAgent('audience-dna')}>Run Audience DNA Builder</button>
         </div>
         {!current?.approvedIdea && current && <p className="muted">Market Intelligence requires an approved Idea Validator version.</p>}
+        {!audienceDNA && <p className="muted">Audience DNA execution is pending staging provider verification.</p>}
+        {audienceDNA && current && !current.approvedMarket &&
+          <p className="muted">Audience DNA requires an approved Market Intelligence version linked to approved Idea Validator evidence.</p>}
         <div role="status">
           {status !== 'idle' && <p><Badge value={status} /> {agentNames[activeRequest?.agent ?? pending?.agent]}</p>}
           {status === 'unknown' && <p>{activeRequest?.can_reconcile

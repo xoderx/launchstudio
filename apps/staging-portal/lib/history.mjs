@@ -6,7 +6,7 @@ const histories = {
   },
   runs: {
     table: 'agent_runs', key: 'id',
-    fields: 'project_id, id, actor_id, request_id, agent, status, source_assessment_id, source_assessment_version, created_at',
+    fields: 'project_id, id, actor_id, request_id, agent, status, source_assessment_id, source_assessment_version, market_assessment_id, market_assessment_version, created_at',
   },
 };
 
@@ -29,7 +29,7 @@ export async function loadHistoryPage(db, projectId, type, cursor) {
   const last = items.at(-1);
   let sources = [];
   if (type === 'versions' && items.length) {
-    sources = unwrap(await db.from('agent_runs').select('id, project_id, source_assessment_id, source_assessment_version')
+    sources = unwrap(await db.from('agent_runs').select('id, project_id, source_assessment_id, source_assessment_version, market_assessment_id, market_assessment_version')
       .eq('project_id', projectId).in('id', items.map(item => item.run_id))).filter(row => row.project_id === projectId);
   }
   return { items, sources, next: data.length > pageSize ? { time: last.created_at, id: last[key] } : null };

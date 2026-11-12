@@ -1,6 +1,7 @@
+import { approvedAudienceSources, audiencePickaxeId, parseAudienceResult } from './audience-dna.mjs';
 import { PickaxeFailure } from './pickaxe-adapter.mjs';
 
-const agents = { 'idea-validator': 'YL7LGN8AV2', 'market-intelligence': 'RYAET6419X' };
+const agents = { 'idea-validator': 'YL7LGN8AV2', 'market-intelligence': 'RYAET6419X', 'audience-dna': audiencePickaxeId };
 const uuid = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
 
 export function createWorkflow({ database, verifySession, runAgent }) {
@@ -26,10 +27,15 @@ export function createWorkflow({ database, verifySession, runAgent }) {
     const claimed = await database.transaction(async tx => {
       const project = await authorize(tx);
       const args = [projectId, actor.id, agent, requestId];
-      const { rows: [existing] } = await tx.query('select id,status,source_assessment_id,source_assessment_version from public.agent_runs where project_id=$1 and actor_id=$2 and agent=$3 and request_id=$4', args);
+      const { rows: [existing] } = await tx.query('select id,status,source_assessment_id,source_assessment_version,market_assessment_id,market_assessment_version from public.agent_runs where project_id=$1 and actor_id=$2 and agent=$3 and request_id=$4', args);
       if (existing && (!recovery?.providerId || existing.status !== 'running')) return { existing };
       if (recovery?.providerId && !existing) throw Error('Missing run for acknowledged submission');
       let approved;
+      let audienceSources;
+      if (agent === 'audience-dna') {
+        audienceSources = await approvedAudienceSources(tx, projectId, existing);
+        if (!audienceSources) throw Object.assign(Error('Approve linked validation and market assessments first'), { status: 409 });
+      }
       if (agent === 'market-intelligence') {
         const { rows: [version] } = await tx.query(`
           select assessment_id, version, result from public.assessment_versions
@@ -40,12 +46,13 @@ export function createWorkflow({ database, verifySession, runAgent }) {
         approved = version;
       }
       const run = existing ?? (await tx.query(`
-        insert into public.agent_runs(project_id,actor_id,agent,request_id,status,source_assessment_id,source_assessment_version)
-        values($1,$2,$3,$4,'running',$5,$6) on conflict do nothing returning id
-      `, [...args, approved?.assessment_id ?? null, approved?.version ?? null])).rows[0];
+        insert into public.agent_runs(project_id,actor_id,agent,request_id,status,source_assessment_id,source_assessment_version,market_assessment_id,market_assessment_version)
+        values($1,$2,$3,$4,'running',$5,$6,$7,$8) on conflict do nothing returning id
+      `, [...args, audienceSources?.idea_id ?? approved?.assessment_id ?? null,
+        audienceSources?.idea_version ?? approved?.version ?? null, audienceSources?.market_id ?? null, audienceSources?.market_version ?? null])).rows[0];
       if (!run) throw Object.assign(Error('Request already in progress'), { status: 409 });
       const profile = Object.fromEntries(['industry','audience','offering','budget'].filter(k => Object.hasOwn(project.profile,k)).map(k => [k,project.profile[k]]));
-      return { run, input: { name: project.name, goal: project.goal, profile, approvedIdea: approved?.result } };
+      return { run, input: { name: project.name, goal: project.goal, profile, approvedIdea: audienceSources?.idea_result ?? approved?.result, approvedMarket: audienceSources?.market_result } };
     });
     if (claimed.existing) return { runId: claimed.existing.id, status: claimed.existing.status };
     const runId = claimed.run.id;
@@ -65,6 +72,7 @@ export function createWorkflow({ database, verifySession, runAgent }) {
       });
       stage = 'pickaxe_response_validation';
       if (typeof output !== 'string' || output.trim().length === 0 || Buffer.byteLength(output) > 60000) throw Error('Invalid agent response');
+      const result = agent === 'audience-dna' ? parseAudienceResult(output) : { markdown: output.trim() };
       stage = 'assessment_persistence_begin';
       return await database.transaction(async tx => {
         stage = 'assessment_persistence_authorization';
@@ -84,13 +92,13 @@ export function createWorkflow({ database, verifySession, runAgent }) {
           insert into public.assessment_versions(assessment_id,project_id,agent,version,run_id,result)
           select $1,$2,$3,coalesce(max(version),0)+1,$4,$5 from public.assessment_versions
           where assessment_id=$1 returning version
-        `, [assessment.id,projectId,agent,runId,{ markdown: output.trim() }]);
+        `, [assessment.id,projectId,agent,runId,result]);
         stage = 'assessment_persistence_progress';
         await tx.query(`
           insert into public.workflow_progress(project_id,stage,next_agent,outstanding_tasks)
           values($1,$2,null,$3) on conflict(project_id) do update
           set stage=excluded.stage,next_agent=excluded.next_agent,outstanding_tasks=excluded.outstanding_tasks
-        `,[projectId,agent==='idea-validator'?'approve':'review',JSON.stringify([agent==='idea-validator'?'Approve the validation assessment':'Review the market analysis'])]);
+        `,[projectId,agent==='idea-validator'?'approve':'review',JSON.stringify([agent==='idea-validator'?'Approve the validation assessment':agent==='market-intelligence'?'Review the market analysis':'Review and approve the audience profile'])]);
         stage = 'assessment_persistence_commit';
         return { runId, assessmentId: assessment.id, version: version.version, status: 'succeeded' };
       });

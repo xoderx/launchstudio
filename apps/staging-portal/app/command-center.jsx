@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import registry from '../../../catalog/agent-registry.json';
+import { audienceSections } from '../../../staging/audience-dna.mjs';
 import { agentNames } from '../lib/command-center.mjs';
 
 const stages = ['Launch', 'Grow', 'Monetize', 'Scale'];
@@ -28,7 +29,7 @@ export function StageNavigation() {
   const tools = registry.agents.filter(item => item.category === stage);
   return <section id="tools" aria-labelledby="tools-title">
     <h2 id="tools-title">Tool roadmap</h2>
-    <p className="muted">52 tools across four stages. Idea Validator and Market Intelligence are available in the selected project.</p>
+    <p className="muted">52 tools across four stages. Project workflows use saved context and approved assessment versions.</p>
     <nav className="stage-nav" aria-label="Business stages">
       {stages.map(item => <button type="button" key={item} aria-pressed={item === stage}
         className="secondary" onClick={() => setStage(item)}>{item}</button>)}
@@ -38,7 +39,7 @@ export function StageNavigation() {
       {tools.map(tool => <li key={tool.id}>
         {['YL7LGN8AV2', 'RYAET6419X'].includes(tool.id)
           ? <a href="#workflow">{tool.name}</a> : <span>{tool.name}</span>}
-        <small>{['YL7LGN8AV2', 'RYAET6419X'].includes(tool.id) ? 'Available in Q/CUE' : 'Planned for Q/CUE'}</small>
+        <small>{['YL7LGN8AV2', 'RYAET6419X'].includes(tool.id) ? 'Available in Q/CUE' : tool.id === 'SCV7PECQF3' ? 'Staging pilot' : 'Planned for Q/CUE'}</small>
       </li>)}
     </ul>
   </section>;
@@ -102,7 +103,7 @@ export function AssessmentLibrary({ view, canApprove, busy, approve, historyCont
   return <section id="assessments" aria-labelledby="assessments-title">
     <h2 id="assessments-title">Assessment library</h2>
     {!view ? <p className="muted">Loading assessments…</p> :
-      !view.versions.length ? <p className="muted">Saved Idea Validator and Market Intelligence versions will appear here.</p> :
+      !view.versions.length ? <p className="muted">Saved Idea Validator, Market Intelligence, and Audience DNA versions will appear here.</p> :
         view.versions.map(version => {
           const id = `assessment-${version.assessment_id}-${version.version}`;
           const source = view.runById.get(version.run_id);
@@ -110,15 +111,23 @@ export function AssessmentLibrary({ view, canApprove, busy, approve, historyCont
             <h3>{agentNames[version.agent]} · Version {version.version}</h3>
             <div className="actions"><Badge value={version.approval_status} /><DateLabel value={version.created_at} /></div>
             {version.approved_at && <p className="muted">Approved <DateLabel value={version.approved_at} /></p>}
-            {version.agent === 'market-intelligence' && <p>
+            {['market-intelligence', 'audience-dna'].includes(version.agent) && <p>
               {source?.source_assessment_id
                 ? <a href={`#assessment-${source.source_assessment_id}-${source.source_assessment_version}`}>Source: Idea Validator version {source.source_assessment_version}</a>
                 : 'No source version is available.'}
             </p>}
+            {version.agent === 'audience-dna' && source?.market_assessment_id && <p>
+              <a href={`#assessment-${source.market_assessment_id}-${source.market_assessment_version}`}>
+                Source: Market Intelligence version {source.market_assessment_version}
+              </a>
+            </p>}
             <details><summary>Read assessment</summary>
-              {version.result?.markdown ? <pre>{version.result.markdown}</pre> : <p className="muted">No assessment text is available.</p>}
+              {version.result?.sections && Object.entries(audienceSections).map(([key, label]) =>
+                <div key={key}><h4>{label}</h4><ul>{version.result.sections[key]?.map((item, index) =>
+                  <li key={index}>{item}</li>)}</ul></div>)}
+              {version.result?.markdown ? <pre>{version.result.markdown}</pre> : !version.result?.sections && <p className="muted">No assessment text is available.</p>}
             </details>
-            {canApprove && version.agent === 'idea-validator' && version.approval_status === 'pending' &&
+            {canApprove && version.approval_status === 'pending' &&
               <button disabled={busy} onClick={() => approve(version)}>Approve version {version.version}</button>}
           </article>;
         })}
