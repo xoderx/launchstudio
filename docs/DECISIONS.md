@@ -33,3 +33,7 @@ Q/CUE Phase 2 reserves one unresolved workflow request per project in Supabase b
 Project histories use descending creation time plus the immutable row ID as a keyset. The signed-in Supabase client performs the database queries under RLS. Older pages stay anchored until the customer chooses to show the newest records.
 
 Audience DNA uses the approved Market Intelligence version and the approved Idea Validator version linked from that market run. Both references are stored on the run and constrained to the same project. The structured result separates source-backed evidence from assumptions. Growth Diagnostic is recommended only after the audience profile is saved and approved. The provider dispatch gate remains closed until the staging pilot prerequisites are verified.
+
+## November 11 visual redesign
+
+Use the actual staging application on `codex/supabase-integration` as the redesign baseline. Keep its Next.js/React/CSS infrastructure and every backend authorization, approval, history, and recovery contract. Share the existing selected business/project state with Start Here and the application shell. Navigator suggestions remain explicitly rule-based; direct model links keep their original portal destinations. Show saved-data milestones and query-scoped counts instead of inferred percentages or invented business metrics. Preview deployment is separate from production promotion and hosted two-customer acceptance.

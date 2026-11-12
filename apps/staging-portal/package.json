@@ -4,7 +4,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start"
+    "start": "next start",
+    "test:ui": "node tests/ui.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.119.0",
@@ -28,5 +29,9 @@
     "@vercel/queue": {
       "minimatch": "11.0.1"
     }
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.1",
+    "playwright": "1.62.1"
   }
 }
