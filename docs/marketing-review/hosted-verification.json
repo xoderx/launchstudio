@@ -1,0 +1,58 @@
+{
+  "scope": "Actual protected hosted Preview, Chromium/Playwright, no mocked responses, no customer session",
+  "commit": "4595f42d2e0a60a512c517928937953d86d60f38",
+  "deploymentId": "dpl_Ft36pAFV8rx4eFsv3uy9hqc4Ne8A",
+  "url": "https://launchstudio-staging-o0dxfork6-xoderxs-projects.vercel.app",
+  "homepageStatus": 200,
+  "previewRobotsHeader": "noindex, nofollow",
+  "routes": {
+    "/product": 200,
+    "/solutions": 200,
+    "/tools": 200,
+    "/academy": 200,
+    "/covibecoder": 200,
+    "/pricing": 200,
+    "/about": 200,
+    "/contact": 200,
+    "/partners": 200,
+    "/privacy": 200,
+    "/terms": 200,
+    "/ai-disclaimer": 200
+  },
+  "keyboardSkipLink": true,
+  "signedOutAppRedirect": "/login#qcue",
+  "unauthenticatedWorkflowStatus": 401,
+  "leadFormStatus": 201,
+  "leadChecks": {
+    "replay": 201,
+    "missingConsent": 400,
+    "honeypot": 400,
+    "crossOrigin": "blocked by browser/platform"
+  },
+  "syntheticLeadEmail": "marketing-preview-1794460680@example.invalid",
+  "requestId": "151e2e76-d3d5-40e1-a860-51252c46e89e",
+  "customerAB": "BLOCKED: legitimate customer credentials/session unavailable",
+  "adminPersistence": {
+    "verified": true,
+    "leadId": "cf38607e-711a-44d4-9c2f-8ae7e761238c",
+    "requestIdRowCount": 1,
+    "consent": true,
+    "consentVersion": "early-access-v1",
+    "createdAt": "2026-11-12T05:18:02.27907Z",
+    "syntheticRecordsCreated": 2,
+    "note": "First run saved successfully before a cross-origin browser probe interrupted the test runner; second complete run separately verified. Replay created no additional row."
+  },
+  "coreCountsUnchanged": {
+    "businesses": 2,
+    "projects": 7,
+    "assessmentVersions": 3,
+    "toolDeliverables": 0
+  },
+  "leadPermissions": {
+    "rls": true,
+    "anonymousInsert": false,
+    "customerRead": false,
+    "workerEmailRead": false
+  },
+  "temporaryDeploymentAccessRevoked": true
+}

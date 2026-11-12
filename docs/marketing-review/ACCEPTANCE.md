@@ -4,6 +4,12 @@
 
 The complete public marketing website is implemented alongside the preserved customer application. Production release remains **HOLD**. PR #1 must remain draft. No production deployment, account migration, billing change or Pickaxe configuration change is authorized by this website task.
 
+Implementation commit: [`4595f42d2e0a60a512c517928937953d86d60f38`](https://github.com/xoderx/launchstudio/commit/4595f42d2e0a60a512c517928937953d86d60f38).
+
+Tested protected Preview: https://launchstudio-staging-o0dxfork6-xoderxs-projects.vercel.app — deployment `dpl_Ft36pAFV8rx4eFsv3uy9hqc4Ne8A`, READY, Preview target. Normal Vercel Authentication remains required. Temporary test access was revoked.
+
+Route map and reproduction instructions: [README](README.md). Actual hosted screenshots: [desktop](hosted-home-desktop.png), [mobile](hosted-home-mobile.png), [lead success](hosted-lead-success.png). Local first-fold screenshots: [desktop](home-desktop.png), [mobile](home-mobile.png).
+
 ## Verification
 
 | Check | Result and evidence |
@@ -17,14 +23,17 @@ The complete public marketing website is implemented alongside the preserved cus
 | Existing static site builder | PASS, 52 tools and six downloads; unchanged and unpublished |
 | Lead SQL permissions/persistence | PASS, actual disposable PostgreSQL, restricted worker, idempotency, quotas, no anonymous/customer access |
 | Local form interaction | PASS with explicitly intercepted success response; not hosted persistence evidence |
-| Hosted Preview and real lead | Pending deployment verification; do not infer success from local fixtures |
+| Hosted Preview and real lead | PASS, actual Chromium with no mocked responses; homepage and 12 additional routes returned 200, Preview noindex confirmed, keyboard skip navigation passed |
+| Hosted lead persistence | PASS, form returned 201 and independent admin SQL confirmed one record for its request ID, consent and timestamp; replay returned 201 without another record |
+| Hosted input protection | PASS, consent false and honeypot returned 400; forged cross-origin probe was blocked by browser/platform (app same-origin 403 separately unit-tested) |
+| Hosted authentication boundary | PASS, signed-out `/app#qcue` reached `/login#qcue`, no customer shell; unauthenticated workflow returned 401 |
 | Real signed-in Customer A/B | BLOCKED: no legitimate customer credentials/session available; existing hosted acceptance runbook remains required |
 
 Mobile Lighthouse on the local production build: performance **86**, accessibility **100**, best practices **100**, SEO **69**. The SEO reduction is the intentional Preview `noindex`; all other SEO checks pass. LCP 4.1 seconds, CLS 0. See `lighthouse-summary.json`. Browser screenshots show actual rendered public pages. Embedded Q/CUE captures show the actual app with clearly labeled synthetic data, not customer outcomes.
 
 ## Data and readiness
 
-One additive lead migration was applied to staging only (hosted `20261112044212`). Customer record counts were unchanged: two businesses, seven projects, three assessment versions, zero tool deliverables. Lead RLS is enabled. Anonymous and authenticated customers have no direct lead read/write access; the worker cannot read lead email/goal. No new SECURITY DEFINER function was added.
+One additive lead migration was applied to staging only (hosted `20261112044212`). Customer record counts were unchanged: two businesses, seven projects, three assessment versions, zero tool deliverables. Lead RLS is enabled. Anonymous and authenticated customers have no direct lead read/write access; the worker cannot read lead email/goal. No new SECURITY DEFINER function was added. Hosted verification created two clearly synthetic inquiries (one preliminary run and one complete run), and no customer account or entitlement. The final request ID has exactly one row after replay. Both synthetic inquiries remain administrator-readable for review. See `hosted-verification.json`.
 
 Original readiness is preserved: two connected AI assessment workflows, Audience DNA paused, 49 remaining business provider APIs unactivated. All 52 business tools remain separate from 13 manual CoVibeCoder planning tools. Existing Pickaxe model links are available; embedded chats and external software building/deployment are not claimed as working.
 
