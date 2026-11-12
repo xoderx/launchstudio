@@ -25,3 +25,17 @@ Read-only Vercel inspection of `launchstudio-staging` (`prj_AyFPF0bTcHzmjPWK3j5m
 Offline preflight is expected to fail against the current unconfigured process. That is evidence of missing inputs, not an application build failure. A successful local compilation does not establish Production service connectivity, approve a release, enable all 65 tools' provider APIs or replace hosted acceptance.
 
 Recommendation: **continue release preparation; HOLD customer production promotion**. Pickaxe continues to power existing execution/model links; current customers, memberships and billing remain unchanged.
+
+## Completed verification
+
+- Source/build commit: `850b86b736ad4bbbceee167c1d61ee8625923183`.
+- Real `VERCEL_ENV=production` Next.js compilation: **PASS**, with indexing explicitly disabled and no production credentials used.
+- Unit/database/preflight suite: **35 passed, zero failed**. An initial test run overlapped dependency reinstallation and failed to find a package file; the final sequential run above passed after installation completed.
+- Restricted-worker database regression: **PASS**, synthetic two-tenant isolation/approvals/history/recovery; provider/Auth calls stubbed.
+- Preserved static builder: **PASS**, 52 tools, six downloads and internal anchors.
+- Release source archive SHA-256: `e1f2c89f42ae6bcb6a5a9c8c16612a0edb88608a317a09826c4fbd9148778604`.
+- Archive verified to contain committed source and release files, without local environment files, node_modules or Next.js caches. All ten migration checksums are recorded in [the manifest](production-assets-manifest.json).
+- Local kit: `work/production-release/850b86b736ad4bbbceee167c1d61ee8625923183/` (ignored generated output). The archive is a source release kit, not an environment-validated Vercel prebuilt deployment.
+- Current-process production preflight: **BLOCKED as expected**, required production configuration absent. Production credential validity, final hosted Customer A/B acceptance and release approval remain unverified.
+
+No production deployment, domain assignment, database change or PR merge was performed.

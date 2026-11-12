@@ -1,0 +1,61 @@
+{
+  "commit": "850b86b736ad4bbbceee167c1d61ee8625923183",
+  "createdAt": "2026-11-12T05:34:27.696Z",
+  "node": "v24.22.1",
+  "target": "production-local-compilation",
+  "build": "PASS",
+  "indexable": false,
+  "sourceSha256": "e1f2c89f42ae6bcb6a5a9c8c16612a0edb88608a317a09826c4fbd9148778604",
+  "migrations": [
+    {
+      "file": "20261111190000_launchstudio_shared_memory.sql",
+      "sha256": "42c696316217b342e21fe0aecbb948c4ec2f02de7926b5162381fe6bd72fa4d3"
+    },
+    {
+      "file": "20261111190100_launchstudio_approval.sql",
+      "sha256": "8b4a425bf12340d381bc68f2a9d66910306c75b99831662642b98065ecc30b13"
+    },
+    {
+      "file": "20261111190200_launchstudio_handoff_provenance.sql",
+      "sha256": "7eb275cea31b762d206b7885d43f60684196f2e6f8b14b8fa3dd8cf7fb650989"
+    },
+    {
+      "file": "20261111223000_launchstudio_staging_worker_access.sql",
+      "sha256": "64e01370579ac34c02dbfffdd70c90472c1f8d3b47d2428178b93d94c3f0a697"
+    },
+    {
+      "file": "20261111234608_launchstudio_project_name.sql",
+      "sha256": "ec8f20695e734260d4518d957e02cd91bbbb4c5555c31dea9990ea3fb387d2cb"
+    },
+    {
+      "file": "20261112021124_launchstudio_workflow_recovery.sql",
+      "sha256": "409e6421d5f2f71656b6d62dc9a737408762202323e9c6b2addf6f0403205e98"
+    },
+    {
+      "file": "20261112022908_launchstudio_audience_dna.sql",
+      "sha256": "64e002fce3f89920388b1d1355bb19a939abbcafbdefb1a5a233fab31d7c9da5"
+    },
+    {
+      "file": "20261112023727_launchstudio_tool_deliverables.sql",
+      "sha256": "c60b47aa013e74c02c20acbf404f1c3211c337a400efece79fb0d61c208a22b7"
+    },
+    {
+      "file": "20261112032053_covibecoder_suite.sql",
+      "sha256": "e1bad156865f489be6585eca5ab4e3e43e284bfef37b90208a6cc7f0ad7a1c7a"
+    },
+    {
+      "file": "20261112042704_marketing_leads.sql",
+      "sha256": "729cb7d7a0b943e5870f36d9381d67d553c8dbc62c1cdc86c966100b24ca8c1a"
+    }
+  ],
+  "productionDeployment": false,
+  "productionCredentialsVerified": false,
+  "schemaComplete": false,
+  "releaseApproved": false,
+  "notes": [
+    "Source archive contains committed files only; no local env files or build caches.",
+    "Local Next.js output remains in apps/staging-portal/.next; this archive is not a Vercel --prebuilt deployment.",
+    "Hosted-only qcue_bridge_initial must be reconciled before production migration.",
+    "Rebuild on Vercel with approved Production variables; test the unaliased production deployment before promotion."
+  ]
+}
