@@ -38,3 +38,7 @@ Next three actions are listed in ROADMAP.md.
 ## Staging assessment TLS repair
 
 The protected Preview reproduced the generic assessment 500. A read-only Vercel probe using the Preview worker URL failed certificate verification before the project authorization query could execute. The worker now uses the Supabase PostgreSQL CA with strict TLS verification. The workflow request logs only the failing stage and a fixed error category. No staging migrations were reapplied.
+
+## Staging Pickaxe acceptance
+
+The restricted hosted worker saved a stubbed assessment inside a rolled-back transaction. Pickaxe history contained no matching synthetic prompt. The configured personal key received HTTP 400 on a read-only completion lookup without workspace scope and reached HTTP 404 for the same nonexistent submission with the verified workspace. Preview supplies that scope to both provider calls. Worker logs distinguish submission, acknowledgment, polling, output validation, and the failing persistence operation.

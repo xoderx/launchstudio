@@ -17,3 +17,7 @@ The full November 11 conversation clarifies that a future independent portal, Ch
 ## Staging PostgreSQL TLS
 
 Use Supabase’s published PostgreSQL CA for the dedicated staging worker connection and require certificate and hostname verification. Keep the restricted-role endpoint allowlist and discard URI SSL options.
+
+## Staging Pickaxe workspace scope
+
+Select the configured Pickaxe workspace on both background submission and polling when using a personal API key. Keep the workspace setting in Vercel Preview, and use the application request ID for correlation. Do not automatically submit again after a provider or persistence failure.

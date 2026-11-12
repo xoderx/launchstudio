@@ -1,3 +1,5 @@
+import { PickaxeFailure } from './pickaxe-adapter.mjs';
+
 const agents = { 'idea-validator': 'YL7LGN8AV2', 'market-intelligence': 'RYAET6419X' };
 const uuid = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
 
@@ -46,33 +48,64 @@ export function createWorkflow({ database, verifySession, runAgent }) {
     });
     if (claimed.existing) return { runId: claimed.existing.id, status: claimed.existing.status };
     const runId = claimed.run.id;
+    let stage = 'pickaxe_submission';
+    function report(stage, category, httpStatus) {
+      console.error(JSON.stringify({ event: 'assessment_worker_failure', requestId, agent, stage, category, httpStatus }));
+    }
     try {
-      const output = await runAgent(agents[agent], claimed.input);
+      const output = await runAgent(agents[agent], claimed.input, {
+        requestId,
+        onAcknowledged(id) {
+          // Only known opaque identifier formats are safe to include.
+          const submissionId = uuid.test(id) || /^[a-f0-9]{24}$/i.test(id) ? id : undefined;
+          console.info(JSON.stringify({ event: 'pickaxe_acknowledged', requestId, agent, submissionId }));
+        },
+      });
+      stage = 'pickaxe_response_validation';
       if (typeof output !== 'string' || output.trim().length === 0 || Buffer.byteLength(output) > 60000) throw Error('Invalid agent response');
+      stage = 'assessment_persistence_begin';
       return await database.transaction(async tx => {
+        stage = 'assessment_persistence_authorization';
         await authorize(tx);
+        stage = 'assessment_persistence_run_status';
         const { rowCount } = await tx.query(
           "update public.agent_runs set status='succeeded' where id=$1 and status='running'", [runId]
         );
         if (!rowCount) throw Error('Agent run is no longer active');
+        stage = 'assessment_persistence_assessment';
         const { rows: [assessment] } = await tx.query(`
           insert into public.assessments(project_id,agent) values($1,$2)
           on conflict(project_id,agent) do update set agent=excluded.agent returning id
         `, [projectId,agent]);
+        stage = 'assessment_persistence_version';
         const { rows: [version] } = await tx.query(`
           insert into public.assessment_versions(assessment_id,project_id,agent,version,run_id,result)
           select $1,$2,$3,coalesce(max(version),0)+1,$4,$5 from public.assessment_versions
           where assessment_id=$1 returning version
         `, [assessment.id,projectId,agent,runId,{ markdown: output.trim() }]);
+        stage = 'assessment_persistence_progress';
         await tx.query(`
           insert into public.workflow_progress(project_id,stage,next_agent,outstanding_tasks)
           values($1,$2,null,$3) on conflict(project_id) do update
           set stage=excluded.stage,next_agent=excluded.next_agent,outstanding_tasks=excluded.outstanding_tasks
         `,[projectId,agent==='idea-validator'?'approve':'review',JSON.stringify([agent==='idea-validator'?'Approve the validation assessment':'Review the market analysis'])]);
+        stage = 'assessment_persistence_commit';
         return { runId, assessmentId: assessment.id, version: version.version, status: 'succeeded' };
       });
-    } catch {
-      await database.query("update public.agent_runs set status='failed' where id=$1 and status='running'",[runId]);
+    } catch (error) {
+      if (error instanceof PickaxeFailure) {
+        report(error.stage, error.category, error.httpStatus);
+      } else {
+        const category = error?.code === '42501' || error?.status === 404 ? 'authorization'
+          : typeof error?.code === 'string' && error.code.startsWith('23') ? 'constraint'
+          : stage === 'pickaxe_response_validation' ? 'invalid_result' : 'unexpected';
+        report(stage, category);
+      }
+      try {
+        await database.query("update public.agent_runs set status='failed' where id=$1 and status='running'",[runId]);
+      } catch {
+        report('assessment_persistence_mark_failed', 'unexpected');
+      }
       throw Object.assign(Error('Agent run failed'), { status: 502 });
     }
   };

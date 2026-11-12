@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import { createPickaxeRunner } from '../../../staging/pickaxe-adapter.mjs';
+import { createPickaxeClient, createPickaxeRunner } from '../../../staging/pickaxe-adapter.mjs';
 import { publicConfig } from './config.mjs';
 import { stagingPoolOptions } from './postgres-options.mjs';
 
@@ -29,20 +29,8 @@ export function database() {
 }
 
 export function agentRunner() {
-  const key = process.env.PICKAXE_STAGING_API_KEY;
-  if (!key) throw new Error('Staging Pickaxe key required');
-  async function request(path, payload) {
-    const response = await fetch('https://api.pickaxe.co/v1' + path, {
-      method: payload ? 'POST' : 'GET',
-      headers: { authorization: 'Bearer ' + key, 'content-type': 'application/json' },
-      body: payload ? JSON.stringify(payload) : undefined,
-      signal: AbortSignal.timeout(10000),
-    });
-    if (!response.ok) throw new Error('Pickaxe request failed');
-    return response.json();
-  }
-  return createPickaxeRunner({
-    submitPickaxe: payload => request('/completions', payload),
-    getPickaxeSubmission: id => request('/completions/' + encodeURIComponent(id)),
-  });
+  return createPickaxeRunner(createPickaxeClient({
+    key: process.env.PICKAXE_STAGING_API_KEY?.trim(),
+    workspaceId: process.env.PICKAXE_STAGING_WORKSPACE_ID?.trim(),
+  }));
 }
