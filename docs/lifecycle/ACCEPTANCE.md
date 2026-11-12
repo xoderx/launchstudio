@@ -17,7 +17,7 @@ Recommendation: **HOLD production**. Baseline `1ea24ba`. Five coordinated batche
 | Provider comparison | Framework ready, live comparison NOT RUN | No new paid provider calls or fabricated quality/cost/latency results |
 | Hosted signed-in Customer A/B | BLOCKED, legitimate sessions unavailable | Not established by fixtures |
 
-Two additive staging migrations were applied: `20261112060409_lifecycle_foundation.sql` (hosted `20261112061212`) and `20261112062328_ai_meter_settlement.sql` (narrow metering column privileges). Historical SQL and the hosted-only bridge were not replayed or changed. Before/after core counts remain two businesses, seven projects, three assessment versions, zero tool deliverables and one workflow request. Zero advanced entitlements, individual grants or enabled gateway budget accounts were created for existing customers.
+Two additive staging migrations were applied: `20261112060409_lifecycle_foundation.sql` (hosted `20261112061212`) and `20261112062328_ai_meter_settlement.sql` (hosted `20261112062434`, narrow metering column privileges). Historical SQL and the hosted-only bridge were not replayed or changed. Before/after core counts remain two businesses, seven projects, three assessment versions, zero tool deliverables and one workflow request. Zero advanced entitlements, individual grants or enabled gateway budget accounts were created for existing customers.
 
 Supabase reports six intentional authenticated SECURITY DEFINER RPC warnings (one new), five no-policy INFO findings (four locked private tables plus existing `qcue_state`) and the preexisting leaked-password warning. This is not a clean security scan. [RPC review guidance](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).
 
@@ -36,3 +36,15 @@ For hosted acceptance, use protected Vercel access and two legitimate Supabase c
 As B, guess A's project/version IDs through the RPC and direct general/private data reads; expect denial. Test explicit reader/editor/approver roles, then revoke/expire access. Database denial is immediate; rendered data clears on the next UI check (up to 15 seconds). Verify version expiry and unavailable/expired sessions. Record actual results against the final Preview commit; do not substitute these local fixtures.
 
 Direct-provider activation additionally needs verified credentials/model/retention, authoritative usage/cost, the bound assessment/provenance sink, budget period/reset/reconciliation procedures and one approved synthetic tenant pilot. Native secure history/streaming and private signed-file storage remain gated. Production still requires separate infrastructure, identity/membership continuity, final legal/retention approval, hosted-only bridge reconciliation and the existing release gates.
+
+## Final protected deployment
+
+- Code commit: [`1715415c3713a342dff47cdfe953b33f8798d76e`](https://github.com/xoderx/launchstudio/commit/1715415c3713a342dff47cdfe953b33f8798d76e).
+- Preview: https://launchstudio-staging-kj8izwiw1-xoderxs-projects.vercel.app
+- Deployment: `dpl_G262s11gkUpjBo4VJeR4om2TaTBW`, READY, Preview target; Vercel protection remains active.
+- Actual hosted Chromium, no mocked responses: homepage and 16 routes returned 200 after redirects; canonical solution aliases reached `/transform` and `/exit-ready`; Preview noindex, keyboard skip, signed-out `/app#qcue` → `/login#qcue` and unauthenticated workflow 401 passed.
+- Real Value Acceleration Advisory form submission returned 201, repeat returned 201 without another row, missing consent/honeypot returned 400, forged cross-origin request blocked by browser/platform. Independent admin SQL confirmed exactly one consent-bearing `value-advisory` record for request `11b78212-7933-4078-9570-7c80c7fe8c10`. No account, service engagement or entitlement was created.
+- Core counts stayed unchanged; advanced grants/entitlements and gateway budget accounts remain zero. Temporary deployment-scoped access was revoked.
+- Latest local lifecycle browser rerun passed after the final build, including eight zero-violation module/theme/width checks. Earlier verification caught and corrected a populated-textarea label issue and disposable teardown dependencies; final checks passed.
+
+Evidence: [hosted results](hosted-verification.json), [hosted desktop](hosted-home-desktop.png), [hosted mobile](hosted-home-mobile.png), [real inquiry success](hosted-lead-success.png), [synthetic workspace browser results](browser-verification.json), [TransformOS capture](screenshots/lifecycle-transform-desktop.png), [ExitReady capture](screenshots/lifecycle-exit-desktop.png). Workspace captures use synthetic sessions/data and are not evidence of a hosted customer login. The subsequent documentation-only commit records the tested code above.
