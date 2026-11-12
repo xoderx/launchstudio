@@ -41,3 +41,9 @@ Use the actual staging application on `codex/supabase-integration` as the redesi
 ## CoVibeCoder fifth suite
 
 Preserve the 52 business tools and academy as a distinct program. Reuse the registry's 13 CoVibeCoder commander workflows at positions 53–65 with tailored manual workspaces, source imports and a separate business entitlement enforced by RLS and narrow RPCs. Do not infer external execution from a reviewed planning artifact. GitHub, Lovable, Vibe SDK and Codex adapters remain disconnected and fail closed; manual copy/export is available. Repository writes, deployment, deletion and production changes require action-specific approval before any future adapter can execute.
+
+## AI Workspace visibility and production preparation
+
+Make AI Workspace the third sidebar destination, second mobile destination and first Start Here feature. Preserve the four existing Pickaxe model destinations. Position LaunchStudio as the branded product with Pickaxe powering current AI execution; keep current customer memberships and billing operational through the transition.
+
+Replace the blanket production rejection with explicit environment validation. Production requires a separate Supabase reference, its matching public URL, a restricted worker connection and Production-only Pickaxe credentials. Preview stays bound to staging. This is configuration support, not approval evidence that the production acceptance gate has passed.

@@ -1,13 +1,15 @@
 import { Pool } from 'pg';
 import { createPickaxeClient, createPickaxeRunner } from '../../../staging/pickaxe-adapter.mjs';
-import { publicConfig } from './config.mjs';
-import { stagingPoolOptions } from './postgres-options.mjs';
+import { projectReference, publicConfig } from './config.mjs';
+import { projectPoolOptions } from './postgres-options.mjs';
 
 let pool;
 export function database() {
   if (!pool) {
     publicConfig();
-    pool = new Pool(stagingPoolOptions(process.env.LAUNCHSTUDIO_STAGING_DATABASE_URL));
+    const connection = process.env.VERCEL_ENV === 'production'
+      ? process.env.LAUNCHSTUDIO_PRODUCTION_DATABASE_URL : process.env.LAUNCHSTUDIO_STAGING_DATABASE_URL;
+    pool = new Pool(projectPoolOptions(connection, projectReference()));
   }
   return {
     query: (sql, args) => pool.query(sql, args),
@@ -29,8 +31,9 @@ export function database() {
 }
 
 export function agentRunner() {
+  const production = process.env.VERCEL_ENV === 'production';
   return createPickaxeRunner(createPickaxeClient({
-    key: process.env.PICKAXE_STAGING_API_KEY?.trim(),
-    workspaceId: process.env.PICKAXE_STAGING_WORKSPACE_ID?.trim(),
+    key: (production ? process.env.PICKAXE_PRODUCTION_API_KEY : process.env.PICKAXE_STAGING_API_KEY)?.trim(),
+    workspaceId: (production ? process.env.PICKAXE_PRODUCTION_WORKSPACE_ID : process.env.PICKAXE_STAGING_WORKSPACE_ID)?.trim(),
   }));
 }

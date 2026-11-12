@@ -18,7 +18,7 @@ second='30000000-0000-4000-8000-000000000002'
 now='2026-11-12T03:00:00Z'
 rows=[]
 contexts={}
-state={'entitled':True,'fail_save':False}
+state={'entitled':True,'fail_save':False,'fail_history':False,'arm_history_failure':False}
 projects=[{'id':project,'business_id':business,'name':'Software pilot','goal':'Build a useful app','status':'active'},
  {'id':second,'business_id':business,'name':'Second project','goal':'Keep separate records','status':'active'}]
 
@@ -45,6 +45,9 @@ def mock(route):
    if state['fail_save']:
     state['fail_save']=False
     return route.abort('failed')
+   if state['arm_history_failure']:
+    state['arm_history_failure']=False
+    state['fail_history']=True
    result=existing['id']
   elif name=='approve_tool_deliverable':
    next(r for r in rows if r['id']==payload['target'])['approved_at']=now
@@ -62,6 +65,9 @@ def mock(route):
    result=None
   else: raise AssertionError('Unexpected RPC '+name)
  else:
+  if name=='tool_deliverables' and state['fail_history'] and 'content' in query.get('select',[''])[0] and query.get('tool_position')==['eq.53']:
+   state['fail_history']=False
+   return route.fulfill(status=403,content_type='application/json',headers={'access-control-allow-origin':'*'},body=json.dumps({'message':'Synthetic history outage after committed save'}))
   result={'businesses':[{'id':business,'owner_id':actor,'name':'Fixture business','profile':{'audience':'Local testers'}}],
    'business_projects':projects,'business_memberships':[], 'workflow_progress':[], 'workflow_requests':[],
    'assessment_versions':[], 'agent_runs':[], 'tool_deliverables':rows,
@@ -146,6 +152,17 @@ with sync_playwright() as p:
  page.context.grant_permissions(['clipboard-read','clipboard-write'])
  suite.get_by_role('button',name='Copy build prompt with context',exact=True).click()
  assert 'Approved product specification' in page.evaluate('navigator.clipboard.readText()')
+ suite.get_by_role('button',name='Edit as new version',exact=True).first.click()
+ suite.get_by_label('Executive summary',exact=True).fill('Committed before history read failure')
+ state['arm_history_failure']=True
+ suite.get_by_role('button',name='Save draft version',exact=True).click()
+ expect(suite.get_by_role('alert')).to_contain_text('save could not be confirmed')
+ assert len([r for r in rows if r['tool_position']==53])==3
+ expect(suite.get_by_role('button',name='Edit as new version',exact=True).first).to_be_disabled()
+ suite.get_by_role('button',name='Save draft version',exact=True).click()
+ expect(suite.get_by_role('heading',name='Version 3 · Draft',exact=True)).to_be_visible()
+ assert len([r for r in rows if r['tool_position']==53])==3
+
  page.add_script_tag(path=str(root/'apps/staging-portal/node_modules/axe-core/axe.min.js'))
  accessibility=[]
  for theme in ['dark','light']:
@@ -176,7 +193,7 @@ with sync_playwright() as p:
  expect(page.get_by_role('button',name='Sign in',exact=True)).to_be_visible()
  assert page.evaluate('Object.keys(sessionStorage).every(key=>!key.startsWith("launchstudio:covibecoder:"))')
  assert not errors,errors
- report={'scope':'Local UI regression; mocked Supabase and synthetic session; not hosted acceptance','passed':['All 13 tailored forms and three starters','Approved context import display','Save and reopen 13 tool drafts','Revision, version approval, Q/CUE progress','Interrupted save followed by reload without duplicate','JSON, Markdown and SQL exports; context-aware prompt copied','Project switching','Entitlement denied UI while original 52 remain available','Sign-out removes recovery data','390px no horizontal overflow','Visible form controls have labels; keyboard focus moves'],'pageErrors':errors,'savedVersions':len(rows),'accessibility':accessibility}
+ report={'scope':'Local UI regression; mocked Supabase and synthetic session; not hosted acceptance','passed':['All 13 tailored forms and three starters','Approved context import display','Save and reopen 13 tool drafts','Revision, version approval, Q/CUE progress','Interrupted save followed by reload without duplicate','Committed save plus failed history read retries without duplicate','JSON, Markdown and SQL exports; context-aware prompt copied','Project switching','Entitlement denied UI while original 52 remain available','Sign-out removes recovery data','390px no horizontal overflow','Visible form controls have labels; keyboard focus moves'],'pageErrors':errors,'savedVersions':len(rows),'accessibility':accessibility}
  (evidence/'covibecoder-browser.json').write_text(json.dumps(report,indent=2))
  print(json.dumps(report,indent=2))
  browser.close()

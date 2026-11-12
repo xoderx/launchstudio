@@ -14,6 +14,12 @@ const groups = ["All stages", "Launch", "Grow", "Monetize", "Scale"];
 const pageSize = 12;
 const empty = () => ({ deliverables: ["", "", ""] });
 
+function recoveryStorage(operation, key, value) {
+  if (!key) return null;
+  try { return sessionStorage[operation](key, value); }
+  catch { return null; }
+}
+
 function download(tool, row) {
   const file = new Blob([JSON.stringify({ tool: tool.key, ...row }, null, 2)], {
     type: "application/json",
@@ -198,6 +204,7 @@ export function ToolWorkbench({ db, tool, project, business, view, canEdit, audi
   const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false);
   const [hasMore, setHasMore] = useState(false);
+  const [loadRevision, setLoadRevision] = useState(0);
   const request = useRef(null);
   const next = catalog.find(item => item.position === tool.position + 1);
   const coVibe = tool.category === 'CoVibeCoder';
@@ -215,12 +222,12 @@ export function ToolWorkbench({ db, tool, project, business, view, canEdit, audi
     let live = true;
     if (recoveryKey) {
       try {
-        const pending = JSON.parse(sessionStorage.getItem(recoveryKey) ?? 'null');
+        const pending = JSON.parse(recoveryStorage('getItem', recoveryKey) ?? 'null');
         if (pending) {
           setDraft(validateDraft(pending.content, tool)); request.current = pending.requestId;
           setMessage('Recovered an unconfirmed draft. Check saved versions or save again to confirm the same request.');
         }
-      } catch { sessionStorage.removeItem(recoveryKey); }
+      } catch { recoveryStorage('removeItem', recoveryKey); }
     }
     Promise.all([fetchRows(), db.from('tool_deliverables').select('id, tool_position, version')
       .eq('project_id', project.id).gte('tool_position', coVibe ? 53 : 1).lte('tool_position', coVibe ? 65 : 52)
@@ -230,16 +237,18 @@ export function ToolWorkbench({ db, tool, project, business, view, canEdit, audi
         .lt('tool_position',tool.position).not('approved_at','is',null)
         .order('tool_position',{ascending:false}).order('version',{ascending:false}).limit(1).maybeSingle()])
       .then(([data, inbox, source]) => { if (live) {
+        if (inbox.error || source.error) throw inbox.error ?? source.error;
         if (recoveryKey && request.current && data.some(row => row.request_id === request.current)) {
-          request.current = null; sessionStorage.removeItem(recoveryKey);
+          request.current = null; recoveryStorage('removeItem', recoveryKey);
           setMessage('Recovered save confirmed in version history.');
         }
         setRows(data.slice(0, pageSize)); setHasMore(data.length > pageSize);
         setQueue(inbox.data ?? []);
         setPrior(source.data ?? null);
+        setError('');
       } }).catch(() => { if (live) setError('Could not load saved drafts.'); });
     return () => { live = false; };
-  }, [db, project?.id, tool.position, recoveryKey]);
+  }, [db, project?.id, tool.position, recoveryKey, loadRevision]);
 
   async function save(event) {
     event.preventDefault();
@@ -249,15 +258,17 @@ export function ToolWorkbench({ db, tool, project, business, view, canEdit, audi
     setBusy(true);
     request.current ??= crypto.randomUUID();
     try {
-      if (recoveryKey) sessionStorage.setItem(recoveryKey, JSON.stringify({ requestId: request.current, content }));
+      recoveryStorage('setItem', recoveryKey, JSON.stringify({ requestId: request.current, content }));
       const { error } = await db.rpc('save_tool_deliverable', {
         target: project.id, tool: tool.position, request: request.current, draft: content,
       });
       if (error) throw error;
-      request.current = null;
-      if (recoveryKey) sessionStorage.removeItem(recoveryKey);
       const data = await fetchRows();
       setRows(data.slice(0, pageSize)); setHasMore(data.length > pageSize);
+      // Retain the idempotency key until the confirming history read succeeds.
+      // A failed read after a committed write must not create a new request.
+      request.current = null;
+      recoveryStorage('removeItem', recoveryKey);
       setMessage('Draft version saved.');
       onChange?.();
     } catch { setError('The save could not be confirmed. Submit again to check the same request.'); }
@@ -316,7 +327,7 @@ export function ToolWorkbench({ db, tool, project, business, view, canEdit, audi
         </li>)}</ul> : <p>No pending tool drafts loaded.</p>}
       </details>
       {canEdit && <form onSubmit={save}>
-        <fieldset disabled={coVibe && Boolean(request.current)}>
+        <fieldset disabled={Boolean(request.current)}>
         {tool.fields?.map(field => <div key={field.key}><label htmlFor={`${tool.key}-${field.key}`}>{field.label}</label>
           <textarea id={`${tool.key}-${field.key}`} required={field.required} maxLength={field.maxLength} value={draft.inputs?.[field.key] ?? ''}
             onChange={event => setDraft({ ...draft, inputs: { ...draft.inputs, [field.key]: event.target.value } })} />
@@ -345,11 +356,12 @@ export function ToolWorkbench({ db, tool, project, business, view, canEdit, audi
             onChange={event => setDraft({ ...draft, deliverables: draft.deliverables.map((value, index) =>
               index === i ? event.target.value : value) })} /></div>)}
         </fieldset>
-        {coVibe && request.current && <p role="status">Confirm the pending save before revising this draft. Saving again uses the same request.</p>}
+        {request.current && <p role="status">Confirm the pending save before revising this draft. Saving again uses the same request.</p>}
         <button disabled={busy}>Save draft version</button>
       </form>}
       {error && <p role="alert">{error}</p>}{message && <p role="status">{message}</p>}
       <h4>Saved versions</h4>
+      <button className="secondary" disabled={busy} onClick={() => setLoadRevision(value => value + 1)}>Reload saved versions and context</button>
       {rows === null ? <p>{error ? 'History unavailable.' : 'Loading saved versions…'}</p> :
         !rows.length ? <p>No tool drafts saved for this project.</p> : rows.map(row => <article key={row.id}>
           <h5>Version {row.version} · {row.approved_at ? 'Approved' : 'Draft'}</h5>
@@ -374,7 +386,7 @@ export function ToolWorkbench({ db, tool, project, business, view, canEdit, audi
                 downloadText(`${tool.key}-v${row.version}-${index + 1}.${tool.formats[index]}`, row.content.deliverables[index])}>
                 Export {label} (.{tool.formats[index]})</button>)}
             </>}
-            {canEdit && <button className="secondary" disabled={busy}
+            {canEdit && <button className="secondary" disabled={busy || Boolean(request.current)}
               onClick={() => { setDraft(row.content); setMessage('Version loaded into the draft editor.'); }}>Edit as new version</button>}
             {canEdit && !row.approved_at && <button disabled={busy} onClick={() => approve(row)}>Approve version {row.version}</button>}
           </div>

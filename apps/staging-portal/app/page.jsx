@@ -53,9 +53,11 @@ export default function Portal() {
         });
         subscription = db.auth.onAuthStateChange((event, current) => {
           if (event === 'SIGNED_OUT') {
-            for (const key of Object.keys(sessionStorage)) {
-              if (key.startsWith('launchstudio:covibecoder:')) sessionStorage.removeItem(key);
-            }
+            try {
+              for (const key of Object.keys(sessionStorage)) {
+                if (key.startsWith('launchstudio:covibecoder:')) sessionStorage.removeItem(key);
+              }
+            } catch { /* Storage may be unavailable; sign-out still clears the UI. */ }
           }
           setSession(current);
         }).data.subscription;

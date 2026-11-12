@@ -111,6 +111,37 @@ export default function StartHere({ business, project, view, displayName }) {
           Your next business breakthrough starts with one focused move.
         </p>
       </div>
+      <section id="ai-workspace" aria-labelledby="ai-workspace-title">
+          <p className="eyebrow">Think · Create · Solve</p>
+          <h2 id="ai-workspace-title">Your AI Workspace</h2>
+          <p className="muted">
+            Universal AI chooses a model for your task. Or bring your own
+            preference.
+          </p>
+          <a
+            className="button-link"
+            href={portal + "ZEHJ2MG2K4Z022Y"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Universal AI <Icon name="arrow" />
+            <span className="sr-only">(new tab)</span>
+          </a>
+          <h3>Choose an individual model</h3>
+          <div className="model-links">
+            {models.map(([name, id]) => (
+              <a
+                href={portal + id}
+                key={id}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Chat with ${name} (new tab)`}
+              >
+                {name}
+              </a>
+            ))}
+          </div>
+        </section>
       <section
         id="navigator"
         className="navigator-card"
@@ -167,16 +198,14 @@ export default function StartHere({ business, project, view, displayName }) {
               <p>
                 Rule-based recommendation.{" "}
                 {recommendation === "CoVibeCoder"
-                  ? "Use the existing build commander to plan your next step."
+                  ? "Open your project’s 13-step software development workspace."
                   : "Explore tools in this stage, review their requirements, and choose one measurable action."}
               </p>
               {recommendation === "CoVibeCoder" ? (
                 <a
-                  href={portal + "launchstudio-covibecoder"}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#covibecoder"
                 >
-                  Open CoVibeCoder (new tab)
+                  Open CoVibeCoder workspace
                 </a>
               ) : (
                 <a
@@ -254,38 +283,7 @@ export default function StartHere({ business, project, view, displayName }) {
           ))}
         </div>
       </section>
-      <div className="launchpad-pair">
-        <section id="ai-workspace">
-          <p className="eyebrow">Think · Create · Solve</p>
-          <h2>Your AI Workspace</h2>
-          <p className="muted">
-            Universal AI chooses a model for your task. Or bring your own
-            preference.
-          </p>
-          <a
-            className="button-link"
-            href={portal + "ZEHJ2MG2K4Z022Y"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open Universal AI <Icon name="arrow" />
-            <span className="sr-only">(new tab)</span>
-          </a>
-          <h3>Choose an individual model</h3>
-          <div className="model-links">
-            {models.map(([name, id]) => (
-              <a
-                href={portal + id}
-                key={id}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Chat with ${name} (new tab)`}
-              >
-                {name}
-              </a>
-            ))}
-          </div>
-        </section>
+      <div>
         <section id="recipes">
           <p className="eyebrow">From goal to execution</p>
           <h2>Outcome Recipes</h2>

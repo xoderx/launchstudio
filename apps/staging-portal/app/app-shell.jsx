@@ -7,13 +7,13 @@ const projectName = (p) => (p.name === "Untitled project" ? p.goal : p.name);
 const destinations = [
   ["Overview", "qcue", "grid"],
   ["Start Here", "start-here", "compass"],
+  ["AI Workspace", "ai-workspace", "spark"],
   ["Projects", "workspace", "folder"],
   ["Workflows", "workflow", "workflow"],
   ["Assessments", "assessments", "check"],
   ["52 Tools", "tools", "grid"],
   ["CoVibeCoder", "covibecoder", "workflow"],
   ["Growth Sprints", "tool-studio", "rocket"],
-  ["AI Workspace", "ai-workspace", "spark"],
   ["Activity", "activity", "activity"],
   ["Settings", "account-settings", "settings"],
 ];
@@ -411,9 +411,9 @@ export function AppShell({
       >
         {[
           ["start-here", "compass", "Start"],
+          ["ai-workspace", "spark", "AI"],
           ["qcue", "grid", "Q/CUE"],
           ["tools", "grid", "Tools"],
-          ["ai-workspace", "spark", "AI"],
         ].map(([id, icon, name]) => (
           <a
             href={"#" + id}

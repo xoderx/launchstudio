@@ -96,6 +96,9 @@ try {
     await page.locator(".navigator-result").innerText(),
     /Rule-based recommendation/,
   );
+  assert.equal(await page.locator('.app-sidebar nav[aria-label="Main navigation"] a').nth(2).getAttribute('href'), '#ai-workspace');
+  assert.equal(await page.locator('.mobile-bottom a').nth(1).getAttribute('href'), '#ai-workspace');
+  assert.equal(await page.locator('#ai-workspace').evaluate(el => Boolean(el.compareDocumentPosition(document.getElementById('navigator')) & Node.DOCUMENT_POSITION_FOLLOWING)), true);
   assert.equal(await page.locator(".model-links a").count(), 4);
   assert.match(
     await page
