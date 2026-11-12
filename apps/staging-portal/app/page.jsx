@@ -2,6 +2,8 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
+import { agentNames, loadProject, projectView, workflowState } from '../lib/command-center.mjs';
+import { Activity, AssessmentLibrary, Badge, ProjectProgress, SavedContext, StageNavigation, projectName } from './command-center';
 
 function unwrap({ data, error }) {
   if (error) throw error;
@@ -38,7 +40,7 @@ export default function Portal() {
     } finally { setBusy(false); }
   }
   return <>
-    <header><p className="brand">LaunchStudio Staging</p><h1>Business workspace</h1></header>
+    {!session && <header className="hero"><p className="brand">LaunchStudio · Staging</p><h1>Q/CUE Command Center</h1></header>}
     {!client && <p role="status">{message || 'Connecting to staging…'}</p>}
     {client && !session && <form onSubmit={login}>
       <h2>Sign in</h2>
@@ -60,50 +62,90 @@ function Workspace({ db, session }) {
   const [snapshot, setSnapshot] = useState(null);
   const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false);
-  const [pending, setPending] = useState(null);
+  const [pendingByProject, setPendingByProject] = useState({});
+  const [recent, setRecent] = useState(null);
+  const [activityError, setActivityError] = useState('');
+  const [projectError, setProjectError] = useState('');
+  const [workspaceError, setWorkspaceError] = useState('');
   const actor = session.user.id;
   const business = businesses.find(item => item.id === businessId);
-  const project = projects.find(item => item.id === projectId);
+  const project = projects.find(item => item.id === projectId && item.business_id === businessId);
   const canEditProjects = business?.owner_id === actor || editorBusinessIds.includes(businessId);
 
-  async function refresh() {
+  async function refresh(initial = false) {
     const [owned, available, memberships] = await Promise.all([
       db.from('businesses').select('id, owner_id, name, profile').order('created_at'),
       db.from('business_projects').select('id, business_id, name, goal, status').order('created_at'),
       db.from('business_memberships').select('business_id').eq('user_id', actor).eq('role', 'editor'),
     ]);
-    setBusinesses(unwrap(owned));
-    setProjects(unwrap(available));
-    setEditorBusinessIds(unwrap(memberships).map(item => item.business_id));
+    const nextBusinesses = unwrap(owned);
+    const nextProjects = unwrap(available);
+    const nextEditors = unwrap(memberships).map(item => item.business_id);
+    setBusinesses(nextBusinesses);
+    setProjects(nextProjects);
+    setEditorBusinessIds(nextEditors);
+    setWorkspaceError('');
+    if (initial && nextBusinesses.length) {
+      const initialBusiness = nextBusinesses[0].id;
+      selectBusiness(initialBusiness);
+      selectProject(nextProjects.find(item => item.business_id === initialBusiness && item.status === 'active')?.id ?? '');
+    }
   }
-  useEffect(() => { refresh().catch(() => setMessage('Could not load your workspace.')); }, [db]);
+  useEffect(() => {
+    refresh(true).catch(() => setWorkspaceError('Could not load your workspace. Reload to try again.'));
+  }, [db, actor]);
+
   useEffect(() => {
     if (!projectId) return;
     let active = true;
+    let timer;
+    setProjectError('');
     async function load() {
       try {
-        const [versions, runs, progress] = await Promise.all([
-          db.from('assessment_versions').select('assessment_id, agent, version, result, approval_status, created_at')
-            .eq('project_id', projectId).order('created_at', { ascending: false }),
-          db.from('agent_runs').select('id, actor_id, request_id, agent, status, source_assessment_id, source_assessment_version')
-            .eq('project_id', projectId).order('created_at', { ascending: false }),
-          db.from('workflow_progress').select('stage, next_agent, outstanding_tasks').eq('project_id', projectId).maybeSingle(),
-        ]);
-        const next = { projectId, versions: unwrap(versions), runs: unwrap(runs), progress: unwrap(progress) };
-        if (!active) return;
-        setSnapshot(next);
+        const next = await loadProject(db, projectId);
+        if (active) {
+          setSnapshot(next);
+          setProjectError('');
+        }
       } catch {
-        if (active) setMessage('Could not refresh project activity.');
+        if (active) setProjectError('Project data could not be refreshed. Showing the last available data.');
+      } finally {
+        if (active) timer = setTimeout(load, 3000);
       }
     }
     load();
-    const timer = setInterval(load, 2500);
-    return () => { active = false; clearInterval(timer); };
+    return () => { active = false; clearTimeout(timer); };
   }, [db, projectId]);
 
-  const current = snapshot?.projectId === projectId ? snapshot : null;
-  const pendingRun = pending && current?.runs.find(run => run.request_id === pending.requestId && run.actor_id === actor);
-  const waiting = pending?.projectId === projectId && !['failed', 'succeeded'].includes(pendingRun?.status);
+  const businessProjects = projects.filter(item => item.business_id === businessId);
+  useEffect(() => {
+    if (!businessId || !businessProjects.length) return;
+    let active = true;
+    let timer;
+    const ids = businessProjects.map(item => item.id);
+    async function load() {
+      try {
+        const runs = unwrap(await db.from('agent_runs').select('id, project_id, agent, status, created_at')
+          .in('project_id', ids).order('created_at', { ascending: false }).limit(12));
+        if (active) {
+          setRecent({ businessId, runs: runs.filter(run => ids.includes(run.project_id)) });
+          setActivityError('');
+        }
+      } catch {
+        if (active) setActivityError('Recent activity could not be refreshed.');
+      } finally {
+        if (active) timer = setTimeout(load, 10000);
+      }
+    }
+    load();
+    return () => { active = false; clearTimeout(timer); };
+  }, [db, businessId, projects]);
+
+  const current = projectView(snapshot, project?.id);
+  const pending = pendingByProject[projectId];
+  const status = workflowState(current?.runs, pending, actor);
+  const waiting = ['submitting', 'unconfirmed', 'queued', 'running'].includes(status);
+  const canRun = canEditProjects && project?.status === 'active' && Boolean(current) && !projectError;
 
   async function action(callback) {
     setBusy(true);
@@ -155,30 +197,76 @@ function Workspace({ db, session }) {
       setMessage(target ? 'Project updated.' : 'Project created.');
     });
   }
-  function runAgent(agent, retry = null) {
-    const input = retry ?? { projectId, agent, requestId: crypto.randomUUID() };
-    setPending(input);
+  function runAgent(agent) {
+    if (!canRun || waiting || busy) return;
+    const input = { projectId, agent, requestId: crypto.randomUUID() };
+    const mark = status => setPendingByProject(previous => ({ ...previous,
+      [input.projectId]: status ? { ...input, status } : null,
+    }));
+    mark('submitting');
     action(async () => {
-      const response = await fetch('/api/workflow', { method: 'POST',
-        headers: { 'content-type': 'application/json', authorization: `Bearer ${session.access_token}` },
-        body: JSON.stringify(input) });
-      const result = await response.json();
-      if (!response.ok) {
-        setMessage(result.error || 'The request could not be queued.');
-        if (response.status < 500) setPending(null);
-        return;
+      try {
+        const response = await fetch('/api/workflow', { method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: `Bearer ${session.access_token}` },
+          body: JSON.stringify(input) });
+        if (response.ok) {
+          mark('queued');
+        } else if (response.status >= 500) {
+          mark('unconfirmed');
+        } else {
+          mark(null);
+          setMessage('The workflow request was declined. Check project access and prerequisites.');
+        }
+      } catch {
+        mark('unconfirmed');
       }
-      setMessage('Request accepted. Saved results appear below.');
     });
   }
+
+  function approve(version) {
+    action(async () => {
+      unwrap(await db.rpc('approve_idea_assessment', { target: version.assessment_id, target_version: version.version }));
+      setMessage('Assessment approved.');
+    });
+  }
+
+  function changeBusiness(id) {
+    selectBusiness(id);
+    selectProject(projects.find(item => item.business_id === id && item.status === 'active')?.id ?? '');
+    setActivityError('');
+    setMessage('');
+  }
+
   return <>
-    <button className="secondary" onClick={() => action(async () => unwrap(await db.auth.signOut()))} disabled={busy}>Sign out</button>
-    <p role="status">{message}</p>
-    <section><h2>Business profile</h2>
-      <label>Business<select value={businessId} onChange={event => { selectBusiness(event.target.value); selectProject(''); }}>
+    <a className="skip-link" href="#workspace">Skip to workspace</a>
+    <header className="hero">
+      <div><p className="brand">LaunchStudio · Staging</p><h1>Q/CUE Command Center</h1>
+        <p className="muted">Track projects, review assessments, and see what comes next.</p></div>
+      <button className="secondary" onClick={() => action(async () => unwrap(await db.auth.signOut()))} disabled={busy}>Sign out</button>
+    </header>
+    <nav className="section-nav" aria-label="Command center">
+      <a href="#workspace">Workspace</a>{project && <><a href="#workflow">Workflows</a><a href="#assessments">Assessments</a></>}
+      {business && <a href="#activity">Recent activity</a>}<a href="#tools">Tool roadmap</a>
+    </nav>
+    {message && <p className="notice" role="status">{message}</p>}
+    {workspaceError && <p className="notice" role="alert">{workspaceError}</p>}
+    <section id="workspace" aria-labelledby="workspace-title">
+      <h2 id="workspace-title">{business?.name ?? 'Business workspace'}</h2>
+      <label>Current business<select value={businessId} onChange={event => changeBusiness(event.target.value)}>
         <option value="">New business</option>
         {businesses.map(item => <option value={item.id} key={item.id}>{item.name}</option>)}
       </select></label>
+      {!business && !workspaceError && <p className="muted">Select a business or save a business profile to get started.</p>}
+      {business && <>
+        <h3>Projects <span className="muted">· {businessProjects.filter(item => item.status === 'active').length} active</span></h3>
+        {businessProjects.length ? <ul className="project-list">{businessProjects.map(item =>
+          <li key={item.id}><button aria-pressed={item.id === projectId} className="secondary"
+            onClick={() => selectProject(item.id)}><span>{projectName(item)}</span><Badge value={item.status} /></button></li>
+        )}</ul> : <p className="muted">No projects yet. Create one with a name and a goal.</p>}
+      </>}
+    </section>
+    <details className="settings" open={business ? undefined : true}>
+      <summary>Business profile</summary>
       <form key={businessId} onSubmit={saveBusiness}>
         {!business && <label>Your display name<input name="displayName" required maxLength={120} /></label>}
         <label>Business name<input name="name" required maxLength={160} defaultValue={business?.name} /></label>
@@ -187,14 +275,8 @@ function Workspace({ db, session }) {
         <label>Offering<textarea name="offering" defaultValue={business?.profile.offering} /></label>
         <button disabled={busy}>Save business profile</button>
       </form>
-    </section>
-    {business && <section><h2>Projects</h2>
-      <label>Project<select value={projectId} onChange={event => selectProject(event.target.value)}>
-        <option value="">Choose a project</option>
-        {projects.filter(item => item.business_id === businessId).map(item => <option value={item.id} key={item.id}>
-          {item.name === 'Untitled project' ? `${item.name} — ${item.goal}` : item.name}
-        </option>)}
-      </select></label>
+    </details>
+    {business && canEditProjects && <details className="settings"><summary>Manage projects</summary>
       {canEditProjects && <form onSubmit={event => saveProject(event)}>
         <label>Project Name<input name="name" required maxLength={160} /></label>
         <label>Project Goal<textarea name="goal" required maxLength={2000} /></label>
@@ -206,30 +288,37 @@ function Workspace({ db, session }) {
         <label>Project Goal<textarea name="goal" required maxLength={2000} defaultValue={project.goal} /></label>
         <button disabled={busy}>Save project changes</button>
       </form>}
-    </section>}
-    {project && <section><h2>Project activity</h2><h3>{project.name}</h3><p>{project.goal}</p>
-      <p>Status: {project.status}{current?.progress && ` · Stage: ${current.progress.stage}`}</p>
-      {current?.progress?.outstanding_tasks.map(task => <p key={task}>{task}</p>)}
-      <div className="actions">
-        <button disabled={busy || waiting} onClick={() => runAgent('idea-validator')}>Run Idea Validator</button>
-        <button disabled={busy || waiting || !current?.versions.some(v => v.agent === 'idea-validator' && v.approval_status === 'approved')}
-          onClick={() => runAgent('market-intelligence')}>Run Market Intelligence</button>
-      </div>
-      {waiting && <div><p role="status">Request {pendingRun?.status ?? 'queued'}.</p>
-        <button className="secondary" disabled={busy} onClick={() => runAgent(pending.agent, pending)}>Check or resend same request</button></div>}
-      {pendingRun?.status === 'failed' && <p role="status">Agent run failed. Run the agent again to start a new request.</p>}
-      <h3>Saved assessments</h3>
-      {!current && <p>Loading project activity…</p>}
-      {current?.versions.length === 0 && <p>No assessments saved.</p>}
-      {current?.versions.map(version => <article key={`${version.assessment_id}:${version.version}`}>
-        <h4>{version.agent === 'idea-validator' ? 'Idea Validator' : 'Market Intelligence'} · Version {version.version}</h4>
-        <p>{version.approval_status}</p><pre>{version.result.markdown}</pre>
-        {version.agent === 'idea-validator' && version.approval_status === 'pending' &&
-          <button disabled={busy} onClick={() => action(async () => {
-            unwrap(await db.rpc('approve_idea_assessment', { target: version.assessment_id, target_version: version.version }));
-            setMessage('Assessment approved.');
-          })}>Approve version {version.version}</button>}
-      </article>)}
-    </section>}
+    </details>}
+    {project && <>
+      <div className="project-heading"><div><p className="brand">Selected project</p><h2>{projectName(project)}</h2></div><Badge value={project.status} /></div>
+      {projectError && <p className="notice" role="alert">{projectError}</p>}
+      <div className="dashboard-grid"><ProjectProgress view={current} project={project} />
+        <SavedContext business={business} project={project} view={current} /></div>
+      <section id="workflow" aria-labelledby="workflow-title">
+        <h2 id="workflow-title">Workflow execution</h2>
+        <div className="actions">
+          <button disabled={!canRun || busy || waiting} onClick={() => runAgent('idea-validator')}>Run Idea Validator</button>
+          <button disabled={!canRun || busy || waiting || !current?.approvedIdea} onClick={() => runAgent('market-intelligence')}>Run Market Intelligence</button>
+        </div>
+        {!current?.approvedIdea && current && <p className="muted">Market Intelligence requires an approved Idea Validator version.</p>}
+        <div role="status">
+          {status !== 'idle' && <p><Badge value={status} /> {pending && agentNames[pending.agent]}</p>}
+          {status === 'unconfirmed' && <p>LaunchStudio could not confirm the request. Watch the run history and verify the previous request before starting another.</p>}
+        </div>
+        {!waiting && current?.runs[0]?.status === 'failed' &&
+          <p className="notice">The latest run failed. Confirm the prior submission ended before starting a new run. If its outcome is unclear, contact support.</p>}
+        {current?.runs.length ? <ul className="activity-list">{current.runs.map(run =>
+          <li key={run.id}><span>{agentNames[run.agent]}</span><div className="activity-meta">
+            <Badge value={run.status} /><time dateTime={run.created_at}>{new Date(run.created_at).toLocaleString()}</time></div></li>
+        )}</ul> : current && <p className="muted">No runs for this project yet.</p>}
+      </section>
+      <AssessmentLibrary view={current} canApprove={canRun} busy={busy} approve={approve} />
+    </>}
+    {business && <>
+      {activityError && <p className="notice" role="alert">{activityError}</p>}
+      <Activity runs={!businessProjects.length ? [] : recent?.businessId === businessId ? recent.runs : null}
+        projects={businessProjects} onSelect={id => { selectProject(id); document.getElementById('workspace')?.scrollIntoView(); }} />
+    </>}
+    <StageNavigation />
   </>;
 }

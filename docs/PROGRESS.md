@@ -44,3 +44,7 @@ The protected Preview reproduced the generic assessment 500. A read-only Vercel 
 The restricted hosted worker saved a stubbed assessment inside a rolled-back transaction. Pickaxe history contained no matching synthetic prompt. The configured personal key received HTTP 400 on a read-only completion lookup without workspace scope and reached HTTP 404 for the same nonexistent submission with the verified workspace. Preview supplies that scope to both provider calls. Worker logs distinguish submission, acknowledgment, polling, output validation, and the failing persistence operation.
 
 The live Idea Validator run saved a version that the owner approved. Market Intelligence linked the approved version but Pickaxe rejected its 3,961-token message against a 3,000-token limit. Bound the Market Intelligence request without changing the approved source. The additive project-name migration preserves existing project and assessment relationships.
+
+## Q/CUE Command Center Phase 1
+
+The staging portal includes business and project navigation, recent runs, project progress, saved context, versioned assessments and source links, and the 52-tool roadmap. The dashboard reads existing Supabase tables with the signed-in customer's session. Workflow status is refreshed from persisted run records. An unconfirmed submission stays visible while the dashboard watches for a matching run.

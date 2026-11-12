@@ -25,3 +25,5 @@ Select the configured Pickaxe workspace on both background submission and pollin
 Market Intelligence sends a bounded excerpt when the full context exceeds its Pickaxe message budget. Keep the complete assessment and its exact approved-version reference in Supabase.
 
 Project names and goals use the existing project editor policy. Older projects keep their IDs and goals and display a default name until an editor names them.
+
+Q/CUE Phase 1 reads project and business context through the signed-in Supabase client and the existing RLS policies. Progress reflects saved assessments and workflow records. Keep existing project management, Idea Validator, approval, and Market Intelligence actions. The other roadmap tools do not execute from Q/CUE.
