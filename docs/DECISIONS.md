@@ -47,3 +47,7 @@ Preserve the 52 business tools and academy as a distinct program. Reuse the regi
 Make AI Workspace the third sidebar destination, second mobile destination and first Start Here feature. Preserve the four existing Pickaxe model destinations. Position LaunchStudio as the branded product with Pickaxe powering current AI execution; keep current customer memberships and billing operational through the transition.
 
 Replace the blanket production rejection with explicit environment validation. Production requires a separate Supabase reference, its matching public URL, a restricted worker connection and Production-only Pickaxe credentials. Preview stays bound to staging. This is configuration support, not approval evidence that the production acceptance gate has passed.
+
+## Public marketing site and route separation
+
+Build the public website in the existing Next.js repository, separate from the unchanged historical Pickaxe site builder. Public page paths occupy the root, sign-in moves to `/login`, and the preserved workspace moves to `/app`. Compatibility handling retains legacy customer hash links. Public pages use only registry projections and labeled synthetic product captures, never customer data. New interest capture uses a separate RLS-protected admin lead table, signed form challenges and atomic quotas; no registration, billing or membership is activated. Preview remains protected/noindex and legal pages remain review drafts.

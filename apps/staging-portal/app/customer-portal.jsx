@@ -2,6 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import ToolStudio from "./tool-studio";
 import CoVibeCoder from "./covibecoder";
 import {
@@ -34,7 +35,9 @@ function unwrap({ data, error }) {
   return data;
 }
 
-export default function Portal() {
+export default function Portal({ loginOnly = false }) {
+  const router = useRouter();
+  const [authReady, setAuthReady] = useState(false);
   const [client, setClient] = useState(null);
   const [audienceDNA, setAudienceDNA] = useState(false);
   const [session, setSession] = useState(null);
@@ -60,6 +63,7 @@ export default function Portal() {
             } catch { /* Storage may be unavailable; sign-out still clears the UI. */ }
           }
           setSession(current);
+          setAuthReady(true);
         }).data.subscription;
         setAudienceDNA(audienceDNA === true);
         setClient(db);
@@ -72,6 +76,11 @@ export default function Portal() {
       subscription?.unsubscribe();
     };
   }, []);
+  useEffect(() => {
+    if (!authReady) return;
+    if (loginOnly && session) router.replace('/app' + location.hash);
+    if (!loginOnly && !session) router.replace('/login' + location.hash);
+  }, [authReady, session, loginOnly, router]);
   async function login(event) {
     event.preventDefault();
     setBusy(true);
@@ -109,7 +118,7 @@ export default function Portal() {
         ) : (
           <LoadingSkeleton label="Connecting to staging" />
         ))}
-      {client && !session && (
+      {client && !session && loginOnly && (
         <form className="login-form" onSubmit={login}>
           <h2>Sign in</h2>
           <label>
@@ -129,7 +138,9 @@ export default function Portal() {
           <p role="status">{message}</p>
         </form>
       )}
-      {session && (
+      {client && !loginOnly && !session && <LoadingSkeleton label="Opening sign in" />}
+      {session && loginOnly && <LoadingSkeleton label="Opening your workspace" />}
+      {session && !loginOnly && (
         <Workspace
           key={session.user.id}
           db={client}

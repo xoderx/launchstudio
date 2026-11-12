@@ -1,5 +1,9 @@
 # LaunchStudio staging portal
 
+The public marketing website now occupies `/`; customer sign-in is `/login` and the preserved customer application is `/app`. Recognized legacy root hashes forward to the customer application. Public routes do not initialize the customer database client. See the [marketing review](../../docs/marketing-review/README.md) for the route map, accurate feature claims, screenshots and release controls.
+
+Interest forms use `/api/early-access` and the additive staging `marketing_leads` table. Configure the server-only `LAUNCHSTUDIO_LEAD_SIGNING_KEY` in Preview. Leads require explicit consent and are administrator-readable; they never create an account, charge or membership. Public production collection requires approved legal details and a retention policy. Production indexing is separately opt-in through `LAUNCHSTUDIO_PUBLIC_SITE_URL` and `LAUNCHSTUDIO_MARKETING_INDEXABLE`.
+
 Next.js app for the separate LaunchStudio Supabase staging project. Run `npm ci` and `npm run build` from this directory. For local development, copy `.env.example` to `.env.local` and run `npm run dev`. Use only synthetic accounts and projects.
 
 ## Private preview

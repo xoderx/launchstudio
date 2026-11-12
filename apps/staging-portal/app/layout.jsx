@@ -1,5 +1,6 @@
 import "./style.css";
 import localFont from "next/font/local";
+import { siteOrigin } from './marketing/content.mjs';
 const inter = localFont({
   src: "./assets/InterVariable.woff2",
   variable: "--font-inter",
@@ -7,7 +8,8 @@ const inter = localFont({
 });
 
 export const metadata = {
-  title: "Q/CUE Command Center · LaunchStudio Staging",
+  metadataBase: new URL(siteOrigin()),
+  title: "LaunchStudio · Build your business",
   robots: { index: false, follow: false },
 };
 
@@ -15,7 +17,7 @@ export default function Layout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.variable}>
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   );

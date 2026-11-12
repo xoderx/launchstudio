@@ -22,7 +22,7 @@ page.on("console", (m) => {
 });
 await mockWorkspace(page);
 try {
-  await page.goto(origin);
+  await page.goto(origin + "/login");
   await page
     .getByLabel("Email", { exact: true })
     .fill("visual-test@example.invalid");

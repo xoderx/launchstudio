@@ -1,5 +1,6 @@
 -- Staging rollback. Remove the route first and take a verified database backup.
 begin;
+drop table if exists public.marketing_leads;
 drop function if exists public.save_tool_deliverable(uuid, integer, uuid, jsonb);
 drop function if exists public.approve_tool_deliverable(uuid);
 drop function if exists public.covibecoder_progress(uuid);
