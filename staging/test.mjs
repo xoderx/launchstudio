@@ -190,6 +190,29 @@ try {
   assert.equal((await as(b,tx=>tx.query('select result from public.assessment_versions where run_id=$1',[targeted.runId]))).rows.length,0);
   await assert.rejects(as(b, tx => tx.query('select public.approve_targeting_assessment($1,1)', [targeted.assessmentId])), { code: '42501' });
   await as(a, tx => tx.query('select public.approve_targeting_assessment($1,1)', [targeted.assessmentId]));
+  const toolDraft = { input: 'Synthetic inputs', summary: 'Synthetic tool output',
+    deliverables: ['First', 'Second', 'Third'], evidence: '', assumptions: '',
+    recommendations: '', actionPlan: '', checklist: '' };
+  const saveDraft = (actor, position, request) => as(actor, tx => tx.query(
+    'select public.save_tool_deliverable($1,$2,$3,$4) as id', [project.id, position, request, toolDraft],
+  ));
+  for (let position = 1; position <= 52; position++) {
+    const { rows: [saved] } = await saveDraft(a, position, crypto.randomUUID());
+    assert.ok(saved.id);
+  }
+  const draftRequest = crypto.randomUUID();
+  const { rows: [draft] } = await saveDraft(a, 1, draftRequest);
+  assert.deepEqual((await saveDraft(a, 1, draftRequest)).rows[0], draft);
+  await assert.rejects(saveDraft(b, 1, crypto.randomUUID()), { code: '42501' });
+  assert.equal((await as(b, tx => tx.query('select id from public.tool_deliverables where project_id=$1', [project.id]))).rows.length, 0);
+  await assert.rejects(as(b, tx => tx.query('select public.approve_tool_deliverable($1)', [draft.id])), { code: '42501' });
+  await as(a, tx => tx.query('select public.approve_tool_deliverable($1)', [draft.id]));
+  const { rows: [savedDraft] } = await as(a, tx => tx.query(
+    'select version, sources, approved_at from public.tool_deliverables where id=$1', [draft.id],
+  ));
+  assert.equal(savedDraft.version, 2);
+  assert.equal(savedDraft.sources.length, 3);
+  assert.ok(savedDraft.approved_at);
   const unacknowledged = { ...recoverable, requestId: crypto.randomUUID() };
   const unknownJob = { ...unacknowledged, ...await reserveDispatch(worker, unacknowledged, false) };
   await claimDispatch(worker, unknownJob);

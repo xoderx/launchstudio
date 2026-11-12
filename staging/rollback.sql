@@ -1,5 +1,8 @@
 -- Staging rollback. Remove the route first and take a verified database backup.
 begin;
+drop function if exists public.save_tool_deliverable(uuid, integer, uuid, jsonb);
+drop function if exists public.approve_tool_deliverable(uuid);
+drop table if exists public.tool_deliverables;
 drop table if exists public.workflow_requests;
 drop function if exists public.approve_targeting_assessment(uuid, integer);
 drop function public.approve_idea_assessment(uuid, integer);

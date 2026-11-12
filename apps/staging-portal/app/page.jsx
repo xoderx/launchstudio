@@ -2,6 +2,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
+import ToolStudio from './tool-studio';
 import { joinHistory, loadHistoryPage } from '../lib/history.mjs';
 import { agentNames, loadProject, projectView, workflowState } from '../lib/command-center.mjs';
 import { Activity, AssessmentLibrary, Badge, ProjectProgress, SavedContext, StageNavigation, projectName } from './command-center';
@@ -303,7 +304,7 @@ function Workspace({ db, session, audienceDNA }) {
     </header>
     <nav className="section-nav" aria-label="Command center">
       <a href="#workspace">Workspace</a>{project && <><a href="#workflow">Workflows</a><a href="#assessments">Assessments</a></>}
-      {business && <a href="#activity">Recent activity</a>}<a href="#tools">Tool roadmap</a>
+      {business && <a href="#activity">Recent activity</a>}<a href="#tools">Tool roadmap</a><a href="#tool-studio">Tools and academy</a>
     </nav>
     {message && <p className="notice" role="status">{message}</p>}
     {workspaceError && <p className="notice" role="alert">{workspaceError}</p>}
@@ -399,5 +400,7 @@ function Workspace({ db, session, audienceDNA }) {
         projects={businessProjects} onSelect={id => { selectProject(id); document.getElementById('workspace')?.scrollIntoView(); }} />
     </>}
     <StageNavigation />
+    <ToolStudio db={db} project={project} business={business} view={current}
+      canEdit={canEditProjects && project?.status === 'active'} audienceEnabled={audienceDNA} />
   </>;
 }
