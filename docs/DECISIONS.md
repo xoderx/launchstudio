@@ -34,6 +34,10 @@ Project histories use descending creation time plus the immutable row ID as a ke
 
 Audience DNA uses the approved Market Intelligence version and the approved Idea Validator version linked from that market run. Both references are stored on the run and constrained to the same project. The structured result separates source-backed evidence from assumptions. Growth Diagnostic is recommended only after the audience profile is saved and approved. The provider dispatch gate remains closed until the staging pilot prerequisites are verified.
 
+## November 11 visual redesign
+
+Use the actual staging application on `codex/supabase-integration` as the redesign baseline. Keep its Next.js/React/CSS infrastructure and every backend authorization, approval, history, and recovery contract. Share the existing selected business/project state with Start Here and the application shell. Navigator suggestions remain explicitly rule-based; direct model links keep their original portal destinations. Show saved-data milestones and query-scoped counts instead of inferred percentages or invented business metrics. Preview deployment is separate from production promotion and hosted two-customer acceptance.
+
 ## CoVibeCoder fifth suite
 
 Preserve the 52 business tools and academy as a distinct program. Reuse the registry's 13 CoVibeCoder commander workflows at positions 53–65 with tailored manual workspaces, source imports and a separate business entitlement enforced by RLS and narrow RPCs. Do not infer external execution from a reviewed planning artifact. GitHub, Lovable, Vibe SDK and Codex adapters remain disconnected and fail closed; manual copy/export is available. Repository writes, deployment, deletion and production changes require action-specific approval before any future adapter can execute.

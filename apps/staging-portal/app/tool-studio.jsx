@@ -1,23 +1,25 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import launch from '../../../catalog/tool-specs/launch.json';
-import grow from '../../../catalog/tool-specs/grow.json';
-import monetize from '../../../catalog/tool-specs/monetize.json';
-import scale from '../../../catalog/tool-specs/scale.json';
-import playbooks from '../../../catalog/flagship-playbooks.json';
-import { draftFields, validateDraft } from '../../../staging/tool-engine.mjs';
-import { artifactMarkdown, codingHandoff, planningOutline } from '../../../staging/covibecoder.mjs';
+import { useEffect, useRef, useState } from "react";
+import launch from "../../../catalog/tool-specs/launch.json";
+import grow from "../../../catalog/tool-specs/grow.json";
+import monetize from "../../../catalog/tool-specs/monetize.json";
+import scale from "../../../catalog/tool-specs/scale.json";
+import playbooks from "../../../catalog/flagship-playbooks.json";
+import { draftFields, validateDraft } from "../../../staging/tool-engine.mjs";
+import { artifactMarkdown, codingHandoff, planningOutline } from "../../../staging/covibecoder.mjs";
 
 const tools = [...launch, ...grow, ...monetize, ...scale];
-const groups = ['All stages', 'Launch', 'Grow', 'Monetize', 'Scale'];
+const groups = ["All stages", "Launch", "Grow", "Monetize", "Scale"];
 const pageSize = 12;
-const empty = () => ({ deliverables: ['', '', ''] });
+const empty = () => ({ deliverables: ["", "", ""] });
 
 function download(tool, row) {
-  const file = new Blob([JSON.stringify({ tool: tool.key, ...row }, null, 2)], { type: 'application/json' });
+  const file = new Blob([JSON.stringify({ tool: tool.key, ...row }, null, 2)], {
+    type: "application/json",
+  });
   const url = URL.createObjectURL(file);
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = `${tool.key}-v${row.version}.json`;
   link.click();
@@ -32,50 +34,158 @@ function downloadText(name, content, type = 'text/plain') {
 }
 
 function AcademySprint({ tool, next, approved }) {
-  return <details className="settings"><summary>Academy · Sprint {tool.position}: {tool.name}{approved ? ' · Deliverable approved' : ''}</summary>
-    <h3>Learning objectives</h3><p>Explain the project decision this sprint supports. Produce {tool.outputs.join(', ').toLowerCase()} and identify one assumption that needs testing.</p>
-    <h3>Lesson and tutorial</h3><ol>
-      <li>Review the project goal and the approved evidence. {tool.input}.</li>
-      <li>{tool.exercise}</li>
-      <li>Record the observation under evidence and label any inference as an assumption.</li>
-      <li>Use the tool workspace below to document {tool.outputs.join(', ').toLowerCase()}. Assign an owner and a date to the first action.</li>
-    </ol>
-    <h3>Exercise and deliverable</h3><p>Complete the exercise, save a version, and ask a teammate to review your evidence and decision. Track: {tool.metric}.</p>
-    <h3>Discussion and community challenge</h3><p>Which finding would change your decision? Share an anonymized hypothesis with a peer and ask them to identify a counterexample.</p>
-    <h3>Completion checklist</h3><ul><li>Record evidence and assumptions separately.</li><li>Complete all three deliverable sections.</li>
-      <li>Record a baseline or explain why it is missing.</li><li>Approve the reviewed version.</li></ul>
-    {next && <p>Recommended next sprint: {next.name}.</p>}
-  </details>;
+  return (
+    <details className="settings">
+      <summary>
+        Academy · Sprint {tool.position}: {tool.name}
+        {approved ? " · Deliverable approved" : ""}
+      </summary>
+      <h3>Learning objectives</h3>
+      <p>
+        Explain the project decision this sprint supports. Produce{" "}
+        {tool.outputs.join(", ").toLowerCase()} and identify one assumption that
+        needs testing.
+      </p>
+      <h3>Lesson and tutorial</h3>
+      <ol>
+        <li>
+          Review the project goal and the approved evidence. {tool.input}.
+        </li>
+        <li>{tool.exercise}</li>
+        <li>
+          Record the observation under evidence and label any inference as an
+          assumption.
+        </li>
+        <li>
+          Use the tool workspace below to document{" "}
+          {tool.outputs.join(", ").toLowerCase()}. Assign an owner and a date to
+          the first action.
+        </li>
+      </ol>
+      <h3>Exercise and deliverable</h3>
+      <p>
+        Complete the exercise, save a version, and ask a teammate to review your
+        evidence and decision. Track: {tool.metric}.
+      </p>
+      <h3>Discussion and community challenge</h3>
+      <p>
+        Which finding would change your decision? Share an anonymized hypothesis
+        with a peer and ask them to identify a counterexample.
+      </p>
+      <h3>Completion checklist</h3>
+      <ul>
+        <li>Record evidence and assumptions separately.</li>
+        <li>Complete all three deliverable sections.</li>
+        <li>Record a baseline or explain why it is missing.</li>
+        <li>Approve the reviewed version.</li>
+      </ul>
+      {next && <p>Recommended next sprint: {next.name}.</p>}
+    </details>
+  );
 }
 
-export default function ToolStudio({ db, project, business, view, canEdit, audienceEnabled }) {
-  const [stage, setStage] = useState('All stages');
-  const [search, setSearch] = useState('');
+export default function ToolStudio({
+  db,
+  project,
+  business,
+  view,
+  canEdit,
+  audienceEnabled,
+}) {
+  const [stage, setStage] = useState("All stages");
+  const [search, setSearch] = useState("");
   const [position, setPosition] = useState(1);
-  const matching = tools.filter(tool => (stage === 'All stages' || tool.category === stage) &&
-    tool.name.toLowerCase().includes(search.trim().toLowerCase()));
-  const tool = matching.find(item => item.position === position) ?? matching[0];
-  return <section id="tool-studio" aria-labelledby="tool-studio-title">
-    <h2 id="tool-studio-title">Tool workspace and academy</h2>
-    <div className="dashboard-grid">
-      <label>Filter by stage<select value={stage} onChange={event => setStage(event.target.value)}>
-        {groups.map(group => <option key={group}>{group}</option>)}</select></label>
-      <label>Find a tool<input type="search" value={search} onChange={event => setSearch(event.target.value)} /></label>
-    </div>
-    {tool ? <>
-      <label>Tool<select value={tool.position} onChange={event => setPosition(Number(event.target.value))}>
-        {matching.map(item => <option value={item.position} key={item.key}>{item.position}. {item.name}</option>)}
-      </select></label>
-      <ToolWorkbench key={`${project?.id ?? 'none'}:${tool.key}`} db={db} tool={tool}
-        project={project} business={business} view={view} canEdit={canEdit} audienceEnabled={audienceEnabled} />
-    </> : <p>No tools match this search.</p>}
-    <details className="settings"><summary>Guided playbooks · {playbooks.length}</summary>
-      {playbooks.map(playbook => <article key={playbook.name}><h3>{playbook.name}</h3>
-        <p>{playbook.objective}</p><p>Inputs: {playbook.inputs}.</p>
-        <ol>{playbook.tools.map(step => <li key={step}>{step}</li>)}</ol>
-        <p>{playbook.criteria}</p><p>{playbook.approval}</p><p>{playbook.timeline}</p></article>)}
-    </details>
-  </section>;
+  useEffect(() => {
+    const choose = (e) => {
+      setStage("All stages");
+      setSearch(e.detail);
+      const selected = tools.find((t) => t.name === e.detail);
+      if (selected) setPosition(selected.position);
+    };
+    window.addEventListener("launchstudio:tool", choose);
+    return () => window.removeEventListener("launchstudio:tool", choose);
+  }, []);
+  const matching = tools.filter(
+    (tool) =>
+      (stage === "All stages" || tool.category === stage) &&
+      tool.name.toLowerCase().includes(search.trim().toLowerCase()),
+  );
+  const tool =
+    matching.find((item) => item.position === position) ?? matching[0];
+  return (
+    <section id="tool-studio" aria-labelledby="tool-studio-title">
+      <p className="eyebrow">Create · Review · Improve</p>
+      <h2 id="tool-studio-title">Your tool workspace & growth sprints</h2>
+      <div className="dashboard-grid">
+        <label>
+          Filter by stage
+          <select
+            value={stage}
+            onChange={(event) => setStage(event.target.value)}
+          >
+            {groups.map((group) => (
+              <option key={group}>{group}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Find a tool
+          <input
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </label>
+      </div>
+      {tool ? (
+        <>
+          <label>
+            Tool
+            <select
+              value={tool.position}
+              onChange={(event) => setPosition(Number(event.target.value))}
+            >
+              {matching.map((item) => (
+                <option value={item.position} key={item.key}>
+                  {item.position}. {item.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <ToolWorkbench
+            key={`${project?.id ?? "none"}:${tool.key}`}
+            db={db}
+            tool={tool}
+            project={project}
+            business={business}
+            view={view}
+            canEdit={canEdit}
+            audienceEnabled={audienceEnabled}
+          />
+        </>
+      ) : (
+        <p>No tools match this search.</p>
+      )}
+      <details className="settings">
+        <summary>Guided playbooks · {playbooks.length}</summary>
+        {playbooks.map((playbook) => (
+          <article key={playbook.name}>
+            <h3>{playbook.name}</h3>
+            <p>{playbook.objective}</p>
+            <p>Inputs: {playbook.inputs}.</p>
+            <ol>
+              {playbook.tools.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <p>{playbook.criteria}</p>
+            <p>{playbook.approval}</p>
+            <p>{playbook.timeline}</p>
+          </article>
+        ))}
+      </details>
+    </section>
+  );
 }
 
 export function ToolWorkbench({ db, tool, project, business, view, canEdit, audienceEnabled,
