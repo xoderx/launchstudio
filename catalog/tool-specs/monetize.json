@@ -1,1 +1,574 @@
-[]
+[
+  {
+    "position": 27,
+    "key": "revenue-opportunity-scanner",
+    "name": "Revenue Opportunity Scanner",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/27-revenue-opportunity-scanner.md",
+      "sha256": "239fab143fe77cc0106bc97d7d2c9b31505ddf8d8c6d991e57acc9da4a06e7aa"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-27",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide offers, sales evidence and cost constraints",
+    "outputs": [
+      "Revenue opportunities",
+      "Impact-confidence score",
+      "Validation actions"
+    ],
+    "exercise": "Rank three opportunities by evidence and contribution potential.",
+    "metric": "Opportunities with validated demand",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 28,
+    "key": "profit-pricing-optimizer",
+    "name": "Profit & Pricing Optimizer",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/28-profit-pricing-optimizer.md",
+      "sha256": "63fa3ab775eae8ff43d0aef388a3df9960d8414ff0255dcda8a4de7b1a4431d0"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-28",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide prices, variable costs and volume assumptions",
+    "outputs": [
+      "Margin model",
+      "Price scenarios",
+      "Test guardrails"
+    ],
+    "exercise": "Recalculate margin at low, base and high volumes.",
+    "metric": "Contribution margin per sale",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 29,
+    "key": "upsell-cross-sell-architect",
+    "name": "Upsell & Cross-Sell Architect",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/29-upsell-cross-sell-architect.md",
+      "sha256": "8ee9ad08b3f7d2b561c7cd88e9e464964ae463a1e5349739cc63989da7ff8687"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-29",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide customer purchases and complementary offers",
+    "outputs": [
+      "Offer adjacency map",
+      "Trigger rules",
+      "Upsell and cross-sell tests"
+    ],
+    "exercise": "Choose one add-on tied to a recently observed customer need.",
+    "metric": "Incremental contribution per order",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 30,
+    "key": "subscription-membership-builder",
+    "name": "Subscription & Membership Builder",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/30-subscription-membership-builder.md",
+      "sha256": "79176a2cbe8649921ef2a48c4778f450fccd7dffd692bef4b6e4c737939ce2a3"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-30",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide recurring value, delivery cost and retention signals",
+    "outputs": [
+      "Membership tiers",
+      "Renewal journey",
+      "Churn safeguards"
+    ],
+    "exercise": "Specify a recurring benefit buyers can verify within one billing cycle.",
+    "metric": "Renewal intent from pilot users",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 31,
+    "key": "digital-product-monetizer",
+    "name": "Digital Product Monetizer",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/31-digital-product-monetizer.md",
+      "sha256": "701d59f3772b16d127b5ce946c480a4281cdf6c09e16bf065bebfcd2f6f09794"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-31",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide digital asset, rights and intended audience",
+    "outputs": [
+      "Product packaging",
+      "Sales channels",
+      "Release economics"
+    ],
+    "exercise": "Interview buyers about one use case and prototype the smallest product.",
+    "metric": "Qualified paid intent",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 32,
+    "key": "merchdone-revenue-builder",
+    "name": "MerchDone Revenue Builder",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/32-merchdone-revenue-builder.md",
+      "sha256": "36258675c58e897de5f4bfbf33fec033cdd280b66e9b4554537153cc62664bcc"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-32",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide audience, merchandise options and landed costs",
+    "outputs": [
+      "SKU shortlist",
+      "Fulfillment economics",
+      "Preorder validation"
+    ],
+    "exercise": "Compare two products using full landed cost and a return allowance.",
+    "metric": "Gross margin per SKU",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 33,
+    "key": "sponsorship-brand-deal-builder",
+    "name": "Sponsorship & Brand Deal Builder",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/33-sponsorship-brand-deal-builder.md",
+      "sha256": "5c6e68c27e75aca15737b87d1f5cee8522238671326ebf3f54d17c58a98eb955"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-33",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide audience evidence, sponsor fit and rights constraints",
+    "outputs": [
+      "Sponsor inventory",
+      "Package outline",
+      "Value measurement"
+    ],
+    "exercise": "Draft one package tied to a verifiable audience outcome.",
+    "metric": "Qualified sponsor interest",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 34,
+    "key": "affiliate-licensing-engine",
+    "name": "Affiliate & Licensing Engine",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/34-affiliate-licensing-engine.md",
+      "sha256": "a151fdefd07efd03fae036966fa74d2fc3597b0e9abca97c0c79e8af9c0f3d1e"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-34",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide owned assets, partner terms and rights evidence",
+    "outputs": [
+      "Licensing or affiliate model",
+      "Partner economics",
+      "Disclosure checklist"
+    ],
+    "exercise": "Map one offer to the rights and disclosures required before launch.",
+    "metric": "Qualified partner commitments",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 35,
+    "key": "proposal-deal-closer",
+    "name": "Proposal & Deal Closer",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/35-proposal-deal-closer.md",
+      "sha256": "d2a28dfc3751b8fefeb0d3c8e3a743922b496f9fb582d6cb53e77ba62eb5aeb7"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-35",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide customer needs, scope and commercial constraints",
+    "outputs": [
+      "Proposal outline",
+      "Scope and exclusions",
+      "Deal review checklist"
+    ],
+    "exercise": "Check every scope item against a documented customer requirement.",
+    "metric": "Proposals advancing to review",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 36,
+    "key": "revenue-recovery-agent",
+    "name": "Revenue Recovery Agent",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/36-revenue-recovery-agent.md",
+      "sha256": "a491a8044de8a268df0e2cc90f7a38eac383f7513e44efd438c94aa2c04af0ec"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-36",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide missed payments or abandoned purchase evidence",
+    "outputs": [
+      "Recovery segments",
+      "Follow-up plan",
+      "Consent and billing checkpoints"
+    ],
+    "exercise": "Separate billing errors from intentional cancellations before drafting outreach.",
+    "metric": "Recoverable cases correctly classified",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 37,
+    "key": "customer-lifetime-value-optimizer",
+    "name": "Customer Lifetime Value Optimizer",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/37-customer-lifetime-value-optimizer.md",
+      "sha256": "d739c307653c77d97ce98794372458e1682f4cb4a7b42dd72125b444ba46192f"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-37",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide retention cohorts and contribution data",
+    "outputs": [
+      "Lifetime value drivers",
+      "Cohort scenarios",
+      "Retention experiments"
+    ],
+    "exercise": "Identify the cohort with the largest evidence-backed value gap.",
+    "metric": "Repeat purchase rate by cohort",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 38,
+    "key": "revenue-forecast-profit-dashboard",
+    "name": "Revenue Forecast & Profit Dashboard",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/38-revenue-forecast-profit-dashboard.md",
+      "sha256": "28194e9fd8d09c987982e0f30f27bda23d3ba732d902bbf9bff36892da39535a"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-38",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide baseline revenue, costs and assumptions",
+    "outputs": [
+      "Forecast scenarios",
+      "Sensitivity table",
+      "Profit review cadence"
+    ],
+    "exercise": "Stress test the two assumptions that move cash needs most.",
+    "metric": "Forecast variance after one period",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 39,
+    "key": "ai-revenue-commander",
+    "name": "AI Revenue Commander",
+    "category": "Monetize",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/39-ai-revenue-commander.md",
+      "sha256": "34df3d297f1161ab01ee4bbfda3bff91a04ff9a8b27af0fc66c922dab9d9502d"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-39",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide revenue objective, capacity and constraints",
+    "outputs": [
+      "Revenue priorities",
+      "Portfolio tests",
+      "Decision cadence"
+    ],
+    "exercise": "Choose the smallest high-confidence revenue experiment and assign a stop condition.",
+    "metric": "Contribution from validated experiments",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  }
+]
