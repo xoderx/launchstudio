@@ -94,3 +94,7 @@ The existing customer workspace is preserved at `/app`, password sign-in at `/lo
 ### Public marketing Preview verification
 
 Application commit `4595f42` is READY on protected Preview `https://launchstudio-staging-o0dxfork6-xoderxs-projects.vercel.app`. Actual Chromium verified public routes, keyboard navigation, noindex and the unsigned application boundary. The real early-access form saved a consent-bearing staging lead, independently confirmed by admin SQL; replay was idempotent, invalid consent/honeypot rejected. Core business/project/assessment/deliverable counts remain unchanged. Temporary deployment test access was revoked. Reports and hosted screenshots are in `docs/marketing-review/`. Production remains HOLD and PR #1 draft; legal drafts, separate production infrastructure and legitimate Customer A/B acceptance remain gates.
+
+### Production assets
+
+Confirmed PR #1 has no merge conflicts and remains draft/unmerged. Read-only Vercel metadata lists six Preview application variables and zero Production variables. Added production configuration preflight, checksummed release-kit builder, blank environment template, secret-free release CI and a staged release/rollback runbook. No production resource, credential, schema or customer traffic was changed. Verification and build output are recorded in `docs/release-review/PRODUCTION_PREPARATION.md`.

@@ -51,3 +51,7 @@ Replace the blanket production rejection with explicit environment validation. P
 ## Public marketing site and route separation
 
 Build the public website in the existing Next.js repository, separate from the unchanged historical Pickaxe site builder. Public page paths occupy the root, sign-in moves to `/login`, and the preserved workspace moves to `/app`. Compatibility handling retains legacy customer hash links. Public pages use only registry projections and labeled synthetic product captures, never customer data. New interest capture uses a separate RLS-protected admin lead table, signed form challenges and atomic quotas; no registration, billing or membership is activated. Preview remains protected/noindex and legal pages remain review drafts.
+
+## Production asset preparation
+
+Prepare a production-mode compilation, checksummed committed-source kit, offline configuration preflight and secret-free release CI now. Do not infer release readiness from compilation or bypass the remaining legitimate customer/session, Production infrastructure, legal and identity gates. Keep schema application, deployment promotion and customer traffic changes separate from preparation. Record hosted-only Q/CUE schema reconciliation as an explicit prerequisite rather than bulk replaying the staging migration set.
