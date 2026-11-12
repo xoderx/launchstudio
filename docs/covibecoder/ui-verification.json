@@ -1,0 +1,28 @@
+{
+  "scope": "Local UI regression; mocked Supabase and synthetic session; not hosted acceptance",
+  "passed": [
+    "All 13 tailored forms and three starters",
+    "Approved context import display",
+    "Save and reopen 13 tool drafts",
+    "Revision, version approval, Q/CUE progress",
+    "Interrupted save followed by reload without duplicate",
+    "JSON, Markdown and SQL exports; context-aware prompt copied",
+    "Project switching",
+    "Entitlement denied UI while original 52 remain available",
+    "Sign-out removes recovery data",
+    "390px no horizontal overflow",
+    "Visible form controls have labels; keyboard focus moves"
+  ],
+  "pageErrors": [],
+  "savedVersions": 14,
+  "accessibility": [
+    {
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "theme": "light",
+      "violations": []
+    }
+  ]
+}
