@@ -26,6 +26,7 @@ All 65 registry positions are represented: 52 business tools and 13 separately e
 | Redesign regression | Existing test suite passed 12 accessibility/overflow combinations and 12 interaction checks without console errors | Local synthetic browser fixtures |
 | Build | Next.js production build and public site builder passed | Build verification, not a production deployment |
 | Hosted schema | New RLS-protected entitlement/context tables; anonymous import/progress execution denied; direct customer entitlement/context writes denied | Read-only hosted catalog/privilege probes |
+| Hosted browser auth boundary | Actual Chromium sign-in page, invalid-login error and unauthenticated workflow `401` | No customer sign-in or A/B acceptance claimed |
 | Customer data preservation | Before/after: 2 businesses, 7 projects, 3 assessments, 3 versions, 5 runs, 0 tool deliverables | Migration did not enroll or edit existing customers |
 
 ## Hosted migration
@@ -58,4 +59,12 @@ Remediation references: [privileged RPC review](https://supabase.com/docs/guides
 
 ## Deployment record
 
-Protected Preview deployment is recorded after final build verification. Production changes and external application deployments are outside this release.
+- URL: https://launchstudio-staging-cef3py31y-xoderxs-projects.vercel.app
+- Deployment: `dpl_FrdaeAZAUTiHnQrCJnDeRuWLBsiX`; READY; Preview (`target=null`).
+- Code commit: `a9f7b56af0fff9a19f3e9bc2b29c03503bc9b298` on `codex/supabase-integration`.
+- Project: `launchstudio-staging` (`prj_AyFPF0bTcHzmjPWK3j5mboG9xjzl`), team `team_zM4TIpqHNjqGMI3SEAxGbC0A`.
+- Verified Vercel Authentication applies to all Preview deployments. No production target, domain promotion, or external app deployment was requested.
+
+Actual Chromium/Playwright browser smoke reached the hosted sign-in page (HTTP 200), loaded `/api/config` (200), confirmed an unauthenticated workflow POST returns `401 Sign in required`, and displayed the expected error after an invalid synthetic login. These requests used the deployed application without mocked responses. A temporary deployment-scoped Vercel share authorization was used for the smoke test and then revoked. This only authorizes deployment access; it supplies no Supabase customer session. See [hosted-preview-smoke.json](hosted-preview-smoke.json).
+
+The subsequent documentation-only commit records this deployment; it does not change the tested application code. Production changes and external application deployments are outside this release.
