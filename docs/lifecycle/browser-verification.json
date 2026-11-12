@@ -1,0 +1,72 @@
+{
+  "scope": "Local Chromium; intercepted Supabase; synthetic session. Not hosted customer acceptance.",
+  "passed": [
+    "Transform diagnostic fields and evidence attestation",
+    "Manual initiatives",
+    "Saved versions and planning approvals",
+    "Ambiguous save retry no duplicate",
+    "Refresh persistence",
+    "Exit progressive intake",
+    "Explicit assumption scenario arithmetic",
+    "Confidential JSON export",
+    "Private content absent from browser storage",
+    "Project switching",
+    "Reader cannot save/approve",
+    "Revoked access clears private fields",
+    "390px no overflow",
+    "Original program return",
+    "Signout"
+  ],
+  "versions": 3,
+  "pageErrors": [],
+  "accessibility": [
+    {
+      "scope": "#transform",
+      "width": 1280,
+      "theme": "dark",
+      "violations": 0
+    },
+    {
+      "scope": "#transform",
+      "width": 1280,
+      "theme": "light",
+      "violations": 0
+    },
+    {
+      "scope": "#transform",
+      "width": 390,
+      "theme": "dark",
+      "violations": 0
+    },
+    {
+      "scope": "#transform",
+      "width": 390,
+      "theme": "light",
+      "violations": 0
+    },
+    {
+      "scope": "#enterprise-value",
+      "width": 1280,
+      "theme": "dark",
+      "violations": 0
+    },
+    {
+      "scope": "#enterprise-value",
+      "width": 1280,
+      "theme": "light",
+      "violations": 0
+    },
+    {
+      "scope": "#enterprise-value",
+      "width": 390,
+      "theme": "dark",
+      "violations": 0
+    },
+    {
+      "scope": "#enterprise-value",
+      "width": 390,
+      "theme": "light",
+      "violations": 0
+    }
+  ]
+}

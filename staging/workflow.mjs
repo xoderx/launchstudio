@@ -1,8 +1,11 @@
-const agents = { 'idea-validator': 'YL7LGN8AV2', 'market-intelligence': 'RYAET6419X' };
+import { approvedAudienceSources, audiencePickaxeId, parseAudienceResult } from './audience-dna.mjs';
+import { PickaxeFailure } from './pickaxe-adapter.mjs';
+
+const agents = { 'idea-validator': 'YL7LGN8AV2', 'market-intelligence': 'RYAET6419X', 'audience-dna': audiencePickaxeId };
 const uuid = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i;
 
 export function createWorkflow({ database, verifySession, runAgent }) {
-  return async ({ token, projectId, requestId, agent }) => {
+  return async ({ token, projectId, requestId, agent, recovery }) => {
     const actor = await verifySession(token);
     if (!actor || !uuid.test(actor.id)) throw Object.assign(Error('Sign in required'), { status: 401 });
     if (!uuid.test(projectId) || !uuid.test(requestId) || !Object.hasOwn(agents, agent)) {
@@ -24,9 +27,15 @@ export function createWorkflow({ database, verifySession, runAgent }) {
     const claimed = await database.transaction(async tx => {
       const project = await authorize(tx);
       const args = [projectId, actor.id, agent, requestId];
-      const { rows: [existing] } = await tx.query('select id,status from public.agent_runs where project_id=$1 and actor_id=$2 and agent=$3 and request_id=$4', args);
-      if (existing) return { existing };
+      const { rows: [existing] } = await tx.query('select id,status,source_assessment_id,source_assessment_version,market_assessment_id,market_assessment_version from public.agent_runs where project_id=$1 and actor_id=$2 and agent=$3 and request_id=$4', args);
+      if (existing && (!recovery?.providerId || existing.status !== 'running')) return { existing };
+      if (recovery?.providerId && !existing) throw Error('Missing run for acknowledged submission');
       let approved;
+      let audienceSources;
+      if (agent === 'audience-dna') {
+        audienceSources = await approvedAudienceSources(tx, projectId, existing);
+        if (!audienceSources) throw Object.assign(Error('Approve linked validation and market assessments first'), { status: 409 });
+      }
       if (agent === 'market-intelligence') {
         const { rows: [version] } = await tx.query(`
           select assessment_id, version, result from public.assessment_versions
@@ -36,41 +45,82 @@ export function createWorkflow({ database, verifySession, runAgent }) {
         if (!version) throw Object.assign(Error('Approve an Idea Validator assessment first'), { status: 409 });
         approved = version;
       }
-      const { rows: [run] } = await tx.query(`
-        insert into public.agent_runs(project_id,actor_id,agent,request_id,status,source_assessment_id,source_assessment_version)
-        values($1,$2,$3,$4,'running',$5,$6) on conflict do nothing returning id
-      `, [...args, approved?.assessment_id ?? null, approved?.version ?? null]);
+      const run = existing ?? (await tx.query(`
+        insert into public.agent_runs(project_id,actor_id,agent,request_id,status,source_assessment_id,source_assessment_version,market_assessment_id,market_assessment_version)
+        values($1,$2,$3,$4,'running',$5,$6,$7,$8) on conflict do nothing returning id
+      `, [...args, audienceSources?.idea_id ?? approved?.assessment_id ?? null,
+        audienceSources?.idea_version ?? approved?.version ?? null, audienceSources?.market_id ?? null, audienceSources?.market_version ?? null])).rows[0];
       if (!run) throw Object.assign(Error('Request already in progress'), { status: 409 });
       const profile = Object.fromEntries(['industry','audience','offering','budget'].filter(k => Object.hasOwn(project.profile,k)).map(k => [k,project.profile[k]]));
-      return { run, input: { name: project.name, goal: project.goal, profile, approvedIdea: approved?.result } };
+      return { run, input: { name: project.name, goal: project.goal, profile, approvedIdea: audienceSources?.idea_result ?? approved?.result, approvedMarket: audienceSources?.market_result } };
     });
     if (claimed.existing) return { runId: claimed.existing.id, status: claimed.existing.status };
     const runId = claimed.run.id;
+    let stage = 'pickaxe_submission';
+    function report(stage, category, httpStatus) {
+      console.error(JSON.stringify({ event: 'assessment_worker_failure', requestId, agent, stage, category, httpStatus }));
+    }
     try {
-      const output = await runAgent(agents[agent], claimed.input);
+      const output = await runAgent(agents[agent], claimed.input, {
+        agent,
+        requestId,
+        providerId: recovery?.providerId,
+        async onAcknowledged(id) {
+          if (recovery) await recovery.acknowledge(id);
+          console.info(JSON.stringify({ event: 'pickaxe_acknowledged', requestId, agent }));
+        },
+      });
+      stage = 'pickaxe_response_validation';
       if (typeof output !== 'string' || output.trim().length === 0 || Buffer.byteLength(output) > 60000) throw Error('Invalid agent response');
+      const result = agent === 'audience-dna' ? parseAudienceResult(output) : { markdown: output.trim() };
+      stage = 'assessment_persistence_begin';
       return await database.transaction(async tx => {
+        stage = 'assessment_persistence_authorization';
         await authorize(tx);
+        stage = 'assessment_persistence_run_status';
+        const { rowCount } = await tx.query(
+          "update public.agent_runs set status='succeeded' where id=$1 and status='running'", [runId]
+        );
+        if (!rowCount) throw Error('Agent run is no longer active');
+        stage = 'assessment_persistence_assessment';
         const { rows: [assessment] } = await tx.query(`
           insert into public.assessments(project_id,agent) values($1,$2)
           on conflict(project_id,agent) do update set agent=excluded.agent returning id
         `, [projectId,agent]);
+        stage = 'assessment_persistence_version';
         const { rows: [version] } = await tx.query(`
           insert into public.assessment_versions(assessment_id,project_id,agent,version,run_id,result)
           select $1,$2,$3,coalesce(max(version),0)+1,$4,$5 from public.assessment_versions
           where assessment_id=$1 returning version
-        `, [assessment.id,projectId,agent,runId,{ markdown: output.trim() }]);
-        await tx.query("update public.agent_runs set status='succeeded' where id=$1 and status='running'",[runId]);
+        `, [assessment.id,projectId,agent,runId,result]);
+        stage = 'assessment_persistence_progress';
         await tx.query(`
           insert into public.workflow_progress(project_id,stage,next_agent,outstanding_tasks)
           values($1,$2,null,$3) on conflict(project_id) do update
           set stage=excluded.stage,next_agent=excluded.next_agent,outstanding_tasks=excluded.outstanding_tasks
-        `,[projectId,agent==='idea-validator'?'approve':'review',JSON.stringify([agent==='idea-validator'?'Approve the validation assessment':'Review the market analysis'])]);
+        `,[projectId,agent==='idea-validator'?'approve':'review',JSON.stringify([agent==='idea-validator'?'Approve the validation assessment':agent==='market-intelligence'?'Review the market analysis':'Review and approve the audience profile'])]);
+        stage = 'assessment_persistence_commit';
         return { runId, assessmentId: assessment.id, version: version.version, status: 'succeeded' };
       });
-    } catch {
-      await database.query("update public.agent_runs set status='failed' where id=$1 and status='running'",[runId]);
-      throw Object.assign(Error('Agent run failed'), { status: 502 });
+    } catch (error) {
+      if (error instanceof PickaxeFailure) {
+        report(error.stage, error.category, error.httpStatus);
+      } else {
+        const category = error?.code === '42501' || error?.status === 404 ? 'authorization'
+          : typeof error?.code === 'string' && error.code.startsWith('23') ? 'constraint'
+          : stage === 'pickaxe_response_validation' ? 'invalid_result' : 'unexpected';
+        report(stage, category);
+      }
+      const terminal = error instanceof PickaxeFailure &&
+        ['provider_terminal_failure', 'missing_credential', 'missing_workspace'].includes(error.category);
+      if (!recovery || terminal) {
+        try {
+          await database.query("update public.agent_runs set status='failed' where id=$1 and status='running'",[runId]);
+        } catch {
+          report('assessment_persistence_mark_failed', 'unexpected');
+        }
+      }
+      throw Object.assign(Error('Agent run failed'), { status: 502, terminal });
     }
   };
 }

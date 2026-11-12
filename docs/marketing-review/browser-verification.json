@@ -1,0 +1,354 @@
+{
+  "publicPages": "Actual local site; no mocked public page responses",
+  "checks": [
+    {
+      "path": "/",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/product",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/solutions",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/tools",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/academy",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/covibecoder",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/pricing",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/about",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/contact",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/early-access",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/privacy",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/terms",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/ai-disclaimer",
+      "width": 1440,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/product",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/solutions",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/tools",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/academy",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/covibecoder",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/pricing",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/about",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/contact",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/early-access",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/privacy",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/terms",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/ai-disclaimer",
+      "width": 1440,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/product",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/solutions",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/tools",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/academy",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/covibecoder",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/pricing",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/about",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/contact",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/early-access",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/privacy",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/terms",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/ai-disclaimer",
+      "width": 390,
+      "theme": "dark",
+      "violations": []
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/product",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/solutions",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/tools",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/academy",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/covibecoder",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/pricing",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/about",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/contact",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/partners",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/early-access",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/privacy",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/terms",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "path": "/ai-disclaimer",
+      "width": 390,
+      "theme": "light",
+      "violations": []
+    }
+  ],
+  "interactions": [
+    "Navigator registry recommendations",
+    "Filtered/searchable catalog",
+    "52 academy sprints",
+    "13 development tools",
+    "App/auth boundary and legacy hash redirects",
+    "Mobile keyboard navigation",
+    "Reduced motion",
+    "Robots/sitemap/Open Graph image",
+    "Interest form UI with synthetic POST response"
+  ],
+  "leadPersistence": "Verified separately against real SQL and hosted API; not established by the intercepted UI POST",
+  "pageErrors": []
+}

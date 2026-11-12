@@ -1,0 +1,26 @@
+{
+  "deploymentId": "dpl_FrdaeAZAUTiHnQrCJnDeRuWLBsiX",
+  "commit": "a9f7b56af0fff9a19f3e9bc2b29c03503bc9b298",
+  "url": "https://launchstudio-staging-cef3py31y-xoderxs-projects.vercel.app",
+  "browser": "Chromium through Playwright",
+  "pageStatus": 200,
+  "title": "Q/CUE Command Center \u00b7 LaunchStudio Staging",
+  "configuration": {
+    "status": 200,
+    "keys": [
+      "url",
+      "publishableKey",
+      "audienceDNA"
+    ],
+    "audienceDNA": false
+  },
+  "unauthenticatedWorkflow": {
+    "status": 401,
+    "body": {
+      "error": "Sign in required"
+    }
+  },
+  "invalidSignInErrorDisplayed": true,
+  "authenticatedCustomerAcceptance": "BLOCKED: confirmed Customer A/B credentials or sessions unavailable",
+  "scope": "Actual protected Preview browser smoke; temporary deployment-scoped Vercel access; no customer session, no mocked responses"
+}

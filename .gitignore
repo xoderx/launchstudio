@@ -12,3 +12,8 @@ supabase/.temp/
 coverage/
 
 /site/public-build.html
+.next/
+.workflow-data/
+.vercel/
+/work/
+/staging/supabase/.temp/

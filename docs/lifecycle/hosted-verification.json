@@ -1,0 +1,60 @@
+{
+  "scope": "Actual protected hosted Preview, Chromium/Playwright, no mocked responses, no customer session",
+  "commit": "1715415c3713a342dff47cdfe953b33f8798d76e",
+  "deploymentId": "dpl_G262s11gkUpjBo4VJeR4om2TaTBW",
+  "url": "https://launchstudio-staging-kj8izwiw1-xoderxs-projects.vercel.app",
+  "homepageStatus": 200,
+  "previewRobotsHeader": "noindex, nofollow",
+  "routes": {
+    "/product": 200,
+    "/solutions": 200,
+    "/tools": 200,
+    "/academy": 200,
+    "/covibecoder": 200,
+    "/pricing": 200,
+    "/about": 200,
+    "/contact": 200,
+    "/partners": 200,
+    "/privacy": 200,
+    "/terms": 200,
+    "/ai-disclaimer": 200,
+    "/transform": 200,
+    "/exit-ready": 200,
+    "/solutions/business-transformation": 200,
+    "/solutions/exit-planning": 200
+  },
+  "keyboardSkipLink": true,
+  "signedOutAppRedirect": "/login#qcue",
+  "unauthenticatedWorkflowStatus": 401,
+  "leadFormStatus": 201,
+  "leadChecks": {
+    "replay": 201,
+    "missingConsent": 400,
+    "honeypot": 400,
+    "crossOrigin": "blocked by browser/platform"
+  },
+  "syntheticLeadEmail": "lifecycle-preview-1794467725@example.invalid",
+  "requestId": "11b78212-7933-4078-9570-7c80c7fe8c10",
+  "customerAB": "BLOCKED: legitimate customer credentials/session unavailable",
+  "adminPersistence": {
+    "verified": true,
+    "requestIdRowCount": 1,
+    "interest": "value-advisory",
+    "consent": true
+  },
+  "leadInterest": "value-advisory",
+  "temporaryDeploymentAccessRevoked": true,
+  "protectionWithoutAuthorization": "302 to deployment login",
+  "coreCountsUnchanged": {
+    "businesses": 2,
+    "projects": 7,
+    "assessmentVersions": 3,
+    "toolDeliverables": 0,
+    "workflowRequests": 1
+  },
+  "automaticEnrollment": {
+    "advancedGrants": 0,
+    "advancedEntitlements": 0,
+    "gatewayBudgetAccounts": 0
+  }
+}

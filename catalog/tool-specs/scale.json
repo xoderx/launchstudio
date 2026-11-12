@@ -1,0 +1,574 @@
+[
+  {
+    "position": 40,
+    "key": "customer-success-retention-agent",
+    "name": "Customer Success & Retention Agent",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/40-customer-success-retention-agent.md",
+      "sha256": "e483742d5068beccb95ac261f9346d6b269c9adb10c30f252a6849efd36ff0c7"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-40",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide customer lifecycle, churn signals and support limits",
+    "outputs": [
+      "Retention segments",
+      "Success milestones",
+      "Intervention plan"
+    ],
+    "exercise": "Interview a recently churned customer and compare their journey with a retained one.",
+    "metric": "Retention rate by cohort",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 41,
+    "key": "sop-playbook-generator",
+    "name": "SOP & Playbook Generator",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/41-sop-playbook-generator.md",
+      "sha256": "f60821f1d09170871ff461adff99288dc6f513309062cf19e2538223cbe140bc"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-41",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide a recurring process, owner and exceptions",
+    "outputs": [
+      "SOP steps",
+      "Quality checks",
+      "Escalation paths"
+    ],
+    "exercise": "Run the procedure once with a teammate who did not write it.",
+    "metric": "Unassisted procedure completion",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 42,
+    "key": "ai-workforce-architect",
+    "name": "AI Workforce Architect",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/42-ai-workforce-architect.md",
+      "sha256": "e8b30332156fe6783c5ce0cb4bdf88d9a397786c43e8c2dcb6cca5709d84130f"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-42",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide roles, repetitive work and access constraints",
+    "outputs": [
+      "AI role map",
+      "Human review gates",
+      "Quality and escalation plan"
+    ],
+    "exercise": "Choose one low-risk task and define a human acceptance check.",
+    "metric": "Accepted output rate",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 43,
+    "key": "automation-integration-builder",
+    "name": "Automation & Integration Builder",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/43-automation-integration-builder.md",
+      "sha256": "8173bd124da4947ccdc2793d541c79524a8f60843766d17cf73a6de5fe078205"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-43",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide process inputs, destinations and permissions",
+    "outputs": [
+      "Integration map",
+      "Dry-run plan",
+      "Rollback and monitoring"
+    ],
+    "exercise": "Trace a synthetic record through the proposed flow on paper.",
+    "metric": "Failure modes covered by tests",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 44,
+    "key": "team-delegation-architect",
+    "name": "Team & Delegation Architect",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/44-team-delegation-architect.md",
+      "sha256": "c0c24f988f0cebd89e3fd7f0a305be3425815e29868c1a21421dec3c719caf32"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-44",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide responsibilities, capacity and reporting lines",
+    "outputs": [
+      "Role boundaries",
+      "Delegation plan",
+      "Escalation ladder"
+    ],
+    "exercise": "Assign one owner and one reviewer to every critical responsibility.",
+    "metric": "Work items with a named owner",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 45,
+    "key": "executive-kpi-performance-dashboard",
+    "name": "Executive KPI & Performance Dashboard",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/45-executive-kpi-performance-dashboard.md",
+      "sha256": "31c163890f90d7de21072a594dd50d7776b569d7ff01a9d7c1290eebe18fb172"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-45",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide business goals, metrics and source availability",
+    "outputs": [
+      "KPI definitions",
+      "Dashboard layout",
+      "Review and action cadence"
+    ],
+    "exercise": "Define the denominator and owner for each KPI before graphing.",
+    "metric": "KPIs with verified data sources",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 46,
+    "key": "market-expansion-planner",
+    "name": "Market Expansion Planner",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/46-market-expansion-planner.md",
+      "sha256": "2a573f76bfa02a5f0d24581a4cdae235666805feec6479b7fe6a344e6400bfda"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-46",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide current market, candidate regions and constraints",
+    "outputs": [
+      "Expansion screen",
+      "Market entry hypotheses",
+      "Pilot and exit criteria"
+    ],
+    "exercise": "Compare two markets on observable demand and delivery friction.",
+    "metric": "Market assumptions verified",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 47,
+    "key": "partnership-channel-scale-builder",
+    "name": "Partnership & Channel Scale Builder",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/47-partnership-channel-scale-builder.md",
+      "sha256": "cd686ba3713196ff0fe361ed8dcd407450a9af026ad1ab818790e8cb83e29412"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-47",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide channel economics and partner capacity",
+    "outputs": [
+      "Channel portfolio",
+      "Partner onboarding plan",
+      "Quality safeguards"
+    ],
+    "exercise": "Choose one partner and agree on handoff and attribution in a pilot plan.",
+    "metric": "Partner-sourced qualified outcomes",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 48,
+    "key": "operations-efficiency-auditor",
+    "name": "Operations Efficiency Auditor",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/48-operations-efficiency-auditor.md",
+      "sha256": "25ad3367fec35be8bfe0825612b2b7831523344e8960ed732ed1da25ad5744a6"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-48",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide process baseline, volume and bottlenecks",
+    "outputs": [
+      "Efficiency audit",
+      "Root-cause hypotheses",
+      "Improvement experiments"
+    ],
+    "exercise": "Time one full process cycle and label wait versus work.",
+    "metric": "Cycle time after the experiment",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 49,
+    "key": "capital-investment-readiness-agent",
+    "name": "Capital & Investment Readiness Agent",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/49-capital-investment-readiness-agent.md",
+      "sha256": "a0f610ca4f54362f084ded143a9500cd43bc33cad5afc4b646bace7ac3c237ea"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-49",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide verified financials, capital objective and gaps",
+    "outputs": [
+      "Readiness checklist",
+      "Evidence room index",
+      "Capital decision questions"
+    ],
+    "exercise": "Trace each claimed metric to a source and flag reconciliation gaps.",
+    "metric": "Required evidence verified",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 50,
+    "key": "ip-business-asset-builder",
+    "name": "IP & Business Asset Builder",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/50-ip-business-asset-builder.md",
+      "sha256": "044ca948ad2f8c6dc2eaaa576238ec725a005e652fab07d2398fb64d2e7f0c73"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-50",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide asset inventory, ownership and usage rights",
+    "outputs": [
+      "Asset register",
+      "Rights gaps",
+      "Protection and reuse priorities"
+    ],
+    "exercise": "Record the creator and evidence of rights for every critical asset.",
+    "metric": "Critical assets with ownership evidence",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 51,
+    "key": "exit-readiness-valuation-planner",
+    "name": "Exit Readiness & Valuation Planner",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/51-exit-readiness-valuation-planner.md",
+      "sha256": "cf2ee033d7caedfd1bd3e322ae8e5078f6afe9aad02282133afd6412a3e5c03a"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-51",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide verified financials, ownership and intended exit",
+    "outputs": [
+      "Exit readiness review",
+      "Illustrative valuation drivers",
+      "Diligence checklist"
+    ],
+    "exercise": "Identify the largest recurring risk a buyer would ask to verify.",
+    "metric": "Diligence gaps closed",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 52,
+    "key": "ai-scale-commander",
+    "name": "AI Scale Commander",
+    "category": "Scale",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "agent-prompts/52-ai-scale-commander.md",
+      "sha256": "937265b0d8763d9bcc002300ab754cce044aaac2e735838164ebfae5c20d415f"
+    },
+    "providerId": null,
+    "catalogId": "launchstudio-tool-52",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide scale objective, constraints and operating baseline",
+    "outputs": [
+      "Scale priorities",
+      "Capacity scenarios",
+      "Risk and review plan"
+    ],
+    "exercise": "Choose one scale constraint and model its impact under three demand levels.",
+    "metric": "Capacity versus demand at the bottleneck",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  }
+]

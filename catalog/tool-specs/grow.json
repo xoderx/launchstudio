@@ -1,0 +1,574 @@
+[
+  {
+    "position": 14,
+    "key": "growth-diagnostic",
+    "name": "Growth Diagnostic",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/02X8FKDJRN.json",
+      "sha256": "b4fa4e8457136a2de41f41eb2e6ac95372ec977e5a02bf6095cd0bad859562c9"
+    },
+    "providerId": null,
+    "catalogId": "02X8FKDJRN",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide funnel baseline and growth goal",
+    "outputs": [
+      "Funnel diagnosis",
+      "Bottleneck evidence",
+      "Experiment queue"
+    ],
+    "exercise": "Pick the largest measured drop-off and write a falsifiable cause.",
+    "metric": "Conversion at the bottleneck",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 15,
+    "key": "lead-intelligence-finder",
+    "name": "Lead Intelligence Finder",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/QSSPRRGYGI.json",
+      "sha256": "187ce849cf645df32c8a1e0f2aa422c7bf3808441e3688d48fd3b8b8c369cb66"
+    },
+    "providerId": null,
+    "catalogId": "QSSPRRGYGI",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Describe target accounts and allowed research sources",
+    "outputs": [
+      "Account qualification criteria",
+      "Research plan",
+      "Verification checklist"
+    ],
+    "exercise": "Validate three candidate accounts against public criteria without inferring contacts.",
+    "metric": "Accounts with verified fit",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 16,
+    "key": "ai-outreach-campaign-builder",
+    "name": "AI Outreach Campaign Builder",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/TR2PO9P3DO.json",
+      "sha256": "04acbe8e5414471ec4e81c9df9167214b1ef6e65fc32eb9e014a01e22072ab84"
+    },
+    "providerId": null,
+    "catalogId": "TR2PO9P3DO",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide audience, offer and permitted channels",
+    "outputs": [
+      "Outreach sequence",
+      "Personalization rules",
+      "Consent and review plan"
+    ],
+    "exercise": "Draft a three-touch sequence and review each claim and opt-out.",
+    "metric": "Qualified reply rate",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 17,
+    "key": "social-media-growth-engine",
+    "name": "Social Media Growth Engine",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/BNGHE43HYY.json",
+      "sha256": "f873d45723401a442cbeffee6eed912656d6feb18658d9c9e4a981bc980a2c7f"
+    },
+    "providerId": null,
+    "catalogId": "BNGHE43HYY",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide audience, channel and publishing capacity",
+    "outputs": [
+      "Channel strategy",
+      "Content cadence",
+      "Engagement measures"
+    ],
+    "exercise": "Compare two recurring formats with the same audience and message.",
+    "metric": "Qualified engagements per post",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 18,
+    "key": "content-swarm-generator",
+    "name": "Content Swarm Generator",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/13G2UCZ59M.json",
+      "sha256": "d2e08f7dd4964bb2effdf36e68b86bb2a8e0799282d9f589922e92347756cd4b"
+    },
+    "providerId": null,
+    "catalogId": "13G2UCZ59M",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide messaging pillars and production capacity",
+    "outputs": [
+      "Content themes",
+      "Production workflow",
+      "Editorial calendar"
+    ],
+    "exercise": "Turn one source article into three distinct useful formats.",
+    "metric": "Publishable assets per week",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 19,
+    "key": "advertising-campaign-architect",
+    "name": "Advertising Campaign Architect",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/3KISRP7LJ8.json",
+      "sha256": "4e65f7ee4784d24c6d852b85710adeb3fbcce4ac0c0751b440f66e96ce205a13"
+    },
+    "providerId": null,
+    "catalogId": "3KISRP7LJ8",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide channel, objective and approved budget constraints",
+    "outputs": [
+      "Campaign structure",
+      "Creative hypotheses",
+      "Budget and measurement plan"
+    ],
+    "exercise": "Define a test cell with a spend ceiling and explicit stopping rule.",
+    "metric": "Cost per qualified action",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 20,
+    "key": "seo-ai-discovery-optimizer",
+    "name": "SEO & AI Discovery Optimizer",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/VD8V5WYO0A.json",
+      "sha256": "8c6c701fdffeea17065c067bb89c6f9dc71fc948e625476491214de24398486e"
+    },
+    "providerId": null,
+    "catalogId": "VD8V5WYO0A",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide site pages, topics and search evidence",
+    "outputs": [
+      "Discovery audit",
+      "Topic and page map",
+      "Optimization backlog"
+    ],
+    "exercise": "Map five verified queries to pages that can answer them.",
+    "metric": "Qualified organic visits",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 21,
+    "key": "partnership-growth-finder",
+    "name": "Partnership Growth Finder",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/1PMHMEHW1G.json",
+      "sha256": "a84d930d1cefb6b9f6565c11cc8a565b0a8fa036c95bd4c3ab01de7e536320e4"
+    },
+    "providerId": null,
+    "catalogId": "1PMHMEHW1G",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Describe partner fit and what each side gains",
+    "outputs": [
+      "Partner criteria",
+      "Pilot proposal",
+      "Due diligence"
+    ],
+    "exercise": "Draft a small co-marketing pilot with a shared success measure.",
+    "metric": "Partners agreeing to a pilot",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 22,
+    "key": "referral-ambassador-builder",
+    "name": "Referral & Ambassador Builder",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/U1NMXZS67P.json",
+      "sha256": "83af5b0e556adcb62cc5c762e3ec5395d4e7852034f7c46c73d5cabb30207ad8"
+    },
+    "providerId": null,
+    "catalogId": "U1NMXZS67P",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide audience, incentive and eligibility constraints",
+    "outputs": [
+      "Referral mechanics",
+      "Reward economics",
+      "Abuse safeguards"
+    ],
+    "exercise": "Test the invitation and reward explanation with three users.",
+    "metric": "Qualified referred conversions",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 23,
+    "key": "viral-growth-challenge-builder",
+    "name": "Viral Growth Challenge Builder",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/U11Y0BE6OG.json",
+      "sha256": "e2a2c439b34894273d7bcbec4c2f47a02acb5fffd5ce4b7d42687139d1fdce26"
+    },
+    "providerId": null,
+    "catalogId": "U11Y0BE6OG",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "State challenge outcome, audience and sharing channel",
+    "outputs": [
+      "Challenge mechanic",
+      "Participation journey",
+      "Moderation plan"
+    ],
+    "exercise": "Walk through enrollment, first action and voluntary sharing.",
+    "metric": "Participants completing first action",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 24,
+    "key": "conversion-optimization-agent",
+    "name": "Conversion Optimization Agent",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/MIJ377CWP7.json",
+      "sha256": "bb1ed5747a6a16d4bd509d70d5cc4640346b48de69800bca6b61310735448ed4"
+    },
+    "providerId": null,
+    "catalogId": "MIJ377CWP7",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide page or funnel baseline and user friction",
+    "outputs": [
+      "Conversion diagnosis",
+      "Test variants",
+      "Measurement plan"
+    ],
+    "exercise": "Use one usability session to observe friction before choosing a variant.",
+    "metric": "Conversion rate at tested step",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 25,
+    "key": "ai-sales-follow-up-agent",
+    "name": "AI Sales & Follow-Up Agent",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/6JH1TVL0MX.json",
+      "sha256": "52d593d914cb599404e6e4907ecf3e1e0e6968c0cce0d7d8fe2ad282e4776a8a"
+    },
+    "providerId": null,
+    "catalogId": "6JH1TVL0MX",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide sales stages and contact permissions",
+    "outputs": [
+      "Follow-up sequences",
+      "Stage exit rules",
+      "Review checkpoints"
+    ],
+    "exercise": "Define when follow-up stops and where consent is checked.",
+    "metric": "Qualified opportunities advancing stage",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 26,
+    "key": "ai-growth-commander",
+    "name": "AI Growth Commander",
+    "category": "Grow",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/TLTYNJ6REX.json",
+      "sha256": "6854aee24d8aee3fba9c2bb38dfb524c707175878b1fbb56b7bc2c6569e69fec"
+    },
+    "providerId": null,
+    "catalogId": "TLTYNJ6REX",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide growth objective, capacity and baseline",
+    "outputs": [
+      "Growth priorities",
+      "Resource allocation",
+      "90-day review cadence"
+    ],
+    "exercise": "Select one leading indicator and assign owners to the first two experiments.",
+    "metric": "Growth experiments completed",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  }
+]

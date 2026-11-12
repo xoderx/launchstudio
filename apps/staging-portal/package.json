@@ -1,0 +1,39 @@
+{
+  "name": "staging-portal",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start",
+    "test:ui": "node tests/ui.mjs",
+    "test:marketing": "node tests/marketing.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.119.0",
+    "ai": "7.0.170",
+    "next": "16.4.6",
+    "pg": "8.23.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "workflow": "5.5.0"
+  },
+  "private": true,
+  "overrides": {
+    "@vercel/cli-auth": {
+      "zod": "4.6.7"
+    },
+    "@vercel/cli-config": {
+      "zod": "4.6.7"
+    },
+    "@oclif/core": {
+      "minimatch": "11.0.1"
+    },
+    "@vercel/queue": {
+      "minimatch": "11.0.1"
+    }
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.1",
+    "playwright": "1.62.1"
+  }
+}

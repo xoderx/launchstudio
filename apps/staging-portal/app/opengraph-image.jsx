@@ -1,0 +1,5 @@
+import { ImageResponse } from 'next/og';
+export const alt='LaunchStudio — Stop collecting AI tools. Start building your business.';
+export const size={width:1200,height:630};
+export const contentType='image/png';
+export default function OpenGraphImage(){return new ImageResponse(<div style={{display:'flex',width:'100%',height:'100%',background:'#0C111B',padding:'65px',color:'#F7F9FC',flexDirection:'column',fontFamily:'sans-serif'}}><div style={{display:'flex',fontSize:32,fontWeight:700,letterSpacing:-2}}>Launch<span style={{color:'#C7F36B'}}>Studio</span></div><div style={{display:'flex',marginTop:65,fontSize:58,fontWeight:700,letterSpacing:-3}}>Stop collecting AI tools.</div><div style={{display:'flex',fontSize:58,fontWeight:700,letterSpacing:-3,color:'#C7F36B'}}>Start building your business.</div><div style={{display:'flex',marginTop:42,fontSize:23,color:'#A5B1C2'}}>Launch · Grow · Monetize · Scale · CoVibeCoder</div><div style={{display:'flex',marginTop:'auto',height:5,background:'linear-gradient(90deg,#C7F36B,#8067EF)',borderRadius:5}}/></div>,size);}

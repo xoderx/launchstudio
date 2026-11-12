@@ -1,0 +1,147 @@
+[
+  {
+    "name": "Business-in-a-Box",
+    "objective": "Founder needs to choose an idea",
+    "inputs": "Audience, problem, budget",
+    "tools": [
+      "Idea Validator",
+      "Market Intelligence",
+      "Business model architect"
+    ],
+    "criteria": "Validation brief, evidence map and business model. One measurable assumption to test.",
+    "approval": "Research or outreach requires appropriate access. Next: 7-Day Launch Sprint.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "7-Day Launch Sprint",
+    "objective": "Founder has a validated offer and launch date",
+    "inputs": "Approved brief, offer, deadline",
+    "tools": [
+      "Offer Architect",
+      "Website & Funnel Generator",
+      "Launch Campaign Creator",
+      "Launch Playbook"
+    ],
+    "criteria": "Launch checklist, copy, and a baseline conversion metric.",
+    "approval": "Approve publication and campaign send. Next: First 100 Customers.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "First 100 Customers",
+    "objective": "Early business needs a repeatable channel",
+    "inputs": "Ideal customer, offer, outreach limits",
+    "tools": [
+      "Growth Diagnostic",
+      "Lead Intelligence Finder",
+      "AI Outreach Campaign Builder",
+      "AI Sales & Follow-Up Agent"
+    ],
+    "criteria": "Channel experiment and approved outreach draft. Measure qualified replies and conversions.",
+    "approval": "Approve outreach and verify consent. Next: Sales Pipeline Builder.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "30-Day Content Engine",
+    "objective": "Team needs a content cadence",
+    "inputs": "Audience, brand, channels",
+    "tools": [
+      "Social Media Growth Engine",
+      "Content Swarm Generator",
+      "SEO & AI Discovery Optimizer"
+    ],
+    "criteria": "Calendar and draft content. Measure qualified engagement.",
+    "approval": "Approve every publishing batch. Next: First 100 Customers.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "Revenue Maximizer",
+    "objective": "Operator wants profitable revenue growth",
+    "inputs": "Sales, prices, costs",
+    "tools": [
+      "Revenue Opportunity Scanner",
+      "Profit & Pricing Optimizer",
+      "Upsell & Cross-Sell Architect"
+    ],
+    "criteria": "Prioritized tests and margin baseline.",
+    "approval": "Approve price or checkout changes separately. Next: Customer Retention Engine.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "Sales Pipeline Builder",
+    "objective": "Team needs a consistent follow-up process",
+    "inputs": "Stages, lead sources, consent",
+    "tools": [
+      "Lead Intelligence Finder",
+      "AI Sales & Follow-Up Agent",
+      "Proposal & Deal Closer"
+    ],
+    "criteria": "Pipeline definitions, follow-up draft, and deal checklist. Measure stage conversion.",
+    "approval": "Approve CRM writes and outbound messages. Next: Revenue Maximizer.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "Business Automation Sprint",
+    "objective": "Team wants to reduce repeat work",
+    "inputs": "Process map, volume, exceptions",
+    "tools": [
+      "SOP & Playbook Generator",
+      "Operations Efficiency Auditor",
+      "Automation & Integration Builder"
+    ],
+    "criteria": "SOP and automation plan. Measure cycle time and errors.",
+    "approval": "Approve production activation after a dry run. Next: AI Workforce Builder.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "AI Workforce Builder",
+    "objective": "Operator needs to assign work to people and agents",
+    "inputs": "Roles, tasks, access constraints",
+    "tools": [
+      "Team & Delegation Architect",
+      "AI Workforce Architect",
+      "Executive KPI & Performance Dashboard"
+    ],
+    "criteria": "Responsibility map and quality checks. Measure completion and escalation.",
+    "approval": "Approve changes to roles, permissions, and active integrations. Next: Business Automation Sprint.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "Customer Retention Engine",
+    "objective": "Team sees churn or low repeat purchase",
+    "inputs": "Cohort, churn evidence, renewal terms",
+    "tools": [
+      "Customer Success & Retention Agent",
+      "Customer Lifetime Value Optimizer",
+      "Revenue Recovery Agent"
+    ],
+    "criteria": "Retention experiment and a baseline. Measure repeat purchase or churn.",
+    "approval": "Approve win-back messages or billing actions separately. Next: Revenue Maximizer.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "Scale to Seven Figures",
+    "objective": "Established business evaluates capacity",
+    "inputs": "Financial baseline, constraints, market",
+    "tools": [
+      "Revenue Forecast & Profit Dashboard",
+      "Market Expansion Planner",
+      "AI Scale Commander"
+    ],
+    "criteria": "Scenario forecast and capacity plan. Measure margin, capacity and risk.",
+    "approval": "Approve spend and commitments separately. Next: 90-Day Growth Accelerator.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  },
+  {
+    "name": "90-Day Growth Accelerator",
+    "objective": "Operator needs a cross-stage plan",
+    "inputs": "Goal, budget, runway, baseline",
+    "tools": [
+      "AI Growth Commander",
+      "AI Revenue Commander",
+      "AI Scale Commander"
+    ],
+    "criteria": "Prioritized 90-day plan with weekly measures.",
+    "approval": "Approve each external action. Next: choose a targeted sprint from measured results.",
+    "timeline": "Day 1: confirm inputs and baseline. Days 2–5: prepare and review tool deliverables. Days 6–7: verify completion criteria and record the next action."
+  }
+]

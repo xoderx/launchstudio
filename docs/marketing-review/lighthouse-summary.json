@@ -1,0 +1,59 @@
+{
+  "scope": "Local built public homepage, Lighthouse 13.6.0 mobile simulation; not a production performance guarantee",
+  "scores": {
+    "performance": 86,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 69
+  },
+  "metrics": {
+    "firstContentfulPaint": "1.1 s",
+    "largestContentfulPaint": "4.1 s",
+    "cumulativeLayoutShift": "0",
+    "totalBlockingTime": "110 ms"
+  },
+  "seoNote": "Indexability audit is intentionally blocked by Preview noindex headers/metadata and robots. All other SEO audits passed.",
+  "seoAudits": [
+    {
+      "id": "is-crawlable",
+      "score": 0
+    },
+    {
+      "id": "document-title",
+      "score": 1
+    },
+    {
+      "id": "meta-description",
+      "score": 1
+    },
+    {
+      "id": "http-status-code",
+      "score": 1
+    },
+    {
+      "id": "link-text",
+      "score": 1
+    },
+    {
+      "id": "crawlable-anchors",
+      "score": 1
+    },
+    {
+      "id": "robots-txt",
+      "score": 1
+    },
+    {
+      "id": "image-alt",
+      "score": 1
+    },
+    {
+      "id": "hreflang",
+      "score": 1
+    },
+    {
+      "id": "canonical",
+      "score": 1
+    }
+  ],
+  "command": "lighthouse http://localhost:3000 --only-categories=performance,accessibility,best-practices,seo"
+}

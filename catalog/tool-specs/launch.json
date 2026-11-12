@@ -1,0 +1,579 @@
+[
+  {
+    "position": 1,
+    "key": "idea-validator",
+    "name": "Idea Validator",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/YL7LGN8AV2.json",
+      "sha256": "bafa03980392e8d819471c4bd8c81a865ace9232ef3832e30e09ee73887b7ee9"
+    },
+    "providerId": "YL7LGN8AV2",
+    "catalogId": "YL7LGN8AV2",
+    "providerStatus": "verified_existing_workflow",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "State the customer problem and strongest validation evidence",
+    "outputs": [
+      "Problem hypothesis",
+      "Demand signals",
+      "Validation experiment"
+    ],
+    "exercise": "Interview five people who recently faced the problem and ask what they did.",
+    "metric": "Qualified interviews with a repeated problem",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": true,
+      "realExecutionVerified": true,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 2,
+    "key": "market-intelligence",
+    "name": "Market Intelligence Agent",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/RYAET6419X.json",
+      "sha256": "f7074d28cb9100b0c0303649ca5650b25831b34ee4ce9a7e1e8d977c981f43d6"
+    },
+    "providerId": "RYAET6419X",
+    "catalogId": "RYAET6419X",
+    "providerStatus": "verified_existing_workflow",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "List the market and the competing alternatives buyers use",
+    "outputs": [
+      "Market evidence map",
+      "Alternatives matrix",
+      "Research gaps"
+    ],
+    "exercise": "Compare three real alternatives on price, promise, and who they serve.",
+    "metric": "Alternatives verified against a primary source",
+    "dependencies": [
+      "idea-validator"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": true,
+      "realExecutionVerified": true,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 3,
+    "key": "business-model-architect",
+    "name": "Business model architect",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/CV6MHOX4Q2.json",
+      "sha256": "cd842a45bc91c85850edc452c0fa1ef2f5c4b77a6655db39411516cc32da74e3"
+    },
+    "providerId": null,
+    "catalogId": "CV6MHOX4Q2",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Describe the proposed offer, revenue source and largest cost",
+    "outputs": [
+      "Business model canvas",
+      "Unit economics",
+      "Viability test"
+    ],
+    "exercise": "Calculate contribution per sale and test the most uncertain cost assumption.",
+    "metric": "Contribution per sale",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 4,
+    "key": "brand-launcher",
+    "name": "Brand launcher",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/85WAJFOG5Z.json",
+      "sha256": "791640afa6ce28ccbc77d2a23dbc403a27798178f61d23b34f4850412a5ea852"
+    },
+    "providerId": null,
+    "catalogId": "85WAJFOG5Z",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Describe the audience, promise and tone",
+    "outputs": [
+      "Positioning statement",
+      "Identity direction",
+      "Brand rollout"
+    ],
+    "exercise": "Ask three target customers to paraphrase the promise without explanation.",
+    "metric": "Accurate unprompted paraphrases",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 5,
+    "key": "brand-checker",
+    "name": "Brand checker",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/R825L3PAVU.json",
+      "sha256": "578934036abb02e51128b5aff7984deec8661648dea00b071ab7201a01e90e9d"
+    },
+    "providerId": null,
+    "catalogId": "R825L3PAVU",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide the current brand and competing brands",
+    "outputs": [
+      "Brand audit",
+      "Consistency gaps",
+      "Remediation priorities"
+    ],
+    "exercise": "Compare one landing page, email and profile against the same brand promise.",
+    "metric": "High-priority inconsistencies resolved",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 6,
+    "key": "audience-dna",
+    "name": "Audience DNA Builder",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/SCV7PECQF3.json",
+      "sha256": "f5ee6c30bb6363cc6e30c15624685b5cc2047ea9767b75c7ed8990a75a321761"
+    },
+    "providerId": "SCV7PECQF3",
+    "catalogId": "SCV7PECQF3",
+    "providerStatus": "metadata_only",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Identify the approved validation and market evidence",
+    "outputs": [
+      "Customer segments",
+      "Buying journey",
+      "30-day activation plan"
+    ],
+    "exercise": "Map one primary segment from trigger to purchase using observed examples.",
+    "metric": "Qualified responses from the primary segment",
+    "dependencies": [
+      "idea-validator",
+      "market-intelligence"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 7,
+    "key": "offer-architect",
+    "name": "Offer Architect",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/3A3G7DKUD5.json",
+      "sha256": "70a9f46cc6ac1aecb40b7dc596055cbf85e9d534f83dff5384db31f9bace770e"
+    },
+    "providerId": null,
+    "catalogId": "3A3G7DKUD5",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "State the buyer, desired outcome and delivery constraints",
+    "outputs": [
+      "Offer promise",
+      "Scope and proof",
+      "Objection responses"
+    ],
+    "exercise": "Show a one-page offer to three buyers and ask what would stop purchase.",
+    "metric": "Buyers requesting a next step",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 8,
+    "key": "product-service-builder",
+    "name": "Product/Service Builder",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/JN1YG14GMN.json",
+      "sha256": "64b66317258a2210b4b8ddbc4100864be74946e5c96d03911cb4de7c048c291c"
+    },
+    "providerId": null,
+    "catalogId": "JN1YG14GMN",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Describe the customer outcome and available resources",
+    "outputs": [
+      "Product scope",
+      "Delivery milestones",
+      "Acceptance criteria"
+    ],
+    "exercise": "Prototype the smallest workflow that delivers the promised outcome.",
+    "metric": "Users completing the prototype task",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 9,
+    "key": "pricing-packaging-designer",
+    "name": "Pricing & Packaging Designer",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/E6TA10VUZO.json",
+      "sha256": "90481eb8acba0175c8159d60c28239784e5fdde82fcc1e6c9b96468b77216ebe"
+    },
+    "providerId": null,
+    "catalogId": "E6TA10VUZO",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide costs, pricing evidence and buyer budgets",
+    "outputs": [
+      "Pricing tiers",
+      "Margin scenarios",
+      "Price test"
+    ],
+    "exercise": "Compare two prices against the same scope and measure qualified intent.",
+    "metric": "Contribution margin by tier",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 10,
+    "key": "website-funnel-generator",
+    "name": "Website & Funnel Generator",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/P4A84P45UW.json",
+      "sha256": "c64e031e761daa959877aa2f7e392107fc53839d83fea5e6323e0c162b8b8ac3"
+    },
+    "providerId": null,
+    "catalogId": "P4A84P45UW",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide the offer, intended visitor and conversion action",
+    "outputs": [
+      "Funnel map",
+      "Page copy outline",
+      "Conversion events"
+    ],
+    "exercise": "Sketch the entry page and test whether a visitor can find the intended action.",
+    "metric": "Visitors who identify the next action",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 11,
+    "key": "launch-campaign-creator",
+    "name": "Launch Campaign Creator",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/NHC0XJ87PP.json",
+      "sha256": "ea029e51554384146108df03d957456bad1bc5eacdc0b02f964149eb0aa36099"
+    },
+    "providerId": null,
+    "catalogId": "NHC0XJ87PP",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide launch date, approved offer and available channels",
+    "outputs": [
+      "Campaign calendar",
+      "Channel assets",
+      "Launch measures"
+    ],
+    "exercise": "Draft one message for each of the first three launch touchpoints.",
+    "metric": "Qualified launch responses",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 12,
+    "key": "launch-playbook",
+    "name": "Launch Playbook",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/ED80B6KXDV.json",
+      "sha256": "20284c80aacdfd9f073b48d67ff4a2dd3ff65b8e32fda5047424cbb18ef230e1"
+    },
+    "providerId": null,
+    "catalogId": "ED80B6KXDV",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "Provide launch deadline, resources and dependencies",
+    "outputs": [
+      "Launch milestones",
+      "Owner checklist",
+      "Fallback plan"
+    ],
+    "exercise": "Work backward from launch day and assign an owner to every prerequisite.",
+    "metric": "Milestones completed on time",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  },
+  {
+    "position": 13,
+    "key": "launch-command",
+    "name": "Launch Command",
+    "category": "Launch",
+    "version": 1,
+    "promptSource": {
+      "archivePath": "recovery/original-agent-prompts/HWHLHRA1PG.json",
+      "sha256": "827040ea8babd3ea27238ee1ea3b16efde3198e834a5af1f460750beaaae904c"
+    },
+    "providerId": null,
+    "catalogId": "HWHLHRA1PG",
+    "providerStatus": "unverified",
+    "executionCost": null,
+    "model": "gpt-5.2",
+    "input": "State the launch objective and current blockers",
+    "outputs": [
+      "Launch decision log",
+      "Critical path",
+      "Weekly operating plan"
+    ],
+    "exercise": "Review all open launch decisions and rank them by impact on launch date.",
+    "metric": "Critical blockers cleared",
+    "dependencies": [],
+    "requiredContext": [
+      "project_goal",
+      "approved_project_assessments"
+    ],
+    "approval": "editor approval before reuse",
+    "executionAllowed": false,
+    "readiness": {
+      "interface": true,
+      "promptSpec": true,
+      "inputValidation": true,
+      "providerConfigured": false,
+      "realExecutionVerified": false,
+      "outputValidatedInTests": true,
+      "draftPersistence": true,
+      "isolationTestedBySharedPolicy": true,
+      "qcueIntegration": true,
+      "academySprint": true,
+      "productionReadiness": "not tested"
+    }
+  }
+]

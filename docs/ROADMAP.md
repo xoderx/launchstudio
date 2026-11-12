@@ -6,3 +6,9 @@
 4. Verify access groups and billing independently. Add integrations only with scoped credentials, explicit approvals and confirmed test outcomes.
 
 See FLAGSHIP_WORKFLOWS.md for the proposed sequences.
+
+## Staging portal release gate
+
+1. Provision and verify the staging worker and private Vercel Preview configuration.
+2. Complete the live two-customer, real-agent, retry, provenance and revocation acceptance run. Record Supabase advisor findings.
+3. Implement Q/CUE and account-scoped onboarding after hosted acceptance passes.
