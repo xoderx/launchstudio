@@ -60,3 +60,9 @@ Staging verification: a signed-in synthetic Idea Validator request was interrupt
 ## Q/CUE Phase 3
 
 Connected Audience DNA approval, source selection, versioned result persistence, and recovery to the existing staging pipeline. Local restricted-worker tests use a stubbed structured response, verify both pinned source versions and the explicit approval gate, and check denial of cross-customer read, approval and execution. Read-only Pickaxe metadata confirms the agent is a GPT-5.2 chat agent with no form fields or attached actions. Live execution remains gated on verified entitlement, limits, and workspace cost controls.
+
+## November 11 LaunchStudio 2.0 visual redesign
+
+Implemented the unified staging application shell, responsive navigation, dark/light themes, locally bundled Inter, Lucide icons, command search, business switching, Start Here Navigator, selected-project continuation, AI Workspace, recipes, and saved assessment links. Restyled Q/CUE project milestones, context, approval versions, workflow controls, activity filtering, tool catalog, and existing workbench/academy. Backend modules, route handlers, migrations, approval callbacks, durable request/recovery, and pagination contracts remain unchanged.
+
+The build, nine dashboard/history/TLS tests, restricted-worker database suite, and original public-site build pass. Browser verification uses the real application with synthetic browser-intercepted data; screenshots and its detailed report are in `docs/redesign-review`. Hosted sign-in and two-customer/provider acceptance remain separate release gates. No production merge, public portal publication, schema mutation, or customer record change is included.

@@ -1,0 +1,92 @@
+{
+  "matrix": [
+    {
+      "width": 1440,
+      "theme": "dark",
+      "route": "start-here",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "dark",
+      "route": "qcue",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "route": "start-here",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "theme": "light",
+      "route": "qcue",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "start-here",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "route": "qcue",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "start-here",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "route": "qcue",
+      "violations": []
+    },
+    {
+      "width": 320,
+      "theme": "dark",
+      "route": "start-here",
+      "violations": []
+    },
+    {
+      "width": 320,
+      "theme": "dark",
+      "route": "qcue",
+      "violations": []
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "route": "start-here",
+      "violations": []
+    },
+    {
+      "width": 320,
+      "theme": "light",
+      "route": "qcue",
+      "violations": []
+    }
+  ],
+  "checks": [
+    "Navigator goal chips and honest rule-based recommendations",
+    "Universal AI and four individual model links",
+    "command search, saved projects, focus restoration",
+    "planned tool selection without provider execution",
+    "approval and audience pilot gates",
+    "project switching clears prior assessments",
+    "business switching clears prior project data",
+    "desktop sidebar and mobile keyboard navigation",
+    "assistant dialog",
+    "theme persistence",
+    "reduced motion",
+    "no console errors"
+  ],
+  "fixture": "Synthetic responses intercepted in the browser; no remote records read or written.",
+  "limitations": "Live authenticated acceptance and provider execution are separate release gates."
+}
