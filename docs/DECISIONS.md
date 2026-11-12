@@ -55,3 +55,7 @@ Build the public website in the existing Next.js repository, separate from the u
 ## Production asset preparation
 
 Prepare a production-mode compilation, checksummed committed-source kit, offline configuration preflight and secret-free release CI now. Do not infer release readiness from compilation or bypass the remaining legitimate customer/session, Production infrastructure, legal and identity gates. Keep schema application, deployment promotion and customer traffic changes separate from preparation. Record hosted-only Q/CUE schema reconciliation as an explicit prerequisite rather than bulk replaying the staging migration set.
+
+## Lifecycle expansion and AI independence — five batches
+
+Keep the 65 registry positions and academy unchanged. Add TransformOS and ExitReady on existing project identities. Financial/deal planning requires audited private tables, an operator-configured program entitlement and individual grant; ordinary membership and the AI worker do not receive access. Choose Vercel AI Gateway with AI SDK as the initial direct foundation while preserving Pickaxe compatibility and no automatic cutover. Extend the existing request ledger for budget metadata. Native conversations remain disabled until credentials, spend controls, persisted provenance and authenticated pilot tests pass. See `docs/lifecycle/ARCHITECTURE.md`.

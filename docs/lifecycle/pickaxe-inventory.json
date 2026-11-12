@@ -1,0 +1,878 @@
+{
+  "generatedAt": "2026-11-12T06:27:46.295Z",
+  "secretValuesExported": false,
+  "agents": [
+    {
+      "position": 1,
+      "name": "Idea Validator",
+      "id": "YL7LGN8AV2",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "existing assessment workflow"
+    },
+    {
+      "position": 2,
+      "name": "Market Intelligence Agent",
+      "id": "RYAET6419X",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "existing assessment workflow"
+    },
+    {
+      "position": 3,
+      "name": "Business model architect",
+      "id": "CV6MHOX4Q2",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 4,
+      "name": "Brand launcher",
+      "id": "85WAJFOG5Z",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 5,
+      "name": "Brand checker",
+      "id": "R825L3PAVU",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 6,
+      "name": "Audience DNA Builder",
+      "id": "SCV7PECQF3",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "paused pilot"
+    },
+    {
+      "position": 7,
+      "name": "Offer Architect",
+      "id": "3A3G7DKUD5",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 8,
+      "name": "Product/Service Builder",
+      "id": "JN1YG14GMN",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 9,
+      "name": "Pricing & Packaging Designer",
+      "id": "E6TA10VUZO",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 10,
+      "name": "Website & Funnel Generator",
+      "id": "P4A84P45UW",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 11,
+      "name": "Launch Campaign Creator",
+      "id": "NHC0XJ87PP",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 12,
+      "name": "Launch Playbook",
+      "id": "ED80B6KXDV",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 13,
+      "name": "Launch Command",
+      "id": "HWHLHRA1PG",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 14,
+      "name": "Growth Diagnostic",
+      "id": "02X8FKDJRN",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 15,
+      "name": "Lead Intelligence Finder",
+      "id": "QSSPRRGYGI",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 16,
+      "name": "AI Outreach Campaign Builder",
+      "id": "TR2PO9P3DO",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 17,
+      "name": "Social Media Growth Engine",
+      "id": "BNGHE43HYY",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 18,
+      "name": "Content Swarm Generator",
+      "id": "13G2UCZ59M",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 19,
+      "name": "Advertising Campaign Architect",
+      "id": "3KISRP7LJ8",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 20,
+      "name": "SEO & AI Discovery Optimizer",
+      "id": "VD8V5WYO0A",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 21,
+      "name": "Partnership Growth Finder",
+      "id": "1PMHMEHW1G",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 22,
+      "name": "Referral & Ambassador Builder",
+      "id": "U1NMXZS67P",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 23,
+      "name": "Viral Growth Challenge Builder",
+      "id": "U11Y0BE6OG",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 24,
+      "name": "Conversion Optimization Agent",
+      "id": "MIJ377CWP7",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 25,
+      "name": "AI Sales & Follow-Up Agent",
+      "id": "6JH1TVL0MX",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 26,
+      "name": "AI Growth Commander",
+      "id": "TLTYNJ6REX",
+      "commanderId": null,
+      "promptFile": null,
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 27,
+      "name": "Revenue Opportunity Scanner",
+      "id": "launchstudio-tool-27",
+      "commanderId": null,
+      "promptFile": "agent-prompts/27-revenue-opportunity-scanner.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 28,
+      "name": "Profit & Pricing Optimizer",
+      "id": "launchstudio-tool-28",
+      "commanderId": null,
+      "promptFile": "agent-prompts/28-profit-pricing-optimizer.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 29,
+      "name": "Upsell & Cross-Sell Architect",
+      "id": "launchstudio-tool-29",
+      "commanderId": null,
+      "promptFile": "agent-prompts/29-upsell-cross-sell-architect.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 30,
+      "name": "Subscription & Membership Builder",
+      "id": "launchstudio-tool-30",
+      "commanderId": null,
+      "promptFile": "agent-prompts/30-subscription-membership-builder.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 31,
+      "name": "Digital Product Monetizer",
+      "id": "launchstudio-tool-31",
+      "commanderId": null,
+      "promptFile": "agent-prompts/31-digital-product-monetizer.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 32,
+      "name": "MerchDone Revenue Builder",
+      "id": "launchstudio-tool-32",
+      "commanderId": null,
+      "promptFile": "agent-prompts/32-merchdone-revenue-builder.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 33,
+      "name": "Sponsorship & Brand Deal Builder",
+      "id": "launchstudio-tool-33",
+      "commanderId": null,
+      "promptFile": "agent-prompts/33-sponsorship-brand-deal-builder.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 34,
+      "name": "Affiliate & Licensing Engine",
+      "id": "launchstudio-tool-34",
+      "commanderId": null,
+      "promptFile": "agent-prompts/34-affiliate-licensing-engine.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 35,
+      "name": "Proposal & Deal Closer",
+      "id": "launchstudio-tool-35",
+      "commanderId": null,
+      "promptFile": "agent-prompts/35-proposal-deal-closer.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 36,
+      "name": "Revenue Recovery Agent",
+      "id": "launchstudio-tool-36",
+      "commanderId": null,
+      "promptFile": "agent-prompts/36-revenue-recovery-agent.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 37,
+      "name": "Customer Lifetime Value Optimizer",
+      "id": "launchstudio-tool-37",
+      "commanderId": null,
+      "promptFile": "agent-prompts/37-customer-lifetime-value-optimizer.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 38,
+      "name": "Revenue Forecast & Profit Dashboard",
+      "id": "launchstudio-tool-38",
+      "commanderId": null,
+      "promptFile": "agent-prompts/38-revenue-forecast-profit-dashboard.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 39,
+      "name": "AI Revenue Commander",
+      "id": "launchstudio-tool-39",
+      "commanderId": null,
+      "promptFile": "agent-prompts/39-ai-revenue-commander.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 40,
+      "name": "Customer Success & Retention Agent",
+      "id": "launchstudio-tool-40",
+      "commanderId": null,
+      "promptFile": "agent-prompts/40-customer-success-retention-agent.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 41,
+      "name": "SOP & Playbook Generator",
+      "id": "launchstudio-tool-41",
+      "commanderId": null,
+      "promptFile": "agent-prompts/41-sop-playbook-generator.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 42,
+      "name": "AI Workforce Architect",
+      "id": "launchstudio-tool-42",
+      "commanderId": null,
+      "promptFile": "agent-prompts/42-ai-workforce-architect.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 43,
+      "name": "Automation & Integration Builder",
+      "id": "launchstudio-tool-43",
+      "commanderId": null,
+      "promptFile": "agent-prompts/43-automation-integration-builder.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 44,
+      "name": "Team & Delegation Architect",
+      "id": "launchstudio-tool-44",
+      "commanderId": null,
+      "promptFile": "agent-prompts/44-team-delegation-architect.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 45,
+      "name": "Executive KPI & Performance Dashboard",
+      "id": "launchstudio-tool-45",
+      "commanderId": null,
+      "promptFile": "agent-prompts/45-executive-kpi-performance-dashboard.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 46,
+      "name": "Market Expansion Planner",
+      "id": "launchstudio-tool-46",
+      "commanderId": null,
+      "promptFile": "agent-prompts/46-market-expansion-planner.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 47,
+      "name": "Partnership & Channel Scale Builder",
+      "id": "launchstudio-tool-47",
+      "commanderId": null,
+      "promptFile": "agent-prompts/47-partnership-channel-scale-builder.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 48,
+      "name": "Operations Efficiency Auditor",
+      "id": "launchstudio-tool-48",
+      "commanderId": null,
+      "promptFile": "agent-prompts/48-operations-efficiency-auditor.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 49,
+      "name": "Capital & Investment Readiness Agent",
+      "id": "launchstudio-tool-49",
+      "commanderId": null,
+      "promptFile": "agent-prompts/49-capital-investment-readiness-agent.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 50,
+      "name": "IP & Business Asset Builder",
+      "id": "launchstudio-tool-50",
+      "commanderId": null,
+      "promptFile": "agent-prompts/50-ip-business-asset-builder.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 51,
+      "name": "Exit Readiness & Valuation Planner",
+      "id": "launchstudio-tool-51",
+      "commanderId": null,
+      "promptFile": "agent-prompts/51-exit-readiness-valuation-planner.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 52,
+      "name": "AI Scale Commander",
+      "id": "launchstudio-tool-52",
+      "commanderId": null,
+      "promptFile": "agent-prompts/52-ai-scale-commander.md",
+      "modelSnapshot": "gpt-5.2",
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 53,
+      "name": "Idea-To-App Translator",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 54,
+      "name": "Prompt Architect",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 55,
+      "name": "Platform & Stack Selector",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 56,
+      "name": "MVP Scope Optimizer",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 57,
+      "name": "Context & Token Minimizer",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 58,
+      "name": "UI/UX Design Architect",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 59,
+      "name": "Database & Auth Architect",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 60,
+      "name": "API & Integration Builder",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 61,
+      "name": "Agent & Automation Designer",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 62,
+      "name": "Debug & Repair Doctor",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 63,
+      "name": "Testing & Qa Engineer",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 64,
+      "name": "Deploy & Security Doctor",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    },
+    {
+      "position": 65,
+      "name": "Cost, Performance & Growth Optimizer",
+      "id": null,
+      "commanderId": "launchstudio-covibecoder",
+      "promptFile": "agent-prompts/covibecoder-commander.md",
+      "modelSnapshot": null,
+      "execution": "API entitlement unverified; manual workspace"
+    }
+  ],
+  "endpoints": [
+    "POST https://api.pickaxe.co/v1/completions",
+    "GET https://api.pickaxe.co/v1/completions/{submissionId}"
+  ],
+  "credentials": [
+    "PICKAXE_STAGING_API_KEY",
+    "PICKAXE_STAGING_WORKSPACE_ID",
+    "PICKAXE_PRODUCTION_API_KEY",
+    "PICKAXE_PRODUCTION_WORKSPACE_ID"
+  ],
+  "references": [
+    {
+      "path": "apps/staging-portal/app/command-center.jsx",
+      "lines": [
+        107,
+        114,
+        116,
+        126
+      ],
+      "sha256": "81f835fd63b31a96f2fa9994cc27a766f904241716a40397b175812cfadd8780"
+    },
+    {
+      "path": "apps/staging-portal/app/marketing/components.jsx",
+      "lines": [
+        4,
+        12,
+        35,
+        36,
+        40
+      ],
+      "sha256": "3f86cf86b7daa3e229d3f33d0c678f0d8d46ae48dfeb2704a1976e134a2a0aae"
+    },
+    {
+      "path": "apps/staging-portal/app/marketing/content.mjs",
+      "lines": [
+        18,
+        25
+      ],
+      "sha256": "a5126a7100f100cd798aa5378edf05b75d2f834bf99216d8c69388fa620923c5"
+    },
+    {
+      "path": "apps/staging-portal/app/native-ai-preview.jsx",
+      "lines": [
+        3
+      ],
+      "sha256": "89e5afaffd59ce3ca96ebb1528ee64f27db7edae5897fb39ccde080c7f487100"
+    },
+    {
+      "path": "apps/staging-portal/app/start-here.jsx",
+      "lines": [
+        9
+      ],
+      "sha256": "2da4b0ac72a0ef78911b9b9580821567b81e3d52a0e241e5e44e2c7c189e6fc4"
+    },
+    {
+      "path": "apps/staging-portal/lib/ai-engine.mjs",
+      "lines": [
+        2,
+        3,
+        5,
+        7,
+        8
+      ],
+      "sha256": "6cabd99b4059c72c8c56885c3a83f943ea6523332a0a5b742af5247261d19523"
+    },
+    {
+      "path": "apps/staging-portal/lib/ai-engine.test.mjs",
+      "lines": [
+        2,
+        6,
+        7,
+        25
+      ],
+      "sha256": "7eb6c0076bfc9692b40ab4e6ae8f1c3745b888ff86959325e271ee0482d988f9"
+    },
+    {
+      "path": "apps/staging-portal/lib/config.test.mjs",
+      "lines": [
+        51,
+        54,
+        55,
+        56,
+        57,
+        61,
+        63,
+        66,
+        67,
+        68
+      ],
+      "sha256": "8a62a2ca342f0867b44656acbd8774f7672ffcee36de3beb4c97c57aa4405e58"
+    },
+    {
+      "path": "apps/staging-portal/lib/runtime.mjs",
+      "lines": [
+        2,
+        5,
+        36,
+        37,
+        38
+      ],
+      "sha256": "7efebe524fd6d555ced920db73c90550b3ec9b084ca5cb74e2d3b1e50772c8fa"
+    },
+    {
+      "path": "apps/staging-portal/lib/workflow-requests.mjs",
+      "lines": [
+        44
+      ],
+      "sha256": "2fb1e7db99c0355e4d65336fa5a2bd53dfe4daf0821d1de88e8b59e39a529914"
+    },
+    {
+      "path": "staging/audience-dna.mjs",
+      "lines": [
+        2
+      ],
+      "sha256": "167df5200af4fbf9da32a90e2e0f19d0d6a8991d703d61326680d23d921e26ef"
+    },
+    {
+      "path": "staging/pickaxe-adapter.mjs",
+      "lines": [
+        5,
+        38,
+        40,
+        47,
+        49,
+        54,
+        56,
+        58,
+        60,
+        63,
+        70,
+        74,
+        75,
+        83,
+        84,
+        88,
+        92,
+        96,
+        97,
+        105,
+        107,
+        108,
+        111,
+        116,
+        120,
+        123,
+        125,
+        129,
+        133
+      ],
+      "sha256": "355340cbfd4521613af43b5f39ed7dc7bd18d406f40d5e55b56c2681ab2d7ff9"
+    },
+    {
+      "path": "staging/pickaxe-adapter.test.mjs",
+      "lines": [
+        3,
+        7,
+        16,
+        21,
+        22,
+        25,
+        31,
+        32,
+        36,
+        41,
+        42,
+        74,
+        75,
+        76,
+        77,
+        80,
+        83,
+        87,
+        94,
+        95,
+        96,
+        107,
+        108,
+        109
+      ],
+      "sha256": "73f46cd45324469fe3007ac1ad60cbfdb1cc314c5286ddce7a1fd6b834d1f8bb"
+    },
+    {
+      "path": "staging/test.mjs",
+      "lines": [
+        59,
+        164
+      ],
+      "sha256": "d5a438a14c1d65214596647cb852767c547b74e620ed86ccb2394737df3f5891"
+    },
+    {
+      "path": "staging/workflow.mjs",
+      "lines": [
+        1,
+        2,
+        4,
+        59,
+        70,
+        73,
+        106,
+        111,
+        114
+      ],
+      "sha256": "edbfa9fb7f9eeb61262aee4ffb574055d455e3b34f53ca79a4c64b66ce4b7c08"
+    },
+    {
+      "path": "site/build.mjs",
+      "lines": [
+        44,
+        60
+      ],
+      "sha256": "2d08c072c4dec284d4a3c73d56f2da1b177a2130c32bd10afe9c92a47dcce893"
+    },
+    {
+      "path": "site/portal-before.json",
+      "lines": [
+        30,
+        45,
+        49,
+        50,
+        55,
+        60,
+        64,
+        65,
+        70,
+        74,
+        75,
+        80,
+        85,
+        90,
+        95,
+        100,
+        105,
+        110,
+        115,
+        120,
+        125,
+        130,
+        135,
+        140,
+        145,
+        150,
+        155,
+        160,
+        165,
+        170,
+        175,
+        180,
+        185,
+        190,
+        195,
+        200,
+        205,
+        210,
+        215,
+        220,
+        225,
+        230,
+        235,
+        240,
+        245,
+        250,
+        255,
+        260,
+        265,
+        270,
+        275,
+        280,
+        285,
+        290,
+        295,
+        300,
+        305,
+        310,
+        315,
+        320,
+        325,
+        330
+      ],
+      "sha256": "03a62d58e063cf847c535e525f16e07d361fc1c8d75576467612b16d26c7b332"
+    }
+  ],
+  "caveats": [
+    "Model snapshots are archived metadata, not current routing promises.",
+    "Provider execution entitlement, remaining credits and membership/billing mapping are not proven by metadata.",
+    "Do not cancel memberships, change prompts or switch traffic using this audit.",
+    "Workspace IDs and keys are server secret bindings, not exported values."
+  ]
+}

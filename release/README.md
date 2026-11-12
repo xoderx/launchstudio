@@ -29,7 +29,7 @@ The preflight returns only named checks and booleans, never values. Missing/inva
 
 ## Database handoff
 
-The manifest lists the ten checked-in migrations without executing them. They are inputs for review, not permission to bulk apply SQL. Hosted staging has a supplemental `qcue_bridge_initial` migration and `qcue_state` not represented by these files. Reconcile their owning implementation and hosted/repository version mapping before preparing a complete new Production schema. Inspect the destination first; never replay these files on staging or a populated customer database. Verify RLS, restricted worker grants, backup/restore and customer A/B denial before release. A source archive is not a customer-data backup.
+The manifest lists the checked-in migration set without executing them. They are inputs for review, not permission to bulk apply SQL. Hosted staging has a supplemental `qcue_bridge_initial` migration and `qcue_state` not represented by these files. Reconcile their owning implementation and hosted/repository version mapping before preparing a complete new Production schema. Inspect the destination first; never replay these files on staging or a populated customer database. Verify RLS, restricted worker grants, backup/restore and customer A/B denial before release. A source archive is not a customer-data backup.
 
 ## Release sequence
 

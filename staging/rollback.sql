@@ -1,5 +1,10 @@
 -- Staging rollback. Remove the route first and take a verified database backup.
 begin;
+-- Disposable local test teardown only; never run against customer databases.
+drop function if exists public.advanced_workspace(uuid,text,text,uuid,jsonb,uuid);
+drop table if exists launchstudio_private.advanced_audit,launchstudio_private.advanced_versions,
+ launchstudio_private.advanced_access,launchstudio_private.advanced_entitlements;
+drop table if exists public.ai_budget_accounts;
 drop table if exists public.marketing_leads;
 drop function if exists public.save_tool_deliverable(uuid, integer, uuid, jsonb);
 drop function if exists public.approve_tool_deliverable(uuid);

@@ -41,7 +41,7 @@ export async function reserveDispatch(db, job, reconcile) {
 export async function claimDispatch(db, job) {
   const { rows: [row] } = await db.query(`
     update public.workflow_requests set status='running'
-    where ${requestKey} and dispatch_id=$5 and status='queued'
+    where ${requestKey} and dispatch_id=$5 and status='queued' and provider='pickaxe'
     returning provider_submission_id`, [...requestArgs(job), job.dispatchId]);
   return row;
 }

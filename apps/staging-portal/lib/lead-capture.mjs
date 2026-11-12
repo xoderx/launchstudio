@@ -1,5 +1,5 @@
 import { createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
-export const interests = ['membership','growth-suite','covibecoder','managed-implementation','partnership','general','support'];
+export const interests = ['membership','growth-suite','covibecoder','managed-implementation','partnership','general','support','transformation-assessment','transformation-blueprint','exit-assessment','value-advisory','done-with-you','outcaas'];
 const sources = new Set(['early-access','contact','partners','pricing']);
 export const consentVersion = 'early-access-v1';
 function failure(status, message) { return Object.assign(Error(message), { status }); }

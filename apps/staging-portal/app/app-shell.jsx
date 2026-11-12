@@ -13,6 +13,8 @@ const destinations = [
   ["Assessments", "assessments", "check"],
   ["52 Tools", "tools", "grid"],
   ["CoVibeCoder", "covibecoder", "workflow"],
+  ["TransformOS", "transform", "activity"],
+  ["Enterprise Value", "enterprise-value", "check"],
   ["Growth Sprints", "tool-studio", "rocket"],
   ["Activity", "activity", "activity"],
   ["Settings", "account-settings", "settings"],

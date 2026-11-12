@@ -1,0 +1,31 @@
+{
+  "fixtureId": "synthetic-transformation-brief-v1",
+  "synthetic": true,
+  "automaticCutover": false,
+  "results": [
+    {
+      "provider": "pickaxe",
+      "inputDigest": null,
+      "provenancePreserved": null,
+      "structuredValid": null,
+      "tokens": null,
+      "costMicrousd": null,
+      "latencyMs": null,
+      "status": "not-run",
+      "quality": "Human rubric review required; no quality score inferred",
+      "recovery": "not verified"
+    },
+    {
+      "provider": "vercel-ai-gateway",
+      "inputDigest": null,
+      "provenancePreserved": null,
+      "structuredValid": null,
+      "tokens": null,
+      "costMicrousd": null,
+      "latencyMs": null,
+      "status": "not-run",
+      "quality": "Human rubric review required; no quality score inferred",
+      "recovery": "not verified"
+    }
+  ]
+}

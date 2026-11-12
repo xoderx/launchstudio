@@ -1,4 +1,5 @@
 "use client";
+import NativeAIPreview from './native-ai-preview';
 import { useState } from "react";
 import Icon from "./icons";
 import { EmptyState, NextActionCard } from "./app-shell";
@@ -127,6 +128,7 @@ export default function StartHere({ business, project, view, displayName }) {
             Open Universal AI <Icon name="arrow" />
             <span className="sr-only">(new tab)</span>
           </a>
+          <NativeAIPreview/>
           <h3>Choose an individual model</h3>
           <div className="model-links">
             {models.map(([name, id]) => (

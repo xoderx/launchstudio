@@ -5,7 +5,7 @@ import AxeBuilder from '@axe-core/playwright';
 const origin=process.env.BASE_URL||'http://localhost:3000';
 assert.ok(['localhost','127.0.0.1'].includes(new URL(origin).hostname));
 const out=process.env.MARKETING_REVIEW_OUTPUT||'/workspace/work/launchstudio/work/marketing-review';mkdirSync(out,{recursive:true});
-const paths=['/','/product','/solutions','/tools','/academy','/covibecoder','/pricing','/about','/contact','/partners','/early-access','/privacy','/terms','/ai-disclaimer'];
+const paths=['/','/product','/solutions','/tools','/academy','/covibecoder','/pricing','/about','/contact','/partners','/early-access','/privacy','/terms','/ai-disclaimer','/transform','/exit-ready'];
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});const context=await browser.newContext();const page=await context.newPage();const errors=[],checks=[];
 page.on('pageerror',e=>errors.push(e.message));
 try{

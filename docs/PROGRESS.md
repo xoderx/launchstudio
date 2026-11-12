@@ -98,3 +98,7 @@ Application commit `4595f42` is READY on protected Preview `https://launchstudio
 ### Production assets
 
 Confirmed PR #1 has no merge conflicts and remains draft/unmerged. Read-only Vercel metadata lists six Preview application variables and zero Production variables. Added production configuration preflight, checksummed release-kit builder, blank environment template, secret-free release CI and a staged release/rollback runbook. No production resource, credential, schema or customer traffic was changed. Verification and build output are recorded in `docs/release-review/PRODUCTION_PREPARATION.md`.
+
+### Lifecycle expansion — five coordinated batches
+
+Baseline `1ea24ba`. Added advanced marketing and six service interests, TransformOS diagnostics/nine manual deliverables, ExitReady intake/ten planning modules/scenario arithmetic, and private Q/CUE workspaces with versions, review approvals and individual access. Applied only new lifecycle and metering-grant migrations to staging. Core counts and hosted-only bridge are preserved. Added Pickaxe compatibility, disabled AI SDK/Gateway adapter, existing-ledger budget reservation/settlement contracts, offline provider comparison, dependency inventory and disabled native workspace interface. No new provider execution, customer enrollment, advisor invitation or production action occurred. Verification and remaining gates: `docs/lifecycle/ACCEPTANCE.md`.

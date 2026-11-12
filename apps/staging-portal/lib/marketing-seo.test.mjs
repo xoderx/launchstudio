@@ -6,5 +6,5 @@ test('Preview cannot be indexed; production indexing requires explicit approval 
  process.env.VERCEL_ENV='production';assert.equal(indexable(),true);assert.equal(pageMetadata('Tools','Description','/tools').alternates.canonical,'https://launch.example/tools');assert.ok(robotsDefinition().rules.disallow.includes('/app'));assert.ok(robotsDefinition().rules.disallow.includes('/api/'));
  process.env.LAUNCHSTUDIO_MARKETING_INDEXABLE='false';assert.equal(indexable(),false);
  process.env.LAUNCHSTUDIO_PUBLIC_SITE_URL='https://launch.example/wrong-path';assert.throws(siteOrigin,/HTTPS origin/);
- assert.equal(routes.length,11);assert.ok(!routes.some(path=>['/app','/login'].includes(path)));
+ assert.equal(routes.length,13);assert.ok(!routes.some(path=>['/app','/login'].includes(path)));
 });

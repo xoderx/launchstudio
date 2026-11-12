@@ -1,5 +1,7 @@
 # LaunchStudio production release
 
+The optional TransformOS/ExitReady foundations and provider-neutral preparation are documented in [lifecycle architecture](lifecycle/ARCHITECTURE.md) and [acceptance](lifecycle/ACCEPTANCE.md). They do not lift any release gate. Advanced access requires operator-set entitlement/individual grants and confidential retention operations. The earlier ten-migration release-kit manifest is historical: regenerate for the current reviewed commit (twelve repository migrations) after hosted-only bridge reconciliation. Direct gateway/native chat remain disabled; no provider cutover or Preview credential reuse is implied.
+
 Recommendation: **HOLD production promotion until production resources and final customer acceptance are verified.** This is release preparation for the existing product, not a rebuild of Q/CUE.
 
 ## Product position

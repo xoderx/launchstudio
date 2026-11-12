@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import ToolStudio from "./tool-studio";
 import CoVibeCoder from "./covibecoder";
+import LifecycleWorkspace from "./lifecycle-workspace";
 import {
   AppShell,
   DashboardMetric,
@@ -155,14 +156,14 @@ export default function Portal({ loginOnly = false }) {
 function Workspace({ db, session, audienceDNA }) {
   const [suite, setSuite] = useState('business');
   useEffect(() => {
-    const choose = () => setSuite(location.hash === '#covibecoder' ? 'covibecoder' : 'business');
+    const choose = () => setSuite(location.hash === '#covibecoder' ? 'covibecoder' : location.hash === '#transform' ? 'transform' : location.hash === '#enterprise-value' ? 'exit' : 'business');
     choose();
     window.addEventListener('hashchange', choose);
     return () => window.removeEventListener('hashchange', choose);
   }, []);
   function openSuite(value) {
     setSuite(value);
-    location.hash = value === 'covibecoder' ? 'covibecoder' : 'tools';
+    location.hash = value === 'covibecoder' ? 'covibecoder' : value === 'transform' ? 'transform' : value === 'exit' ? 'enterprise-value' : 'tools';
   }
   const [businesses, setBusinesses] = useState([]);
   const [workspaceLoaded, setWorkspaceLoaded] = useState(false);
@@ -603,7 +604,10 @@ function Workspace({ db, session, audienceDNA }) {
           Sign out
         </button>
       </header>
+      <p className="muted">Lifecycle: Launch → Grow → Monetize → Scale → Transform → Exit. Advanced programs are optional; CoVibeCoder supports technology at any stage.</p>
       <nav className="stage-nav" aria-label="Product suites">
+        <button className="secondary" aria-pressed={suite === 'transform'} onClick={() => openSuite('transform')}>TransformOS</button>
+        <button className="secondary" aria-pressed={suite === 'exit'} onClick={() => openSuite('exit')}>Enterprise Value · ExitReady</button>
         <button className="secondary" aria-pressed={suite === 'business'} onClick={() => openSuite('business')}>Business program · 52 tools</button>
         <button className="secondary" aria-pressed={suite === 'covibecoder'} onClick={() => openSuite('covibecoder')}>CoVibeCoder · 13 tools</button>
       </nav>
@@ -1029,7 +1033,7 @@ function Workspace({ db, session, audienceDNA }) {
         {project && <button className="secondary" onClick={() => openSuite('covibecoder')}>Open this project in CoVibeCoder</button>}
         <ToolStudio db={db} project={project} business={business} view={current}
           canEdit={canEditProjects && project?.status === 'active'} audienceEnabled={audienceDNA} />
-      </> : <CoVibeCoder key={`${actor}:${businessId}:${projectId}`} db={db} actorId={actor} business={business} project={project}
+      </> : ['transform','exit'].includes(suite) ? (project ? <LifecycleWorkspace key={`${actor}:${businessId}:${projectId}:${suite}`} db={db} project={project} program={suite} onReturn={() => openSuite('business')}/> : <p>Select a project to open the advanced program.</p>) : <CoVibeCoder key={`${actor}:${businessId}:${projectId}`} db={db} actorId={actor} business={business} project={project}
         projects={businessProjects} view={current} canEdit={canEditProjects && project?.status === 'active'}
         onReturn={() => openSuite('business')} onSelectProject={selectProject} />}
 

@@ -1,4 +1,4 @@
-export const routes=['/','/product','/solutions','/tools','/academy','/covibecoder','/pricing','/about','/contact','/partners','/early-access'];
+export const routes=['/','/product','/solutions','/tools','/academy','/covibecoder','/pricing','/about','/contact','/partners','/early-access','/transform','/exit-ready'];
 export function siteOrigin() {
   const configured=process.env.LAUNCHSTUDIO_PUBLIC_SITE_URL;
   if(configured){const u=new URL(configured);if(u.protocol!=='https:'||u.pathname!=='/'||u.search||u.hash)throw Error('Public site URL must be an HTTPS origin');return u.origin;}
