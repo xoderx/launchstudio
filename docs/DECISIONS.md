@@ -27,3 +27,7 @@ Market Intelligence sends a bounded excerpt when the full context exceeds its Pi
 Project names and goals use the existing project editor policy. Older projects keep their IDs and goals and display a default name until an editor names them.
 
 Q/CUE Phase 1 reads project and business context through the signed-in Supabase client and the existing RLS policies. Progress reflects saved assessments and workflow records. Keep existing project management, Idea Validator, approval, and Market Intelligence actions. The other roadmap tools do not execute from Q/CUE.
+
+Q/CUE Phase 2 reserves one unresolved workflow request per project in Supabase before Vercel dispatch. A worker can submit only after claiming its dispatch ID. It records the provider ID before polling. Recovery uses that ID for GET only and preserves the original assessment provenance. Unknown outcomes without an ID and unreconciled legacy failures require operator review.
+
+Project histories use descending creation time plus the immutable row ID as a keyset. The signed-in Supabase client performs the database queries under RLS. Older pages stay anchored until the customer chooses to show the newest records.

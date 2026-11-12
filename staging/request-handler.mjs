@@ -22,7 +22,7 @@ export function createRequestHandler(workflow) {
         chunks.push(Buffer.from(value));
       }
       payload = JSON.parse(Buffer.concat(chunks).toString('utf8'));
-      if (!payload || typeof payload !== 'object' || Object.keys(payload).some(key => !['projectId','requestId','agent'].includes(key))) throw Error();
+      if (!payload || typeof payload !== 'object' || Object.keys(payload).some(key => !['projectId','requestId','agent','operation'].includes(key))) throw Error();
     } catch {
       return json({ error: 'Invalid workflow request' }, 400);
     }

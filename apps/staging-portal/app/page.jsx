@@ -2,6 +2,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
+import { joinHistory, loadHistoryPage } from '../lib/history.mjs';
 import { agentNames, loadProject, projectView, workflowState } from '../lib/command-center.mjs';
 import { Activity, AssessmentLibrary, Badge, ProjectProgress, SavedContext, StageNavigation, projectName } from './command-center';
 
@@ -60,6 +61,9 @@ function Workspace({ db, session }) {
   const [businessId, selectBusiness] = useState('');
   const [projectId, selectProject] = useState('');
   const [snapshot, setSnapshot] = useState(null);
+  const [history, setHistory] = useState({});
+  const [historyLoading, setHistoryLoading] = useState(null);
+  const [historyError, setHistoryError] = useState(null);
   const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false);
   const [pendingByProject, setPendingByProject] = useState({});
@@ -105,10 +109,21 @@ function Workspace({ db, session }) {
         const next = await loadProject(db, projectId);
         if (active) {
           setSnapshot(next);
+          setPendingByProject(previous => {
+            const pending = previous[projectId];
+            return pending && next.requests.some(item => item.request_id === pending.requestId && item.actor_id === actor)
+              ? { ...previous, [projectId]: null } : previous;
+          });
           setProjectError('');
         }
-      } catch {
-        if (active) setProjectError('Project data could not be refreshed. Showing the last available data.');
+      } catch (error) {
+        if (active && error.status === 404) {
+          setSnapshot(null);
+          setHistory(previous => ({ ...previous, [projectId]: undefined }));
+          setProjectError('This project is unavailable.');
+        } else if (active) {
+          setProjectError('Project data could not be refreshed. Showing the last available data.');
+        }
       } finally {
         if (active) timer = setTimeout(load, 3000);
       }
@@ -141,11 +156,48 @@ function Workspace({ db, session }) {
     return () => { active = false; clearTimeout(timer); };
   }, [db, businessId, projects]);
 
-  const current = projectView(snapshot, project?.id);
+  const scoped = snapshot?.projectId === project?.id ? snapshot : null;
+  const pages = scoped && { ...scoped.pages, ...history[projectId] };
+  const current = scoped && projectView({
+    ...scoped, pages, versions: pages.versions.items, runs: pages.runs.items,
+  }, project?.id);
   const pending = pendingByProject[projectId];
-  const status = workflowState(current?.runs, pending, actor);
-  const waiting = ['submitting', 'unconfirmed', 'queued', 'running'].includes(status);
+  const activeRequest = current?.activeRequest;
+  const status = activeRequest?.status ?? workflowState(scoped?.runs, pending, actor);
+  const waiting = ['submitting', 'unconfirmed', 'queued', 'running', 'unknown'].includes(status);
   const canRun = canEditProjects && project?.status === 'active' && Boolean(current) && !projectError;
+
+  async function moreHistory(type) {
+    const page = pages?.[type];
+    if (!page?.next || historyLoading) return;
+    const target = projectId;
+    setHistoryLoading({ target, type });
+    setHistoryError(null);
+    try {
+      const next = await loadHistoryPage(db, target, type, page.next);
+      setHistory(previous => ({
+        ...previous, [target]: { ...previous[target], [type]: joinHistory(page, next) },
+      }));
+    } catch {
+      setHistoryError({ target, type });
+    } finally {
+      setHistoryLoading(null);
+    }
+  }
+
+  function historyControls(type) {
+    const frozen = history[projectId]?.[type];
+    const loading = historyLoading?.target === projectId && historyLoading.type === type;
+    return <div className="actions">
+      {historyError?.target === projectId && historyError.type === type && <p role="alert">Could not load older history.</p>}
+      {pages?.[type].next && <button className="secondary" disabled={Boolean(historyLoading)}
+        onClick={() => moreHistory(type)}>{loading ? 'Loading…' : type === 'runs' ? 'Load older runs' : 'Load older assessments'}</button>}
+      {frozen && <button className="secondary" disabled={Boolean(historyLoading)}
+        onClick={() => setHistory(previous => ({ ...previous, [projectId]: Object.fromEntries(
+          Object.entries(previous[projectId]).filter(([key]) => key !== type),
+        ) }))}>Show newest {type === 'runs' ? 'runs' : 'assessments'}</button>}
+    </div>;
+  }
 
   async function action(callback) {
     setBusy(true);
@@ -197,9 +249,11 @@ function Workspace({ db, session }) {
       setMessage(target ? 'Project updated.' : 'Project created.');
     });
   }
-  function runAgent(agent) {
-    if (!canRun || waiting || busy) return;
-    const input = { projectId, agent, requestId: crypto.randomUUID() };
+  function runAgent(agent, recover) {
+    if (!canRun || busy || (waiting && !recover)) return;
+    const input = recover
+      ? { projectId, agent, requestId: recover.request_id, operation: 'reconcile' }
+      : { projectId, agent, requestId: crypto.randomUUID() };
     const mark = status => setPendingByProject(previous => ({ ...previous,
       [input.projectId]: status ? { ...input, status } : null,
     }));
@@ -210,7 +264,7 @@ function Workspace({ db, session }) {
           headers: { 'content-type': 'application/json', authorization: `Bearer ${session.access_token}` },
           body: JSON.stringify(input) });
         if (response.ok) {
-          mark('queued');
+          mark(recover ? null : 'queued');
         } else if (response.status >= 500) {
           mark('unconfirmed');
         } else {
@@ -302,17 +356,31 @@ function Workspace({ db, session }) {
         </div>
         {!current?.approvedIdea && current && <p className="muted">Market Intelligence requires an approved Idea Validator version.</p>}
         <div role="status">
-          {status !== 'idle' && <p><Badge value={status} /> {pending && agentNames[pending.agent]}</p>}
+          {status !== 'idle' && <p><Badge value={status} /> {agentNames[activeRequest?.agent ?? pending?.agent]}</p>}
+          {status === 'unknown' && <p>{activeRequest?.can_reconcile
+            ? 'Check the existing provider submission to recover its result.'
+            : 'No provider acknowledgment was saved. Contact support before starting another run.'}</p>}
           {status === 'unconfirmed' && <p>LaunchStudio could not confirm the request. Watch the run history and verify the previous request before starting another.</p>}
         </div>
+        {status === 'unknown' && activeRequest?.can_reconcile && activeRequest.actor_id === actor &&
+          <button className="secondary" disabled={!canRun || busy || Boolean(pending)}
+            onClick={() => runAgent(activeRequest.agent, activeRequest)}>Check existing submission</button>}
+        {current?.requests.length > 0 && <details><summary>Request history</summary>
+          <ul className="activity-list">{current.requests.map(item =>
+            <li key={item.request_id}><span>{agentNames[item.agent]}</span><div className="activity-meta">
+              <Badge value={item.status} /><time dateTime={item.created_at}>{new Date(item.created_at).toLocaleString()}</time>
+            </div></li>)}</ul>
+        </details>}
         {!waiting && current?.runs[0]?.status === 'failed' &&
           <p className="notice">The latest run failed. Confirm the prior submission ended before starting a new run. If its outcome is unclear, contact support.</p>}
         {current?.runs.length ? <ul className="activity-list">{current.runs.map(run =>
           <li key={run.id}><span>{agentNames[run.agent]}</span><div className="activity-meta">
             <Badge value={run.status} /><time dateTime={run.created_at}>{new Date(run.created_at).toLocaleString()}</time></div></li>
         )}</ul> : current && <p className="muted">No runs for this project yet.</p>}
+        {historyControls('runs')}
       </section>
-      <AssessmentLibrary view={current} canApprove={canRun} busy={busy} approve={approve} />
+      <AssessmentLibrary view={current} canApprove={canRun} busy={busy} approve={approve}
+        historyControls={historyControls('versions')} />
     </>}
     {business && <>
       {activityError && <p className="notice" role="alert">{activityError}</p>}

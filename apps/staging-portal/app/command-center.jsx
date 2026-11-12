@@ -9,7 +9,7 @@ const labels = {
   active: 'Active', completed: 'Completed', archived: 'Archived',
   approved: 'Approved', pending: 'Pending approval', rejected: 'Rejected',
   queued: 'Queued', running: 'Running', succeeded: 'Succeeded', failed: 'Failed',
-  submitting: 'Submitting', unconfirmed: 'Submission unconfirmed',
+  submitting: 'Submitting', unconfirmed: 'Submission unconfirmed', unknown: 'Status unknown',
 };
 
 export const projectName = project => project.name === 'Untitled project' ? project.goal : project.name;
@@ -98,7 +98,7 @@ export function SavedContext({ business, project, view }) {
   </section>;
 }
 
-export function AssessmentLibrary({ view, canApprove, busy, approve }) {
+export function AssessmentLibrary({ view, canApprove, busy, approve, historyControls }) {
   return <section id="assessments" aria-labelledby="assessments-title">
     <h2 id="assessments-title">Assessment library</h2>
     {!view ? <p className="muted">Loading assessments…</p> :
@@ -122,5 +122,6 @@ export function AssessmentLibrary({ view, canApprove, busy, approve }) {
               <button disabled={busy} onClick={() => approve(version)}>Approve version {version.version}</button>}
           </article>;
         })}
+    {historyControls}
   </section>;
 }

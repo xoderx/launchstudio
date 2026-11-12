@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 import { createWorkflow, createSessionVerifier } from './workflow.mjs';
 import { createRequestHandler } from './request-handler.mjs';
+import { reserveDispatch, claimDispatch, updateDispatch } from '../apps/staging-portal/lib/workflow-requests.mjs';
 const a='10000000-0000-4000-8000-000000000001', b='10000000-0000-4000-8000-000000000002';
 const directory = mkdtempSync(join(tmpdir(), 'launchstudio-acceptance-'));
 let db = await PGlite.create(directory);
@@ -108,6 +109,58 @@ try {
     'select source_assessment_id, source_assessment_version from public.agent_runs where id=$1', [market.runId]
   ));
   assert.deepEqual(source,{source_assessment_id:idea.assessmentId,source_assessment_version:1});
+  await db.query('delete from public.business_memberships where business_id=$1 and user_id=$2',[business.id,b]);
+  const recoverable = { projectId: project.id, actorId: a, agent: 'market-intelligence', requestId: crypto.randomUUID() };
+  const reservations = await Promise.all([reserveDispatch(worker, recoverable, false), reserveDispatch(worker, recoverable, false)]);
+  assert.equal(reservations.filter(item => item.dispatchId).length, 1);
+  const job = { ...recoverable, dispatchId: reservations.find(item => item.dispatchId).dispatchId };
+  assert.deepEqual(await claimDispatch(worker, job), { provider_submission_id: null });
+  assert.equal(await claimDispatch(worker, job), undefined);
+  assert.deepEqual(await reserveDispatch(worker, job, true), { status: 'running' });
+  let submissions = 0;
+  const interrupted = createWorkflow({ database: worker, verifySession: async () => ({ id: a }),
+    async runAgent(_id, _input, options) {
+      assert.equal(options.providerId, null);
+      submissions++;
+      await options.onAcknowledged('synthetic-provider-id');
+      throw Error('Simulated interruption after acknowledgment');
+    },
+  });
+  await assert.rejects(interrupted({ ...job, recovery: { providerId: null,
+    acknowledge: id => updateDispatch(worker, job, 'running', id) } }), { status: 502, terminal: false });
+  await updateDispatch(worker, job, 'unknown');
+  const reads = actor => as(actor, tx => tx.query(
+    'select status,can_reconcile from public.workflow_requests where project_id=$1',[project.id],
+  ));
+  assert.deepEqual((await reads(a)).rows, [{ status: 'unknown', can_reconcile: true }]);
+  assert.deepEqual((await reads(b)).rows, []);
+  await assert.rejects(as(a, tx => tx.query('select provider_submission_id from public.workflow_requests')), { code: '42501' });
+  await assert.rejects(reserveDispatch(worker, { ...job, requestId: crypto.randomUUID() }, false), { status: 409 });
+  const retry = { ...job, ...await reserveDispatch(worker, job, true) };
+  assert.ok(retry.dispatchId !== job.dispatchId);
+  assert.equal(await claimDispatch(worker, job), undefined);
+  const claim = await claimDispatch(worker, retry);
+  assert.equal(claim.provider_submission_id, 'synthetic-provider-id');
+  const recovery = createWorkflow({ database: worker, verifySession: async () => ({ id: a }),
+    async runAgent(_id, input, options) {
+      assert.equal(options.providerId, 'synthetic-provider-id');
+      assert.equal(input.approvedIdea.markdown, 'Validated outcome with next steps.');
+      return 'Recovered market result.';
+    },
+  });
+  const recovered = await recovery({ ...retry, recovery: { providerId: claim.provider_submission_id } });
+  assert.equal(recovered.version, 2);
+  await updateDispatch(worker, retry, 'completed');
+  assert.equal(submissions, 1);
+  assert.deepEqual((await reads(a)).rows, [{ status: 'completed', can_reconcile: true }]);
+  assert.deepEqual(await reserveDispatch(worker, retry, false), { status: 'completed' });
+
+  const unacknowledged = { ...recoverable, requestId: crypto.randomUUID() };
+  const unknownJob = { ...unacknowledged, ...await reserveDispatch(worker, unacknowledged, false) };
+  await claimDispatch(worker, unknownJob);
+  await updateDispatch(worker, unknownJob, 'unknown');
+  assert.deepEqual(await reserveDispatch(worker, unknownJob, true), { status: 'unknown' });
+  await db.query("insert into public.business_memberships(business_id,user_id,role) values($1,$2,'viewer')",[business.id,b]);
   await db.close();
   db = await PGlite.create(directory);
   const { rows: [restored] } = await as(a,tx=>tx.query(

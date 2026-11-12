@@ -10,20 +10,38 @@ test('project loader scopes every read and refuses rows from another project', a
   const calls = [];
   const db = {
     from(table) {
-      const response = {
-        assessment_versions: [idea, { ...market, project_id: 'customer-b' }],
-        agent_runs: [run, { ...run, project_id: 'customer-b' }],
-        workflow_progress: { project_id: 'customer-b', stage: 'review' },
-      }[table];
-      const finish = () => Promise.resolve({ data: response });
-      return { select: () => ({ eq: (column, id) => {
-        calls.push([table, column, id]);
-        return { order: finish, maybeSingle: finish };
-      } }) };
+      const filters = [];
+      const query = {
+        select: () => query,
+        eq(column, id) {
+          filters.push([column, id]);
+          calls.push([table, column, id]);
+          return query;
+        },
+        order: () => query, limit: () => query, in: () => query,
+        maybeSingle() {
+          const id = filters[0]?.[1];
+          return Promise.resolve({ data: {
+            business_projects: id === 'a' ? { id } : null,
+            workflow_progress: { project_id: 'customer-b', stage: 'review' },
+          }[table] ?? null });
+        },
+        then(resolve) {
+          const data = {
+            assessment_versions: [idea, { ...market, project_id: 'customer-b' }],
+            agent_runs: [run, { ...run, project_id: 'customer-b' }],
+            workflow_requests: [{ project_id: 'customer-b' }],
+          }[table];
+          return Promise.resolve({ data }).then(resolve);
+        },
+      };
+      return query;
     },
   };
+  await assert.rejects(loadProject(db, 'customer-b'), { status: 404 });
   const snapshot = await loadProject(db, 'a');
-  assert.deepEqual(calls.map(call => call.slice(1)), Array(3).fill(['project_id', 'a']));
+  assert.ok(calls.filter(call => call[1] === 'project_id').every(call => call[2] === 'a'));
+  assert.deepEqual(snapshot.requests, []);
   assert.deepEqual(snapshot.versions, [idea]);
   assert.deepEqual(snapshot.runs, [run]);
   assert.equal(snapshot.progress, null);

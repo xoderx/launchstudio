@@ -24,3 +24,9 @@ The run row provides the deduplication key. Concurrent submissions with the same
 Open the protected Preview and sign in as a staging customer. Select a business and project to view progress, saved context, workflows, and assessment versions. Market Intelligence links to the specific Idea Validator version stored on its run. The tool roadmap is informational except for the two existing project workflows.
 
 Run the dashboard tests with `node --test lib/command-center.test.mjs` from this directory. Run the staging database suite for tenant isolation and approval permissions. To check the deployed UI, open an approved handoff project, switch to an empty project, confirm the former project's data disappears, and sign in as the second test customer to confirm the first customer's business and projects are absent.
+
+### Workflow recovery and history
+
+Apply the workflow recovery migration to the staging Supabase project before deploying this version. A queued or running request becomes visibly unknown after five minutes without a recorded update. When Pickaxe acknowledged the request, the initiating customer can select **Check existing submission**. Recovery only polls the saved provider ID and never issues a replacement provider submission. If there is no acknowledgment, contact support to verify the outcome. Historical failures from before the ledger have no provider ID to recover in Q/CUE.
+
+The project histories use the signed-in customer's Supabase session and RLS. **Load older** continues from the last displayed creation timestamp and unique row ID. **Show newest** refreshes the list from the top. Run `node --test lib/*.test.mjs` for history and dashboard regressions, and `node test.mjs` from `staging/` for database and recovery coverage.

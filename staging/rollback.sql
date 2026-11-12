@@ -1,5 +1,6 @@
 -- Staging rollback. Remove the route first and take a verified database backup.
 begin;
+drop table if exists public.workflow_requests;
 drop function public.approve_idea_assessment(uuid, integer);
 drop table public.workflow_progress, public.assessment_versions, public.assessments,
   public.agent_runs, public.business_projects, public.business_memberships,

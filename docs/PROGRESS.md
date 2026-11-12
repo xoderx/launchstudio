@@ -48,3 +48,9 @@ The live Idea Validator run saved a version that the owner approved. Market Inte
 ## Q/CUE Command Center Phase 1
 
 The staging portal includes business and project navigation, recent runs, project progress, saved context, versioned assessments and source links, and the 52-tool roadmap. The dashboard reads existing Supabase tables with the signed-in customer's session. Workflow status is refreshed from persisted run records. An unconfirmed submission stays visible while the dashboard watches for a matching run.
+
+## Q/CUE Phase 2
+
+Added a staging workflow request ledger, server-side provider acknowledgment, GET-only reconciliation, and keyset history pages. The recovery test simulates interruption after acknowledgment, verifies that a concurrent duplicate cannot dispatch, and recovers the result with its original approved source. Tests also verify that customers cannot read provider IDs.
+
+Recommend Audience DNA Builder as the next pilot. It can turn the approved idea and its linked market evidence into a target audience profile. Before connecting it, verify the agent's credential scope, required inputs, dependencies and provider usage limits, and decide how a customer approves the Market Intelligence version for use as a source.

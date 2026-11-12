@@ -88,3 +88,27 @@ test('submission, acknowledgment, polling and invalid output have distinct failu
     assert.equal(responses.length, 0);
   }
 });
+
+test('reconciliation only fetches the acknowledged submission', async () => {
+  let reads = 0;
+  const run = createPickaxeRunner({
+    submitPickaxe: () => assert.fail('Recovery must never submit'),
+    getPickaxeSubmission: async id => {
+      assert.equal(id, 'known-provider-id');
+      reads++;
+      return { status: 'completed', result: 'Recovered Markdown' };
+    },
+  });
+  assert.equal(await run('fixture', {}, { providerId: 'known-provider-id' }), 'Recovered Markdown');
+  assert.equal(reads, 1);
+});
+
+test('the provider acknowledgment is persisted before the adapter returns or polls', async () => {
+  const run = createPickaxeRunner({
+    submitPickaxe: async () => ({ submissionId: 'known-provider-id', status: 'queued' }),
+    getPickaxeSubmission: () => assert.fail('Poll must wait for durable acknowledgment'),
+  });
+  await assert.rejects(run('fixture', {}, {
+    onAcknowledged: async () => { throw Error('Storage unavailable'); },
+  }), /Storage unavailable/);
+});

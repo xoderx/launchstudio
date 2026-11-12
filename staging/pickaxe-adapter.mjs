@@ -63,6 +63,7 @@ export function createPickaxeClient({ key, workspaceId, fetchImpl = fetch }) {
       method: payload ? 'POST' : 'GET',
       headers,
       body: payload ? JSON.stringify(payload) : undefined,
+      redirect: 'error',
       signal: AbortSignal.timeout(10000),
     });
     if (!response.ok) throw new PickaxeHttpError(response.status);
@@ -92,17 +93,26 @@ async function request(stage, operation) {
 }
 
 export function createPickaxeRunner(client, { timeoutMs = 120_000, sleep = delay } = {}) {
-  return async (pickaxeId, context, { requestId, onAcknowledged, agent } = {}) => {
+  return async (pickaxeId, context, { requestId, onAcknowledged, agent, providerId } = {}) => {
     const original = instructions + JSON.stringify(context);
     const prompt = agent === 'market-intelligence' ? marketMessage(context, original) : original;
     const deadline = Date.now() + timeoutMs;
-    let submission = await request('pickaxe_submission',
-      () => client.submitPickaxe({ pickaxeId, message: prompt, background: true }, requestId));
-    const id = submission?.submissionId;
-    if (typeof id !== 'string' || !id.trim()) {
-      throw new PickaxeFailure('pickaxe_acknowledgment', 'missing_submission_id');
+    let submission;
+    let id = providerId;
+    if (id) {
+      submission = await request('pickaxe_polling', () => client.getPickaxeSubmission(id, requestId));
+    } else {
+      submission = await request('pickaxe_submission',
+        () => client.submitPickaxe({ pickaxeId, message: prompt, background: true }, requestId));
+      id = submission?.submissionId;
+      if (typeof id !== 'string' || !/^[a-zA-Z0-9_-]{1,128}$/.test(id)) {
+        throw new PickaxeFailure('pickaxe_acknowledgment', 'missing_submission_id');
+      }
+      await onAcknowledged?.(id);
     }
-    onAcknowledged?.(id);
+    if (!submission || typeof submission.status !== 'string') {
+      throw new PickaxeFailure('pickaxe_polling', 'invalid_status');
+    }
     while (submission.terminal !== true && !['completed', 'failed', 'cancelled'].includes(submission.status)) {
       const remaining = deadline - Date.now();
       if (remaining <= 0) throw new PickaxeFailure('pickaxe_polling', 'timeout');
@@ -114,7 +124,8 @@ export function createPickaxeRunner(client, { timeoutMs = 120_000, sleep = delay
       }
     }
     if (submission.status !== 'completed') {
-      throw new PickaxeFailure('pickaxe_response_validation', 'provider_terminal_failure');
+      throw new PickaxeFailure('pickaxe_response_validation',
+        ['failed', 'cancelled'].includes(submission.status) ? 'provider_terminal_failure' : 'invalid_status');
     }
     if (typeof submission.result !== 'string' || !submission.result.trim() || Buffer.byteLength(submission.result) > 60000) {
       throw new PickaxeFailure('pickaxe_response_validation', 'invalid_result');
