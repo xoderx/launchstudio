@@ -1,0 +1,912 @@
+[
+  {
+    "position": 53,
+    "key": "idea-to-app-translator",
+    "name": "Idea-To-App Translator",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Turn an informal idea into an implementation-ready software concept",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Customer problem",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Primary user journey",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Measurable product outcome",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Product requirements document",
+      "User stories and acceptance criteria",
+      "Implementation handoff"
+    ],
+    "starters": [
+      "Map the business idea into a one-page PRD.",
+      "Turn the approved audience profile into user stories.",
+      "Define a measurable outcome before choosing features."
+    ],
+    "exercise": "Interview one target user and rewrite a user story around an observed need.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Problem and intended user",
+      "Goals, exclusions and release scope",
+      "Owner, acceptance gate and next decision"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 54,
+    "key": "prompt-architect",
+    "name": "Prompt Architect",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Generate high-quality instructions for AI coding platforms",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Target coding environment",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Task and repository constraints",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Definition of done",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Coding system brief",
+      "Incremental build prompts",
+      "Review and repair prompts"
+    ],
+    "starters": [
+      "Write a prompt for one small reviewed change.",
+      "Explain the repository constraints before proposing code.",
+      "Create a repair prompt that preserves working behavior."
+    ],
+    "exercise": "Try a prompt on a disposable example and record where it was ambiguous.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Role, context and prohibited actions",
+      "One task, inputs and expected files",
+      "Verification and explicit approval requirements"
+    ],
+    "formats": [
+      "txt",
+      "txt",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 55,
+    "key": "platform-stack-selector",
+    "name": "Platform & Stack Selector",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Choose the simplest practical development architecture",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Hosting and runtime needs",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Team skills and maintenance budget",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Required integrations and constraints",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Stack comparison",
+      "Architecture decision record",
+      "Architecture and service boundaries"
+    ],
+    "starters": [
+      "Compare two practical stacks using the same requirements.",
+      "Select the simplest stack the team can maintain.",
+      "Document one reversible and one costly architecture decision."
+    ],
+    "exercise": "Compare documentation and operational limits of two candidates using primary sources.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Constraints and ranked criteria",
+      "Options, evidence and tradeoffs",
+      "Decision, consequences and review trigger"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 56,
+    "key": "mvp-scope-optimizer",
+    "name": "MVP Scope Optimizer",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Reduce a large product concept to the smallest useful first release without sacrificing critical functionality",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Must-have customer outcome",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Time and delivery capacity",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Features to defer",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "MVP scope and exclusions",
+      "Prioritized backlog",
+      "Release acceptance gates"
+    ],
+    "starters": [
+      "Reduce the scope to one complete customer journey.",
+      "Separate critical security from optional features.",
+      "Write acceptance gates for the first usable release."
+    ],
+    "exercise": "Remove one feature and check that the primary user can still complete the promised task.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Must, should and deferred scope",
+      "Ordered tasks, dependencies and owners",
+      "Observable acceptance evidence"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 57,
+    "key": "context-token-minimizer",
+    "name": "Context & Token Minimizer",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Reduce wasted development tokens, excessive context, repeated requests, and unnecessary AI coding loops while preserving the information needed for correctness",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Current context and instructions",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Stable repository facts",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Budget and known uncertainty",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Reusable context pack",
+      "Task-sized prompt bundle",
+      "Context and cost checklist"
+    ],
+    "starters": [
+      "Separate stable facts from the current task.",
+      "Summarize context while retaining exact acceptance criteria.",
+      "Document unknowns before starting another coding loop."
+    ],
+    "exercise": "Shorten a long brief and have a peer check that every constraint survived.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Verified facts, sources and constraints",
+      "Current task and minimal relevant excerpts",
+      "Budget, truncation and refresh rules"
+    ],
+    "formats": [
+      "md",
+      "txt",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 58,
+    "key": "ui-ux-design-architect",
+    "name": "UI/UX Design Architect",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Design usable, attractive, accessible, and responsive software interfaces",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Users and critical screens",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Accessibility and device needs",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Brand and interaction constraints",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "UI specification",
+      "Interaction and responsive states",
+      "Accessibility review checklist"
+    ],
+    "starters": [
+      "Specify empty, loading, error and success states.",
+      "Design the main task for a narrow screen and keyboard.",
+      "Translate the audience needs into clear interface decisions."
+    ],
+    "exercise": "Walk the primary journey using only the keyboard and annotate each focus transition.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Screen purpose, information hierarchy and components",
+      "User flow, validation and responsive behavior",
+      "Keyboard, labels, contrast and assistive technology checks"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 59,
+    "key": "database-auth-architect",
+    "name": "Database & Auth Architect",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Create secure data models and access control systems",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Entities and relationships",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Roles and tenant boundaries",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Sensitive data and retention",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Database schema draft",
+      "Auth and authorization matrix",
+      "Migration and data safety plan"
+    ],
+    "starters": [
+      "Model ownership before writing tables.",
+      "Describe denial cases for a second tenant.",
+      "Plan an additive migration with a verified backup."
+    ],
+    "exercise": "Write one allowed and one denied access example for each role and entity.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Entities, keys and constraints; SQL for review only",
+      "Roles, ownership, RLS and session handling",
+      "Forward migration, backup and verification"
+    ],
+    "formats": [
+      "sql",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 60,
+    "key": "api-integration-builder",
+    "name": "API & Integration Builder",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Design reliable connections between the application and external services",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Service and required operation",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Authorization scopes and limits",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Failure and retry requirements",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "API and integration contract",
+      "Authorized adapter plan",
+      "Failure and approval runbook"
+    ],
+    "starters": [
+      "Define inputs and outputs before connecting a service.",
+      "List the minimum scopes for the requested operation.",
+      "Plan idempotency and recovery after an unknown response."
+    ],
+    "exercise": "Simulate a timeout after acknowledgment and show why a duplicate write is prevented.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Endpoints, schemas and validation",
+      "Credential location, scopes and connection checks",
+      "Retries, approval, idempotency and audit trail"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 61,
+    "key": "agent-automation-designer",
+    "name": "Agent & Automation Designer",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Design AI agents and workflows that perform useful application tasks",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Agent objective and allowed tools",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Human approval boundaries",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Usage and recovery limits",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Agent behavior specification",
+      "Workflow and approval map",
+      "Evaluation and recovery plan"
+    ],
+    "starters": [
+      "Constrain an agent to one measurable task.",
+      "Require approval before an external write.",
+      "Define a safe stop for an uncertain provider result."
+    ],
+    "exercise": "Describe a prompt injection attempt and test how the proposed tool boundary would reject it.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Inputs, allowed tools and stopping criteria",
+      "Steps, approvals and persisted state",
+      "Quality cases, budgets and failure recovery"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 62,
+    "key": "debug-repair-doctor",
+    "name": "Debug & Repair Doctor",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Find and fix errors efficiently without destroying working functionality",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Reproduction steps and expected behavior",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Observed errors without secrets",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Known working behavior to preserve",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Reproduction and evidence log",
+      "Minimal repair plan",
+      "Regression verification handoff"
+    ],
+    "starters": [
+      "Create a minimal reproduction before changing code.",
+      "Separate observed evidence from possible causes.",
+      "Limit the repair to the verified failing behavior."
+    ],
+    "exercise": "Reproduce a defect twice and record a failing check that will detect recurrence.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Environment, exact steps, expected and actual result",
+      "Hypothesis, smallest change and rollback approach",
+      "Tests, preserved behavior and review evidence"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 63,
+    "key": "testing-qa-engineer",
+    "name": "Testing & Qa Engineer",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Convert product requirements into executable quality gates",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Critical acceptance journeys",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Test users and fixtures",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Quality and security gates",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Test plan and cases",
+      "Tenant and permission tests",
+      "Release evidence report"
+    ],
+    "starters": [
+      "Turn each requirement into an observable test.",
+      "Test a second customer and revoked access.",
+      "Mark missing execution evidence as blocked."
+    ],
+    "exercise": "Execute one happy path and one denied path, recording the actual result and environment.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Scope, fixtures, steps and assertions",
+      "Cross-tenant, viewer, expiry and revocation cases",
+      "Passed, failed, blocked and linked evidence"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 64,
+    "key": "deploy-security-doctor",
+    "name": "Deploy & Security Doctor",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Prepare applications for secure, maintainable production deployment",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Target environment and release owner",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Configuration and secret requirements",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Rollback and approval process",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Deployment checklist",
+      "Security and operations review",
+      "Approved release handoff"
+    ],
+    "starters": [
+      "Prepare a protected Preview before any production request.",
+      "Check configuration without copying credentials.",
+      "Write a rollback and explicit release approval checklist."
+    ],
+    "exercise": "Review a hypothetical failed deployment and identify the evidence required before retrying.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Build, environment, migrations and smoke checks",
+      "Access, secrets, monitoring and incident ownership",
+      "Exact artifact, target, approver and rollback; no deployment claim"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  },
+  {
+    "position": 65,
+    "key": "cost-performance-growth-optimizer",
+    "name": "Cost, Performance & Growth Optimizer",
+    "category": "CoVibeCoder",
+    "catalogId": null,
+    "commanderId": "launchstudio-covibecoder",
+    "promptFile": "agent-prompts/covibecoder-commander.md",
+    "version": 1,
+    "providerId": null,
+    "providerStatus": "manual_workspace",
+    "executionAllowed": false,
+    "executionCost": null,
+    "input": "Improve an application after initial development by reducing unnecessary costs, strengthening reliability, and improving user conversion and engagement",
+    "fields": [
+      {
+        "key": "field1",
+        "label": "Measured usage and performance baseline",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field2",
+        "label": "Cost budget and service objectives",
+        "required": true,
+        "maxLength": 1800
+      },
+      {
+        "key": "field3",
+        "label": "Growth objective and ethical constraints",
+        "required": true,
+        "maxLength": 1800
+      }
+    ],
+    "outputs": [
+      "Cost and performance baseline",
+      "Prioritized optimization experiments",
+      "Measurement and growth review"
+    ],
+    "starters": [
+      "Measure a baseline before proposing optimization.",
+      "Separate estimated savings from verified savings.",
+      "Design one reversible performance or conversion experiment."
+    ],
+    "exercise": "Compare a before and after measurement and identify at least one confounding variable.",
+    "metric": "Approved step with linked source context and review evidence",
+    "outlines": [
+      "Measured metrics, source and observation window",
+      "Hypothesis, expected effect, budget and rollback",
+      "Outcome, uncertainty and next experiment"
+    ],
+    "formats": [
+      "md",
+      "md",
+      "md"
+    ],
+    "requiredContext": [
+      "project_goal",
+      "approved_business_context",
+      "approved_prior_covibecoder_steps"
+    ],
+    "approval": "Editor approval records planning review; external writes require separate explicit approval.",
+    "readiness": {
+      "workspace": "implemented",
+      "providerExecution": "not connected",
+      "externalBuild": "not connected",
+      "deployment": "not connected",
+      "liveAcceptance": "pending"
+    }
+  }
+]

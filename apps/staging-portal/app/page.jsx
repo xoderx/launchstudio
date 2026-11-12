@@ -3,6 +3,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
 import ToolStudio from './tool-studio';
+import CoVibeCoder from './covibecoder';
 import { joinHistory, loadHistoryPage } from '../lib/history.mjs';
 import { agentNames, loadProject, projectView, workflowState } from '../lib/command-center.mjs';
 import { Activity, AssessmentLibrary, Badge, ProjectProgress, SavedContext, StageNavigation, projectName } from './command-center';
@@ -26,7 +27,14 @@ export default function Portal() {
       const { url, publishableKey, audienceDNA } = await response.json();
       if (!active) return;
       const db = createClient(url, publishableKey, { auth: { detectSessionInUrl: false } });
-      subscription = db.auth.onAuthStateChange((_event, current) => setSession(current)).data.subscription;
+      subscription = db.auth.onAuthStateChange((event, current) => {
+        if (event === 'SIGNED_OUT') {
+          for (const key of Object.keys(sessionStorage)) {
+            if (key.startsWith('launchstudio:covibecoder:')) sessionStorage.removeItem(key);
+          }
+        }
+        setSession(current);
+      }).data.subscription;
       setAudienceDNA(audienceDNA === true);
       setClient(db);
     }).catch(error => { if (active) setMessage(error.message); });
@@ -58,6 +66,7 @@ export default function Portal() {
 }
 
 function Workspace({ db, session, audienceDNA }) {
+  const [suite, setSuite] = useState('business');
   const [businesses, setBusinesses] = useState([]);
   const [projects, setProjects] = useState([]);
   const [editorBusinessIds, setEditorBusinessIds] = useState([]);
@@ -302,9 +311,16 @@ function Workspace({ db, session, audienceDNA }) {
         <p className="muted">Track projects, review assessments, and see what comes next.</p></div>
       <button className="secondary" onClick={() => action(async () => unwrap(await db.auth.signOut()))} disabled={busy}>Sign out</button>
     </header>
+    <nav className="stage-nav" aria-label="Product suites">
+      <button className="secondary" aria-pressed={suite === 'business'} onClick={() => setSuite('business')}>Business program · 52 tools</button>
+      <button className="secondary" aria-pressed={suite === 'covibecoder'} onClick={() => setSuite('covibecoder')}>CoVibeCoder · 13 tools</button>
+    </nav>
     <nav className="section-nav" aria-label="Command center">
       <a href="#workspace">Workspace</a>{project && <><a href="#workflow">Workflows</a><a href="#assessments">Assessments</a></>}
-      {business && <a href="#activity">Recent activity</a>}<a href="#tools">Tool roadmap</a><a href="#tool-studio">Tools and academy</a>
+      {business && <a href="#activity">Recent activity</a>}
+      <a href="#tools" onClick={() => setSuite('business')}>Tool roadmap</a>
+      <a href="#tool-studio" onClick={() => setSuite('business')}>Tools and academy</a>
+      <a href="#covibecoder" onClick={() => setSuite('covibecoder')}>CoVibeCoder workspace</a>
     </nav>
     {message && <p className="notice" role="status">{message}</p>}
     {workspaceError && <p className="notice" role="alert">{workspaceError}</p>}
@@ -399,8 +415,12 @@ function Workspace({ db, session, audienceDNA }) {
       <Activity runs={!businessProjects.length ? [] : recent?.businessId === businessId ? recent.runs : null}
         projects={businessProjects} onSelect={id => { selectProject(id); document.getElementById('workspace')?.scrollIntoView(); }} />
     </>}
-    <StageNavigation />
-    <ToolStudio db={db} project={project} business={business} view={current}
-      canEdit={canEditProjects && project?.status === 'active'} audienceEnabled={audienceDNA} />
+    {suite === 'business' ? <><StageNavigation />
+      {project && <button className="secondary" onClick={() => setSuite('covibecoder')}>Open this project in CoVibeCoder</button>}
+      <ToolStudio db={db} project={project} business={business} view={current}
+        canEdit={canEditProjects && project?.status === 'active'} audienceEnabled={audienceDNA} />
+    </> : <CoVibeCoder key={`${actor}:${businessId}:${projectId}`} db={db} actorId={actor} business={business} project={project}
+      projects={businessProjects} view={current} canEdit={canEditProjects && project?.status === 'active'}
+      onReturn={() => setSuite('business')} onSelectProject={selectProject} />}
   </>;
 }

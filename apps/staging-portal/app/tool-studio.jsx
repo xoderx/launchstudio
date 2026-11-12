@@ -7,6 +7,7 @@ import monetize from '../../../catalog/tool-specs/monetize.json';
 import scale from '../../../catalog/tool-specs/scale.json';
 import playbooks from '../../../catalog/flagship-playbooks.json';
 import { draftFields, validateDraft } from '../../../staging/tool-engine.mjs';
+import { artifactMarkdown, codingHandoff, planningOutline } from '../../../staging/covibecoder.mjs';
 
 const tools = [...launch, ...grow, ...monetize, ...scale];
 const groups = ['All stages', 'Launch', 'Grow', 'Monetize', 'Scale'];
@@ -20,6 +21,13 @@ function download(tool, row) {
   link.href = url;
   link.download = `${tool.key}-v${row.version}.json`;
   link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function downloadText(name, content, type = 'text/plain') {
+  const url = URL.createObjectURL(new Blob([content], { type }));
+  const link = document.createElement('a');
+  link.href = url; link.download = name; link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
@@ -70,7 +78,8 @@ export default function ToolStudio({ db, project, business, view, canEdit, audie
   </section>;
 }
 
-function ToolWorkbench({ db, tool, project, business, view, canEdit, audienceEnabled }) {
+export function ToolWorkbench({ db, tool, project, business, view, canEdit, audienceEnabled,
+  catalog = tools, importedContext, onChange, recoveryKey }) {
   const [draft, setDraft] = useState(empty);
   const [rows, setRows] = useState(null);
   const [queue, setQueue] = useState([]);
@@ -80,10 +89,11 @@ function ToolWorkbench({ db, tool, project, business, view, canEdit, audienceEna
   const [busy, setBusy] = useState(false);
   const [hasMore, setHasMore] = useState(false);
   const request = useRef(null);
-  const next = tools[tool.position];
+  const next = catalog.find(item => item.position === tool.position + 1);
+  const coVibe = tool.category === 'CoVibeCoder';
   const connected = tool.providerStatus === 'verified_existing_workflow' || (tool.key === 'audience-dna' && audienceEnabled);
   const fetchRows = async before => {
-    let query = db.from('tool_deliverables').select('id, version, content, sources, approved_at, created_at')
+    let query = db.from('tool_deliverables').select('id, request_id, version, content, sources, approved_at, created_at')
       .eq('project_id', project.id).eq('tool_position', tool.position).order('version', { ascending: false }).limit(pageSize + 1);
     if (before) query = query.lt('version', before);
     const { data, error } = await query;
@@ -93,35 +103,53 @@ function ToolWorkbench({ db, tool, project, business, view, canEdit, audienceEna
   useEffect(() => {
     if (!project) return;
     let live = true;
+    if (recoveryKey) {
+      try {
+        const pending = JSON.parse(sessionStorage.getItem(recoveryKey) ?? 'null');
+        if (pending) {
+          setDraft(validateDraft(pending.content, tool)); request.current = pending.requestId;
+          setMessage('Recovered an unconfirmed draft. Check saved versions or save again to confirm the same request.');
+        }
+      } catch { sessionStorage.removeItem(recoveryKey); }
+    }
     Promise.all([fetchRows(), db.from('tool_deliverables').select('id, tool_position, version')
-      .eq('project_id', project.id).is('approved_at', null).order('created_at', { ascending: false }).limit(12),
+      .eq('project_id', project.id).gte('tool_position', coVibe ? 53 : 1).lte('tool_position', coVibe ? 65 : 52)
+      .is('approved_at', null).order('created_at', { ascending: false }).limit(12),
       db.from('tool_deliverables').select('tool_position,version,content').eq('project_id', project.id)
+        .gte('tool_position', coVibe ? 53 : 1)
         .lt('tool_position',tool.position).not('approved_at','is',null)
         .order('tool_position',{ascending:false}).order('version',{ascending:false}).limit(1).maybeSingle()])
       .then(([data, inbox, source]) => { if (live) {
+        if (recoveryKey && request.current && data.some(row => row.request_id === request.current)) {
+          request.current = null; sessionStorage.removeItem(recoveryKey);
+          setMessage('Recovered save confirmed in version history.');
+        }
         setRows(data.slice(0, pageSize)); setHasMore(data.length > pageSize);
         setQueue(inbox.data ?? []);
         setPrior(source.data ?? null);
       } }).catch(() => { if (live) setError('Could not load saved drafts.'); });
     return () => { live = false; };
-  }, [db, project?.id, tool.position]);
+  }, [db, project?.id, tool.position, recoveryKey]);
 
   async function save(event) {
     event.preventDefault();
     setError(''); setMessage('');
     let content;
-    try { content = validateDraft(draft); } catch (error) { setError(error.message); return; }
+    try { content = validateDraft(draft, tool); } catch (error) { setError(error.message); return; }
     setBusy(true);
     request.current ??= crypto.randomUUID();
     try {
+      if (recoveryKey) sessionStorage.setItem(recoveryKey, JSON.stringify({ requestId: request.current, content }));
       const { error } = await db.rpc('save_tool_deliverable', {
         target: project.id, tool: tool.position, request: request.current, draft: content,
       });
       if (error) throw error;
       request.current = null;
+      if (recoveryKey) sessionStorage.removeItem(recoveryKey);
       const data = await fetchRows();
       setRows(data.slice(0, pageSize)); setHasMore(data.length > pageSize);
       setMessage('Draft version saved.');
+      onChange?.();
     } catch { setError('The save could not be confirmed. Submit again to check the same request.'); }
     finally { setBusy(false); }
   }
@@ -135,6 +163,7 @@ function ToolWorkbench({ db, tool, project, business, view, canEdit, audienceEna
       setRows(data.slice(0, pageSize)); setHasMore(data.length > pageSize);
       setQueue(items => items.filter(item => item.id !== row.id));
       setMessage('Version approved.');
+      onChange?.();
     } catch { setError('Could not approve this version.'); }
     finally { setBusy(false); }
   }
@@ -154,33 +183,59 @@ function ToolWorkbench({ db, tool, project, business, view, canEdit, audienceEna
     <p>Produces {tool.outputs.join(', ').toLowerCase()}.</p>
     <p className="muted">{connected ? 'Provider workflow available in the selected project.' :
       'Draft workspace available. Provider execution and usage cost are unverified.'} {connected && <a href="#workflow">Open workflow controls</a>}</p>
-    <AcademySprint tool={tool} next={next} approved={rows?.some(row => row.approved_at)} />
+    {coVibe ? <details className="settings"><summary>CoVibeCoder pathway · Step {tool.position - 52} of 13</summary>
+      <p><strong>Learning objective:</strong> {tool.input}.</p>
+      <p><strong>Guided exercise:</strong> {tool.exercise}</p>
+      <ol><li>Review the imported approved context and prior development step.</li>
+        <li>Complete the tailored inputs and draft the three deliverables.</li>
+        <li>Check evidence and assumptions, save a version, and request review.</li>
+        <li>Approve the planning artifact before using it in the next step.</li></ol>
+      {next && <p>Next step: {next.name}.</p>}
+    </details> : <AcademySprint tool={tool} next={next} approved={rows?.some(row => row.approved_at)} />}
     {!project ? <p>Select a project to view or save drafts.</p> : <>
       <p><strong>Saved context:</strong> {business.name} · {project.goal}</p>
       {view?.approvedIdea && <p>Approved Idea Validator · Version {view.approvedIdea.version}</p>}
       {view?.approvedMarket && <p>Approved Market Intelligence · Version {view.approvedMarket.version}</p>}
       {view?.summary?.approvedAudience && <p>Approved Audience DNA · Version {view.summary.approvedAudience.version}</p>}
-      {prior && <details><summary>Approved prior tool: {tools[prior.tool_position - 1]?.name} · Version {prior.version}</summary>
+      {prior && <details><summary>Approved prior tool: {catalog.find(item => item.position === prior.tool_position)?.name} · Version {prior.version}</summary>
         <p>{prior.content.summary}</p><ul>{prior.content.deliverables.map((value, index) => <li key={index}>{value}</li>)}</ul>
       </details>}
       <details className="settings"><summary>Approval inbox · {queue.length} recent</summary>
         {queue.length ? <ul>{queue.map(row => <li key={row.id}>
-          {tools[row.tool_position - 1]?.name} · Version {row.version}
+          {catalog.find(item => item.position === row.tool_position)?.name} · Version {row.version}
         </li>)}</ul> : <p>No pending tool drafts loaded.</p>}
       </details>
       {canEdit && <form onSubmit={save}>
+        <fieldset disabled={coVibe && Boolean(request.current)}>
+        {tool.fields?.map(field => <div key={field.key}><label htmlFor={`${tool.key}-${field.key}`}>{field.label}</label>
+          <textarea id={`${tool.key}-${field.key}`} required={field.required} maxLength={field.maxLength} value={draft.inputs?.[field.key] ?? ''}
+            onChange={event => setDraft({ ...draft, inputs: { ...draft.inputs, [field.key]: event.target.value } })} />
+        </div>)}
         <div className="actions">
-          {[`Start with the inputs: ${tool.input}`, `Use the exercise: ${tool.exercise}`,
-            `Use the saved project goal and measure: ${tool.metric}.`].map(starter =>
+          {(tool.starters ?? [`Start with the inputs: ${tool.input}`, `Use the exercise: ${tool.exercise}`,
+            `Use the saved project goal and measure: ${tool.metric}.`]).map(starter =>
             <button type="button" className="secondary" key={starter} onClick={() => setDraft({ ...draft, input: starter })}>{starter}</button>)}
         </div>
-        {Object.entries(draftFields).map(([field, label]) => <label key={field}>{label}
-          <textarea required={['input', 'summary'].includes(field)} maxLength={3000} value={draft[field] ?? ''}
-            onChange={event => setDraft({ ...draft, [field]: event.target.value })} /></label>)}
-        {tool.outputs.map((label, i) => <label key={label}>{label}
-          <textarea required maxLength={4000} value={draft.deliverables[i]}
+        {coVibe && <div className="actions"><button type="button" className="secondary" onClick={() => {
+          try { setDraft(planningOutline(tool, draft)); setError(''); setMessage('Planning outline prepared from your inputs. Review and complete it before approval.'); }
+          catch (error) { setError(error.message); }
+        }}>Prepare planning outline</button>
+          <button type="button" className="secondary" onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(codingHandoff(tool, draft, { business: business.name,
+                project: { id: project.id, goal: project.goal }, imports: importedContext ? [importedContext] : [], prior }));
+              setMessage('Build prompt copied. Use it in an authorized coding environment.');
+            } catch { setError('Clipboard unavailable. Export the draft and copy it manually.'); }
+          }}>Copy build prompt with context</button></div>}
+        {Object.entries(draftFields).map(([field, label]) => <div key={field}><label htmlFor={`${tool.key}-${field}`}>{label}</label>
+          <textarea id={`${tool.key}-${field}`} required={['input', 'summary'].includes(field)} maxLength={3000} value={draft[field] ?? ''}
+            onChange={event => setDraft({ ...draft, [field]: event.target.value })} /></div>)}
+        {tool.outputs.map((label, i) => <div key={label}><label htmlFor={`${tool.key}-output-${i}`}>{label}</label>
+          <textarea id={`${tool.key}-output-${i}`} required maxLength={4000} value={draft.deliverables[i]}
             onChange={event => setDraft({ ...draft, deliverables: draft.deliverables.map((value, index) =>
-              index === i ? event.target.value : value) })} /></label>)}
+              index === i ? event.target.value : value) })} /></div>)}
+        </fieldset>
+        {coVibe && request.current && <p role="status">Confirm the pending save before revising this draft. Saving again uses the same request.</p>}
         <button disabled={busy}>Save draft version</button>
       </form>}
       {error && <p role="alert">{error}</p>}{message && <p role="status">{message}</p>}
@@ -190,14 +245,25 @@ function ToolWorkbench({ db, tool, project, business, view, canEdit, audienceEna
           <h5>Version {row.version} · {row.approved_at ? 'Approved' : 'Draft'}</h5>
           <p>{row.content.summary}</p>
           <details><summary>Read deliverable</summary>
+            {tool.fields?.map(field => <div key={field.key}><h6>{field.label}</h6><pre>{row.content.inputs?.[field.key]}</pre></div>)}
             {tool.outputs.map((label, i) => <div key={label}><h6>{label}</h6><pre>{row.content.deliverables[i]}</pre></div>)}
             {Object.entries(draftFields).filter(([key]) => row.content[key]).map(([key,label]) =>
               <div key={key}><h6>{label}</h6><pre>{row.content[key]}</pre></div>)}
           </details>
-          {row.sources.length > 0 && <ul>{row.sources.map(source => <li key={source.assessmentId ?? source.deliverableId}>
-            {source.agent ?? tools[source.toolPosition - 1]?.name} · Version {source.version}</li>)}</ul>}
+          {row.sources.length > 0 && <ul>{row.sources.map((source, index) => <li key={`${source.assessmentId ?? source.deliverableId}:${source.version}:${index}`}>
+            {source.agent ?? catalog.find(item => item.position === source.toolPosition)?.name ?? `Tool ${source.toolPosition}`} · Version {source.version}</li>)}</ul>}
           <div className="actions">
             <button className="secondary" onClick={() => download(tool, row)}>Export JSON</button>
+            {coVibe && <>
+              <button className="secondary" onClick={() => downloadText(`${tool.key}-v${row.version}.md`, artifactMarkdown(tool, row), 'text/markdown')}>Export Markdown</button>
+              <button className="secondary" onClick={async () => {
+                try { await navigator.clipboard.writeText(artifactMarkdown(tool, row)); setMessage('Artifact copied.'); }
+                catch { setError('Clipboard unavailable. Use Markdown export.'); }
+              }}>Copy artifact</button>
+              {tool.outputs.map((label, index) => <button key={label} className="secondary" onClick={() =>
+                downloadText(`${tool.key}-v${row.version}-${index + 1}.${tool.formats[index]}`, row.content.deliverables[index])}>
+                Export {label} (.{tool.formats[index]})</button>)}
+            </>}
             {canEdit && <button className="secondary" disabled={busy}
               onClick={() => { setDraft(row.content); setMessage('Version loaded into the draft editor.'); }}>Edit as new version</button>}
             {canEdit && !row.approved_at && <button disabled={busy} onClick={() => approve(row)}>Approve version {row.version}</button>}

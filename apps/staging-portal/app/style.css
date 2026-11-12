@@ -29,6 +29,10 @@ section[id], article[id] { scroll-margin-top: 1rem; }
 summary { cursor: pointer; font-weight: 700; }
 form, label { display: grid; gap: .5rem; }
 form { gap: 1rem; margin: 1rem 0; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 1rem; }
+.development-steps { display: grid; gap: .6rem; padding-left: 1.4rem; }
+.development-steps li { overflow-wrap: anywhere; }
+.development-steps button { max-width: 100%; text-align: left; white-space: normal; }
 input, textarea, select, button {
   font: inherit; border-radius: .45rem; padding: .58rem .7rem; border: 1px solid #8494ab;
   min-height: 2.75rem; min-width: 0;

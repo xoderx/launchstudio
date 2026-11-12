@@ -33,3 +33,7 @@ Q/CUE Phase 2 reserves one unresolved workflow request per project in Supabase b
 Project histories use descending creation time plus the immutable row ID as a keyset. The signed-in Supabase client performs the database queries under RLS. Older pages stay anchored until the customer chooses to show the newest records.
 
 Audience DNA uses the approved Market Intelligence version and the approved Idea Validator version linked from that market run. Both references are stored on the run and constrained to the same project. The structured result separates source-backed evidence from assumptions. Growth Diagnostic is recommended only after the audience profile is saved and approved. The provider dispatch gate remains closed until the staging pilot prerequisites are verified.
+
+## CoVibeCoder fifth suite
+
+Preserve the 52 business tools and academy as a distinct program. Reuse the registry's 13 CoVibeCoder commander workflows at positions 53–65 with tailored manual workspaces, source imports and a separate business entitlement enforced by RLS and narrow RPCs. Do not infer external execution from a reviewed planning artifact. GitHub, Lovable, Vibe SDK and Codex adapters remain disconnected and fail closed; manual copy/export is available. Repository writes, deployment, deletion and production changes require action-specific approval before any future adapter can execute.

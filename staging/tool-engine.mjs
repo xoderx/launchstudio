@@ -5,13 +5,20 @@ export const draftFields = {
   instructions: 'Additional instructions',
 };
 
-export function validateDraft(input) {
+export function validateDraft(input, tool) {
   const clean = Object.fromEntries(Object.keys(draftFields).map(key => [key, typeof input[key] === 'string' ? input[key].trim() : '']));
   if (!clean.input || !clean.summary || !Array.isArray(input.deliverables) || input.deliverables.length !== 3 ||
       input.deliverables.some(item => typeof item !== 'string' || !item.trim())) {
     throw Error('Enter the project inputs, summary, and all three deliverable sections.');
   }
   clean.deliverables = input.deliverables.map(item => item.trim());
+  if (tool?.fields) {
+    clean.inputs = Object.fromEntries(tool.fields.map(field => {
+      const value = typeof input.inputs?.[field.key] === 'string' ? input.inputs[field.key].trim() : '';
+      if ((field.required && !value) || value.length > field.maxLength) throw Error(`Complete ${field.label}.`);
+      return [field.key, value];
+    }));
+  }
   if (new TextEncoder().encode(JSON.stringify(clean)).length > 31000) throw Error('This draft exceeds the saved size limit.');
   return clean;
 }
