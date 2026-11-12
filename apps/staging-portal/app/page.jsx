@@ -373,10 +373,13 @@ function Workspace({ db, session }) {
         </details>}
         {!waiting && current?.runs[0]?.status === 'failed' &&
           <p className="notice">The latest run failed. Confirm the prior submission ended before starting a new run. If its outcome is unclear, contact support.</p>}
-        {current?.runs.length ? <ul className="activity-list">{current.runs.map(run =>
-          <li key={run.id}><span>{agentNames[run.agent]}</span><div className="activity-meta">
-            <Badge value={run.status} /><time dateTime={run.created_at}>{new Date(run.created_at).toLocaleString()}</time></div></li>
-        )}</ul> : current && <p className="muted">No runs for this project yet.</p>}
+        {current?.runs.length ? <ul className="activity-list">{current.runs.map(run => {
+          const request = current.requests.find(item => item.request_id === run.request_id &&
+            item.actor_id === run.actor_id && item.agent === run.agent);
+          return <li key={run.id}><span>{agentNames[run.agent]}</span><div className="activity-meta">
+            <Badge value={run.status === 'succeeded' ? run.status : request?.status ?? run.status} />
+            <time dateTime={run.created_at}>{new Date(run.created_at).toLocaleString()}</time></div></li>;
+        })}</ul> : current && <p className="muted">No runs for this project yet.</p>}
         {historyControls('runs')}
       </section>
       <AssessmentLibrary view={current} canApprove={canRun} busy={busy} approve={approve}

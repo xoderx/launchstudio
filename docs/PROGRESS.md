@@ -54,3 +54,5 @@ The staging portal includes business and project navigation, recent runs, projec
 Added a staging workflow request ledger, server-side provider acknowledgment, GET-only reconciliation, and keyset history pages. The recovery test simulates interruption after acknowledgment, verifies that a concurrent duplicate cannot dispatch, and recovers the result with its original approved source. Tests also verify that customers cannot read provider IDs.
 
 Recommend Audience DNA Builder as the next pilot. It can turn the approved idea and its linked market evidence into a target audience profile. Before connecting it, verify the agent's credential scope, required inputs, dependencies and provider usage limits, and decide how a customer approves the Market Intelligence version for use as a source.
+
+Staging verification: a signed-in synthetic Idea Validator request was interrupted immediately after Pickaxe acknowledged it. After reload, the unknown request offered recovery and prevented a new submission. GET-only reconciliation completed the same request and saved one assessment. The temporary acceptance deployment was separate from the release Preview.

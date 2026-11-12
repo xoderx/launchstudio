@@ -57,7 +57,11 @@ export function projectView(snapshot, projectId) {
     approvedIdea && 'Approve an Idea Validator version',
     savedMarket && 'Save a Market Intelligence assessment',
   ].filter(Boolean);
-  const next = progress?.outstanding_tasks?.find(task => typeof task === 'string' && task.trim()) ??
+  const active = snapshot.activeRequest;
+  const recoveryAction = active?.status === 'unknown'
+    ? active.can_reconcile ? 'Check the existing provider submission' : 'Contact support to verify the submission'
+    : active ? 'Wait for the current workflow request' : undefined;
+  const next = recoveryAction ?? progress?.outstanding_tasks?.find(task => typeof task === 'string' && task.trim()) ??
     (savedMarket ? 'Review the market analysis' : approvedIdea ? 'Run Market Intelligence' :
       pendingIdea ? 'Review the pending Idea Validator assessment' : 'Run Idea Validator');
   return { ...snapshot, approvedIdea, completed, next, runById: new Map([...runs, ...(snapshot.pages?.versions.sources ?? [])].map(run => [run.id, run])) };

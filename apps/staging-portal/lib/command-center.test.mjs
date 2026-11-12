@@ -76,3 +76,11 @@ test('workflow status distinguishes unknown requests, active work, and terminal 
   assert.equal(workflowState([{ ...other, status: 'queued' }], null, 'a'), 'queued');
   assert.equal(workflowState([], null, 'a'), 'idle');
 });
+
+test('recovery takes priority over the next planned workflow action', () => {
+  const snapshot = { projectId: 'a', versions: [], runs: [], progress: null };
+  assert.equal(projectView({ ...snapshot, activeRequest: { status: 'unknown', can_reconcile: true } }, 'a').next,
+    'Check the existing provider submission');
+  assert.equal(projectView({ ...snapshot, activeRequest: { status: 'unknown', can_reconcile: false } }, 'a').next,
+    'Contact support to verify the submission');
+});
